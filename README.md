@@ -16,19 +16,20 @@ La entrega formal del examen debe ser acompañada por las siguientes evidencias:
 
  # CASO A DESARROLLAR  
  
-La entrega del documento y proyecto deberá ser vía electrónica, utilizando algún disco virtual compartido o vía Blackboard, según el docente lo indique. 
+1. La entrega del documento y proyecto deberá ser vía electrónica, utilizando algún disco virtual compartido o vía Blackboard, según el docente lo indique. 
  
-El encargo debe ser entregado en la fecha y horario establecido por la escuela (día examen transversal). Ud dispone desde la semana 16 para desarrollar el proyecto. Entregas atrasadas o de compilación no serán revisadas y se calificará con nota 1.0 
+2. El encargo debe ser entregado en la fecha y horario establecido por la escuela (día examen transversal). Ud dispone desde la semana 16 para desarrollar el proyecto. Entregas atrasadas o de compilación no serán revisadas y se calificará con nota 1.0 
  
-La empresa concesionada “Auto Park” ha solicitado la construcción de un sistema que permita agilizar el proceso de pago de ticket de sus estacionamientos a nivel nacional. 
+## Caso 
+La empresa concesionada *Auto Park* ha solicitado la construcción de un sistema que permita agilizar el proceso de pago de ticket de sus estacionamientos a nivel nacional. 
  
-En la primera reunión que sostiene el CEO de “Auto Park”, plantea que la primera versión de este sistema permitirá ser más transparente y ágil el pago de tickets de sus estacionamientos por parte de sus clientes, ya que evitará el tiempo de demora y molestias que se producen actualmente en las boleterías. Ya que podrán pagar en línea el uso de estos. 
+* En la primera reunión que sostiene el CEO de “Auto Park”, plantea que la primera versión de este sistema permitirá ser más transparente y ágil el pago de tickets de sus estacionamientos por parte de sus clientes, ya que evitará el tiempo de demora y molestias que se producen actualmente en las boleterías. Ya que podrán pagar en línea el uso de estos. 
  
-El CEO indica que es importante que la plataforma sea intuitiva y con diseño simple y elegante, que refleje el sello de la empresa, donde siempre el cliente es lo primordial dando como reflejo de eso a su satisfacción, dando todo lo necesario para poder comprar en línea, sin problema de entendimiento de cómo usar la aplicación. 
+* El CEO indica que es importante que la plataforma sea intuitiva y con diseño simple y elegante, que refleje el sello de la empresa, donde siempre el cliente es lo primordial dando como reflejo de eso a su satisfacción, dando todo lo necesario para poder comprar en línea, sin problema de entendimiento de cómo usar la aplicación. 
  
-El cliente debe poder seleccionar un listado de estacionamientos, y seleccionar el que desea pagar, uno o todos los que desee (existen 6 estacionamientos), esta opción podrá realizarla siempre y cuando ingrese sus datos personales previamente, como es Nombre, Rut, número telefónico y correo electrónico. Además, deberá ingresar la opción de medios de pago y la opción de envío de boleta. El sistema mostrará el total a cancelar de todos los estacionamientos que haya escogido. Para ingresar los montos a cancelar el cliente previamente debió ingresar a la aplicación móvil de la empresa quien le entregará el valor total a cancelar por su estadía. 
+* El cliente debe poder seleccionar un listado de estacionamientos, y seleccionar el que desea pagar, uno o todos los que desee (existen 6 estacionamientos), esta opción podrá realizarla siempre y cuando ingrese sus datos personales previamente, como es Nombre, Rut, número telefónico y correo electrónico. Además, deberá ingresar la opción de medios de pago y la opción de envío de boleta. El sistema mostrará el total a cancelar de todos los estacionamientos que haya escogido. Para ingresar los montos a cancelar el cliente previamente debió ingresar a la aplicación móvil de la empresa quien le entregará el valor total a cancelar por su estadía. 
  
-Una vez presionado el botón Pagar, lo enviará a una página indicando sus datos y el total cancelado. Finalmente, el sistema tendrá la opción poder buscar las últimas compras realizadas y revisar el historial de compra e imprimir el informe. 
+* Una vez presionado el botón Pagar, lo enviará a una página indicando sus datos y el total cancelado. Finalmente, el sistema tendrá la opción poder buscar las últimas compras realizadas y revisar el historial de compra e imprimir el informe. 
 
 *** 
  # PROTOTIPO DEL PROYECTO. 
