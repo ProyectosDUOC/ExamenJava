@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1E531799-6134-6BF7-8599-7CBCD70540F2" name="estacionamiento">
+<createdBy>benja</createdBy>
+<createdTime>2017-12-08 16:51:37 UTC</createdTime>
+<ownerDesignName>111</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_estacionamiento" id="C9D64C69-E518-686F-B400-4DC693AABB1A">
+<createdBy>benja</createdBy>
+<createdTime>2017-12-08 17:02:21 UTC</createdTime>
+<ownerDesignName>111</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_estacionamiento" id="49B5BF3C-488E-6A59-3E20-66D76977BFAA">
+<createdBy>benja</createdBy>
+<createdTime>2017-12-08 17:02:21 UTC</createdTime>
+<ownerDesignName>111</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="precio_estacionamiento" id="3E208FFD-1E1E-FB1E-E133-115C47A6D153">
+<createdBy>benja</createdBy>
+<createdTime>2017-12-08 17:02:21 UTC</createdTime>
+<ownerDesignName>111</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="ED9D7A20-F2AB-B149-5DC1-78DA6A8DC723" name="Estacionamiento_PK">
+<createdBy>benja</createdBy>
+<createdTime>2017-12-08 17:02:21 UTC</createdTime>
+<ownerDesignName>111</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C9D64C69-E518-686F-B400-4DC693AABB1A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
