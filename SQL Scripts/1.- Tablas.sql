@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS autoPark;
+
+
+CREATE Database autoPark;
 
 CREATE TABLE boleta (
     id_boleta      INT NOT NULL,
