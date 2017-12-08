@@ -13,6 +13,11 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
+        <input id="btnInicio" type="button" value="Inicio" />
+        <input id="btnPagoCompras" type="button" value="Ver Pago/Compras" />
+        <input id="btnAyuda" type="button" value="Ayuda" />
+        <br/><br/><br/>
         Rut:<input id="Text1" type="text" />
         <br/><br/>
         Nombre:<input id="Text2" type="text" />
