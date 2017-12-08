@@ -40,6 +40,21 @@ La siguiente figura representa la página principal del sistema de pago de estac
 
 ***
 
+## REQUSITOS FUNCIONALES. 
+ 
+**Los requerimientos revisados más importantes con CEO de empresa son los siguientes:** 
+
+| N° | Requisito | Estado |
+| -- | -- | -- |
+| RF1 | Se debe ingresar todos los campos de la empresa, Rut, nombre, teléfono y correo electrónico  , también los medios de pago y envío.| - |
+| RF2 | Se debe generar un Boucher con un número correlativo (rescatado desde la base de datos) y mostrar su total de pago y datos de compra | - |
+| RF3 | Se debe permitir eliminar o editar estacionamientos dentro de la grilla central de pagos | - |
+| RF4 | Realice un menú que redirija a la página principal y de compras o pagos anteriores según lo sugerido en las figuras de prototipos. | - |
+| RF5 | Se debe buscar por Rut los pagos o compras registradas anteriormente que serán buscado en la página de Ver compras.| - | 
+| RF6 | Se debe registrar un Log con las actividades que se realizan en forma exitosa como también de errores.| - | 
+| RF7 | El usuario podrá ver los estacionamientos y su ubicación ingresando a la opción Ver Estacionamientos en donde aparecerá las coordenadas de ubicación de estas para poder re direccionar a alguna opción de mapas disponible en la internet. | - | 
+
+
  ## Requisitos Funcionales
 
 N° | Requisito | Estado
