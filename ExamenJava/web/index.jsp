@@ -18,13 +18,15 @@
         <input id="btnPagoCompras" type="button" value="Ver Pago/Compras" />
         <input id="btnAyuda" type="button" value="Ayuda" />
         <br/><br/><br/>
-        Rut:<input id="Text1" type="text" />
+        Rut:<input id="Text1" type="text" /> 
         <br/><br/>
         Nombre:<input id="Text2" type="text" />
         <br/><br/>
         Telefono:<input id="Text3" type="text" />
         <br/><br/>
         e-mail:<input id="Text4" type="text" />
+        
+        
         <br/><br/><br/><br/>
         Seleccione Estacionamiento indique la cantidad de dinero  que mostro la aplicacion movil:
         <br/><br/>
