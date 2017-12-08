@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>hola</h1>
         
-        <input id="btnInicio" type="button" value="Inicio" />
+        <input id="btnInicio" type="button" value="Inicio¡" />
         <input id="btnPagoCompras" type="button" value="Ver Pago/Compras" />
         <input id="btnAyuda" type="button" value="Ayuda" />
         <br/><br/><br/>
