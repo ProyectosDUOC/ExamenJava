@@ -27,10 +27,12 @@
             <div class="input-field col s12">
                 <select name="comuna">                            
                     <option value="" disabled selected>Elija la comuna</option>
-                    <% for (modelo.Comuna xx : listaComuna) {%>
+                    <% for (modelo.Comuna xx : listaComuna)
+                    {                    
+                    %>
                     <option value="<%=xx.getNombreComuna()%>" ><%=xx.getNombreComuna()%></option>
                     <%
-                        }
+                      }
                     %>
                 </select>
                 <label>Comuna</label>
