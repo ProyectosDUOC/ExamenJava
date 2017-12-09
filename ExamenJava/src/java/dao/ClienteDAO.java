@@ -20,7 +20,7 @@ public class ClienteDAO {
     private Cliente p;
     private EntityManager em;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("cliente", System.getProperties());
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
 
     public boolean Crear(Cliente cliente) {
         em = factory.createEntityManager();
@@ -67,12 +67,4 @@ public class ClienteDAO {
         
         return clientes;
     }
-    /*
-         if (opcion.equals("Listar")) {
-                for (Persona obj : personas) {
-                    out.println("<h2>" + obj.toString() + "<h2>");
-                }
-            }
-    
-    */
 }

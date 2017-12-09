@@ -9,23 +9,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Estacionamiento;
+import modelo.FormaPago;
+
 /**
  *
- * @author carlos
+ * @author benja
  */
-public class EstacionamientoDAO {
-    
-    private Estacionamiento p;
+public class FormaPagoDAO {
+     private FormaPago p;
     private EntityManager em;
-    
+
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
-    
-    public boolean Crear(Estacionamiento estacionamiento) {
+
+    public boolean Crear(FormaPago formaPago) {
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(estacionamiento);
+            em.persist(formaPago);
             em.flush();
             em.getTransaction().commit();
             return true;
@@ -35,19 +35,19 @@ public class EstacionamientoDAO {
         }
     }
 
-    public boolean Leer(String idEstacionamiento) {
-        p = em.find(Estacionamiento.class, idEstacionamiento);
+    public boolean Leer(int id) {
+        p = em.find(FormaPago.class, id);
 
-        if (p.getIdEstacionamiento() == null) {
+        if (p.getIdPago() == null) {
             return false;
         } else {
             return true;
         }
     }
-    
-    public boolean Eliminar(String idEstacionamiento) {
+
+    public boolean Eliminar(int id) {
         try{
-            p = em.find(Estacionamiento.class, idEstacionamiento);
+            p = em.find(FormaPago.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
@@ -58,15 +58,12 @@ public class EstacionamientoDAO {
         }        
     }
     
-    public List<Estacionamiento> Listar(){
+    public List<FormaPago> Listar(){
         
-        List<Estacionamiento> estacionamientos;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento c");
-        estacionamientos = q.getResultList();
-        int num_clientes = estacionamientos.size();
+        List<FormaPago> formaPagos;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_pago c");
+        formaPagos = q.getResultList();
         
-        return estacionamientos;
+        return formaPagos;
     }
-    
-    
 }

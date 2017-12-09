@@ -10,13 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.Estacionamiento;
+
 /**
  *
- * @author carlos
+ * @author benja
  */
 public class EstacionamientoDAO {
-    
-    private Estacionamiento p;
+     private Estacionamiento p;
     private EntityManager em;
     
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
@@ -67,6 +67,4 @@ public class EstacionamientoDAO {
         
         return estacionamientos;
     }
-    
-    
 }
