@@ -9,23 +9,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Estacionamiento;
+import modelo.EstacionamientoLocalidad;
+
 /**
  *
- * @author carlos
+ * @author benja
  */
-public class EstacionamientoDAO {
-    
-    private Estacionamiento p;
+public class EstacionamientoLocalidadDAO {
+     private EstacionamientoLocalidad p;
     private EntityManager em;
     
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
     
-    public boolean Crear(Estacionamiento estacionamiento) {
+    public boolean Crear(EstacionamientoLocalidad estacionamientoLocalidad) {
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(estacionamiento);
+            em.persist(estacionamientoLocalidad);
             em.flush();
             em.getTransaction().commit();
             return true;
@@ -34,9 +34,9 @@ public class EstacionamientoDAO {
             return false;
         }
     }
-
+    
     public boolean Leer(String idEstacionamiento) {
-        p = em.find(Estacionamiento.class, idEstacionamiento);
+        p = em.find(EstacionamientoLocalidad.class, idEstacionamiento);
 
         if (p.getIdEstacionamiento() == null) {
             return false;
@@ -47,7 +47,7 @@ public class EstacionamientoDAO {
     
     public boolean Eliminar(String idEstacionamiento) {
         try{
-            p = em.find(Estacionamiento.class, idEstacionamiento);
+            p = em.find(EstacionamientoLocalidad.class, idEstacionamiento);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
@@ -58,15 +58,13 @@ public class EstacionamientoDAO {
         }        
     }
     
-    public List<Estacionamiento> Listar(){
+    public List<EstacionamientoLocalidad> Listar(){
         
-        List<Estacionamiento> estacionamientos;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento c");
-        estacionamientos = q.getResultList();
-        int num_clientes = estacionamientos.size();
+        List<EstacionamientoLocalidad> estacionamientosLocalidad;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento_localidad c");
+        estacionamientosLocalidad = q.getResultList();
+        int num_clientes = estacionamientosLocalidad.size();
         
-        return estacionamientos;
+        return estacionamientosLocalidad;
     }
-    
-    
 }

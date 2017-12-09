@@ -9,23 +9,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Estacionamiento;
+import modelo.EstacionamientoTicket;
+
 /**
  *
- * @author carlos
+ * @author benja
  */
-public class EstacionamientoDAO {
-    
-    private Estacionamiento p;
+public class EstacionamientoTicketDAO {
+     private EstacionamientoTicket p;
     private EntityManager em;
-    
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
-    
-    public boolean Crear(Estacionamiento estacionamiento) {
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPUExamenJavaFinalPU", System.getProperties());
+
+    public boolean Crear(EstacionamientoTicket es) {
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(estacionamiento);
+            em.persist(es);
             em.flush();
             em.getTransaction().commit();
             return true;
@@ -35,19 +35,19 @@ public class EstacionamientoDAO {
         }
     }
 
-    public boolean Leer(String idEstacionamiento) {
-        p = em.find(Estacionamiento.class, idEstacionamiento);
+    public boolean Leer(int id) {
+        p = em.find(EstacionamientoTicket.class, id);
 
-        if (p.getIdEstacionamiento() == null) {
+        if (p.getIdEstacionamiento()== null) {
             return false;
         } else {
             return true;
         }
     }
-    
-    public boolean Eliminar(String idEstacionamiento) {
+
+    public boolean Eliminar(int id) {
         try{
-            p = em.find(Estacionamiento.class, idEstacionamiento);
+            p = em.find(EstacionamientoTicket.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
@@ -58,15 +58,12 @@ public class EstacionamientoDAO {
         }        
     }
     
-    public List<Estacionamiento> Listar(){
+    public List<EstacionamientoTicket> Listar(){
         
-        List<Estacionamiento> estacionamientos;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento c");
-        estacionamientos = q.getResultList();
-        int num_clientes = estacionamientos.size();
+        List<EstacionamientoTicket> tickets;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM estacionamiento_ticket c");
+        tickets = q.getResultList();
         
-        return estacionamientos;
+        return tickets;
     }
-    
-    
 }
