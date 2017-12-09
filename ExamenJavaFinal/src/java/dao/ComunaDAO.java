@@ -18,10 +18,9 @@ import modelo.Comuna;
 public class ComunaDAO {
     private Comuna p;
     private EntityManager em;
-    EntityManagerFactory factory;
-    
-    public boolean Crear(Comuna comuna) {
-        factory = Persistence.createEntityManagerFactory("ExamenJavaPU", System.getProperties());
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
+     
+    public boolean Crear(Comuna comuna) {      
 
         em = factory.createEntityManager();
         try {
@@ -37,8 +36,7 @@ public class ComunaDAO {
     }
 
     public boolean Leer(int id) {
-        factory = Persistence.createEntityManagerFactory("ExamenJavaPU", System.getProperties());
-
+      
         em = factory.createEntityManager();
         p = em.find(Comuna.class, id);
 
@@ -50,9 +48,7 @@ public class ComunaDAO {
     }
 
     public boolean Eliminar(int id) {
-        try{
-            factory = Persistence.createEntityManagerFactory("ExamenJavaPU", System.getProperties());
-
+        try{           
             em = factory.createEntityManager();
             p = em.find(Comuna.class, id);
             em.remove(p);
@@ -65,12 +61,11 @@ public class ComunaDAO {
         }        
     }
     
-    public List<Comuna> Listar(){    
-        factory = Persistence.createEntityManagerFactory("ExamenJavaPU", System.getProperties());
+    public List<Comuna> Listar(){           
 
         em = factory.createEntityManager();
         List<Comuna> comunas;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM comuna c");
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Comuna c");
         comunas = q.getResultList();        
         return comunas;
     }
