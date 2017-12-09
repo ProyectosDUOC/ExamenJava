@@ -28,7 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EstacionamientoLocalidad.findAll", query = "SELECT e FROM EstacionamientoLocalidad e")
     , @NamedQuery(name = "EstacionamientoLocalidad.findByIdEstacionamiento", query = "SELECT e FROM EstacionamientoLocalidad e WHERE e.idEstacionamiento = :idEstacionamiento")
     , @NamedQuery(name = "EstacionamientoLocalidad.findByMapaLocalidad", query = "SELECT e FROM EstacionamientoLocalidad e WHERE e.mapaLocalidad = :mapaLocalidad")
-    , @NamedQuery(name = "EstacionamientoLocalidad.findByIdComuna", query = "SELECT e FROM EstacionamientoLocalidad e WHERE e.idComuna = :idComuna")})
+    , @NamedQuery(name = "EstacionamientoLocalidad.findByIdComuna", query = "SELECT e FROM EstacionamientoLocalidad e WHERE e.idComuna = :idComuna")
+    , @NamedQuery(name = "EstacionamientoLocalidad.findByMapaLongitud", query = "SELECT e FROM EstacionamientoLocalidad e WHERE e.mapaLongitud = :mapaLongitud")
+    , @NamedQuery(name = "EstacionamientoLocalidad.findByMapaLatitud", query = "SELECT e FROM EstacionamientoLocalidad e WHERE e.mapaLatitud = :mapaLatitud")})
 public class EstacionamientoLocalidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,18 +46,18 @@ public class EstacionamientoLocalidad implements Serializable {
     @NotNull
     @Column(name = "id_comuna")
     private int idComuna;
+    @Size(max = 30)
+    @Column(name = "mapa_longitud")
+    private String mapaLongitud;
+    @Size(max = 30)
+    @Column(name = "mapa_latitud")
+    private String mapaLatitud;
 
     public EstacionamientoLocalidad() {
     }
 
     public EstacionamientoLocalidad(Integer idEstacionamiento) {
         this.idEstacionamiento = idEstacionamiento;
-    }
-
-    public EstacionamientoLocalidad(Integer idEstacionamiento, String mapaLocalidad, int idComuna) {
-        this.idEstacionamiento = idEstacionamiento;
-        this.mapaLocalidad = mapaLocalidad;
-        this.idComuna = idComuna;
     }
 
     public EstacionamientoLocalidad(Integer idEstacionamiento, int idComuna) {
@@ -85,6 +87,22 @@ public class EstacionamientoLocalidad implements Serializable {
 
     public void setIdComuna(int idComuna) {
         this.idComuna = idComuna;
+    }
+
+    public String getMapaLongitud() {
+        return mapaLongitud;
+    }
+
+    public void setMapaLongitud(String mapaLongitud) {
+        this.mapaLongitud = mapaLongitud;
+    }
+
+    public String getMapaLatitud() {
+        return mapaLatitud;
+    }
+
+    public void setMapaLatitud(String mapaLatitud) {
+        this.mapaLatitud = mapaLatitud;
     }
 
     @Override
