@@ -38,7 +38,8 @@ ALTER TABLE comuna ADD CONSTRAINT comuna_pk PRIMARY KEY ( id_comuna );
 CREATE TABLE detalle_boleta (
     id_boleta            INT NOT NULL,
     id_estacionamiento   INT NOT NULL,
-    numero_ticket        INT
+    numero_ticket        INT,
+    PRIMARY KEY(id_boleta)
 );
 
 CREATE TABLE estacionamiento (
@@ -51,13 +52,17 @@ ALTER TABLE estacionamiento ADD CONSTRAINT estacionamiento_pk PRIMARY KEY ( id_e
 
 CREATE TABLE estacionamiento_localidad (
     id_estacionamiento   INT NOT NULL,
-    mapa_localidad       VARCHAR(300),
-    id_comuna            INT NOT NULL
+    mapa_localidad       VARCHAR(300), 
+    id_comuna            INT NOT NULL,
+    mapa_longitud        VARCHAR(30),        
+    mapa_latitud         VARCHAR(30),
+    PRIMARY KEY(id_estacionamiento)
 );
 
 CREATE TABLE estacionamiento_ticket (
     id_estacionamiento   INT NOT NULL,
-    numero_ticket        INT
+    numero_ticket        INT,
+    PRIMARY KEY(id_estacionamiento)
 );
 
 CREATE TABLE forma_envio (
@@ -132,12 +137,12 @@ INSERT INTO estacionamiento VALUES (4, 'AutoPark Plaza Sucre', 4500);
 INSERT INTO estacionamiento VALUES (5, 'AutoPark Saba Plaza Tribunales de Justicia', 5500);
 INSERT INTO estacionamiento VALUES (6, 'AutoPark Central Parking System ', 6500);
 
-INSERT INTO estacionamiento_localidad VALUES (1, 'Barcelona 2077, P 1 Todo, Providencia, Santiago' , 3);
-INSERT INTO estacionamiento_localidad VALUES (2, 'Teatinos 10, Santiago, Región Metropolitana' , 3);
-INSERT INTO estacionamiento_localidad VALUES (3, 'Plaza Bellavista, Valparaíso' , 7);
-INSERT INTO estacionamiento_localidad VALUES (4, ' Sucre 30 - Plaza Sucre - Subterráneo, Vina del Mar, Región de Valparaíso' , 4);
-INSERT INTO estacionamiento_localidad VALUES (5, 'Dirección: Plaza Tribunales de Justicia:, Concepción' , 6);
-INSERT INTO estacionamiento_localidad VALUES (6, 'Ismael Valdés Vergara Nº 838 - Diagonal Cervantes' , 5);
+INSERT INTO estacionamiento_localidad VALUES (1, 'Barcelona 2077, P 1 Todo, Providencia, Santiago','-33.4251437','-70.6130836', 3);
+INSERT INTO estacionamiento_localidad VALUES (2, 'Teatinos 10, Santiago, Región Metropolitana','-33.4441289','-70.6567306' , 3);
+INSERT INTO estacionamiento_localidad VALUES (3, 'Plaza Bellavista, Valparaíso','-33.0436597','-71.6253119' , 7);
+INSERT INTO estacionamiento_localidad VALUES (4, 'Sucre 30 - Plaza Sucre - Subterráneo, Vina del Mar, Región de Valparaíso','-33.0254242','-71.5545642' , 4);
+INSERT INTO estacionamiento_localidad VALUES (5, 'Plaza Tribunales de Justicia:, Concepción','-36.825958','-73.049005',6);
+INSERT INTO estacionamiento_localidad VALUES (6, 'Ismael Valdés Vergara Nº 838 - Diagonal Cervantes','-33.4338413','-70.652074' , 5);
 
 INSERT INTO estacionamiento_ticket VALUES(1, 10);
 INSERT INTO estacionamiento_ticket VALUES(2, 3000);
