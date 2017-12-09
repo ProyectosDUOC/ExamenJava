@@ -36,8 +36,8 @@ public class BoletaDAO {
     }
 
     public boolean Leer(int id) {
+        em = factory.createEntityManager();
         p = em.find(Boleta.class, id);
-
         if (p.getIdBoleta()== null) {
             return false;
         } else {
@@ -47,6 +47,7 @@ public class BoletaDAO {
 
     public boolean Eliminar(int id) {
         try{
+            em = factory.createEntityManager();
             p = em.find(Boleta.class, id);
             em.remove(p);
             em.flush();
@@ -59,11 +60,10 @@ public class BoletaDAO {
     }
     
     public List<Boleta> Listar(){
-        
+        em = factory.createEntityManager();
         List<Boleta> boletas;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Boleta c");
-        boletas = q.getResultList();
-        
+        boletas = q.getResultList();        
         return boletas;
     }
 }

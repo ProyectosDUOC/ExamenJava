@@ -4,6 +4,10 @@
     Author     : benja
 --%>
 
+<%@page import="dao.EstacionamientoTicketDAO"%>
+<%@page import="modelo.EstacionamientoTicket"%>
+<%@page import="dao.EstacionamientoDAO"%>
+<%@page import="modelo.Estacionamiento"%>
 <%@page import="dao.ComunaDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Comuna"%>
@@ -17,7 +21,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+        <% List<Estacionamiento> listaEsta = (new EstacionamientoDAO()) .Listar(); %>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
@@ -32,18 +36,20 @@
         </nav>    
         <div class="section">
             <div class="container">
-                <div class="input-field col s2 ">
+                <div class="row">
+                     <div class="input-field col s6 ">
                     Rut:<input id="Text1" type="text" /> 
                 </div>
-                <div class="input-field col s2 ">
+                <div class="input-field col s6 ">
                     Nombre:<input id="Text2" type="text" />
                 </div>
-                <div class="input-field col s2 ">
+                <div class="input-field col s6 ">
                     Telefono:<input id="Text3" type="text" />
                 </div>
-                <div class="input-field col s2 ">
+                <div class="input-field col s6 ">
                     e-mail:<input id="Text4" type="text" />
                 </div>
+                </div>                
             </div>
         </div>
 
@@ -51,18 +57,16 @@
             <div class="container">
                 <form action="#" method="POST">    
                 <div class="input-field col s2 ">
-                    Seleccione Estacionamiento, indique la cantidad de dinero que mostro la aplicacion movil:
                     <div class="input-field col s12">
-                        <select name="comuna">
-                            <option value="" disabled selected>Elija la comuna</option>
+                        <select name="etacionamientos">
+                           
+                            <option value="" disabled selected>Estacionamientos</option>
+                            <%for (Estacionamiento esta : listaEsta) { %>
+                             <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEstacionamiento()%></option>
+                            <%   
+                                }
+                            %>
                             <option value="Calera de Tango">Calera de Tango</option>
-                            <option value="San Bernardo">San Bernardo</option>
-                            <option value="Santiago">Santiago</option>
-                            <option value="Rancagua">Rancagua</option>
-                            <option value="La Pintana">La  Pitanta</option>
-                            <option value="Puente ALto">Puente alto</option>
-                            <option value="Cerrillos">Cerrillos</option>
-                            <option value="Maipu">Maipu</option>
                         </select>
                         <label>Comuna</label>
                     </div>

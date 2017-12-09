@@ -36,8 +36,8 @@ public class EstacionamientoTicketDAO {
     }
 
     public boolean Leer(int id) {
+         em = factory.createEntityManager();
         p = em.find(EstacionamientoTicket.class, id);
-
         if (p.getIdEstacionamiento()== null) {
             return false;
         } else {
@@ -47,6 +47,7 @@ public class EstacionamientoTicketDAO {
 
     public boolean Eliminar(int id) {
         try{
+             em = factory.createEntityManager();
             p = em.find(EstacionamientoTicket.class, id);
             em.remove(p);
             em.flush();
@@ -59,7 +60,7 @@ public class EstacionamientoTicketDAO {
     }
     
     public List<EstacionamientoTicket> Listar(){
-        
+        em = factory.createEntityManager();
         List<EstacionamientoTicket> tickets;
         javax.persistence.Query q = em.createQuery("SELECT c FROM estacionamiento_ticket c");
         tickets = q.getResultList();

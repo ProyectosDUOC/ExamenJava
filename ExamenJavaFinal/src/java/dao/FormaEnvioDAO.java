@@ -36,8 +36,8 @@ public class FormaEnvioDAO {
     }
 
     public boolean Leer(int id) {
+        em = factory.createEntityManager();
         p = em.find(FormaEnvio.class, id);
-
         if (p.getIdEnvio()== null) {
             return false;
         } else {
@@ -47,6 +47,7 @@ public class FormaEnvioDAO {
 
     public boolean Eliminar(int id) {
         try{
+            em = factory.createEntityManager();
             p = em.find(FormaEnvio.class, id);
             em.remove(p);
             em.flush();
@@ -59,7 +60,7 @@ public class FormaEnvioDAO {
     }
     
     public List<FormaEnvio> Listar(){
-        
+        em = factory.createEntityManager();
         List<FormaEnvio> formaPagos;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_envio c");
         formaPagos = q.getResultList();

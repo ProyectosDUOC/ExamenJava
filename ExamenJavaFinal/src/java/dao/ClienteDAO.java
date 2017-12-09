@@ -36,8 +36,8 @@ public class ClienteDAO {
     }
 
     public boolean Leer(String rut) {
+        em = factory.createEntityManager();
         p = em.find(Cliente.class, rut);
-
         if (p.getRutCliente().isEmpty()) {
             return false;
         } else {
@@ -47,6 +47,7 @@ public class ClienteDAO {
 
     public boolean Eliminar(String rut) {
         try{
+            em = factory.createEntityManager();
             p = em.find(Cliente.class, rut);
             em.remove(p);
             em.flush();
@@ -59,11 +60,10 @@ public class ClienteDAO {
     }
     
     public List<Cliente> Listar(){
-        
+        em = factory.createEntityManager();
         List<Cliente> clientes;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Cliente c");
-        clientes = q.getResultList();
-        
+        clientes = q.getResultList();        
         return clientes;
     }
 }
