@@ -16,7 +16,7 @@ import modelo.DetalleBoleta;
  * @author benja
  */
 public class DetalleBoletaDAO {
-      private modelo.DetalleBoleta p;
+    private DetalleBoleta p;
     private EntityManager em;
 
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
@@ -35,18 +35,32 @@ public class DetalleBoletaDAO {
         }
     }
 
-    public boolean Leer(int id) {
+    public DetalleBoleta Leer(int id) {
         p = em.find(DetalleBoleta.class, id);
 
         if (p.getIdBoleta()== null) {
+            return null;
+        } else {
+            return p;
+        }
+    }
+    public boolean Actualizar(DetalleBoleta detalleBoleta) {
+        em = factory.createEntityManager();
+        p = em.find(DetalleBoleta.class, detalleBoleta.getIdBoleta());        
+        
+        if (p.getIdBoleta()== null) {
             return false;
         } else {
+            em.getTransaction().begin();
+            p.setIdEstacionamiento(detalleBoleta.getIdEstacionamiento());
+            p.setNumeroTicket(detalleBoleta.getNumeroTicket());
+            em.getTransaction().commit();           
             return true;
         }
     }
-
     public boolean Eliminar(int id) {
         try{
+             em = factory.createEntityManager();
             p = em.find(DetalleBoleta.class, id);
             em.remove(p);
             em.flush();
@@ -59,7 +73,7 @@ public class DetalleBoletaDAO {
     }
     
     public List<DetalleBoleta> Listar(){
-        
+         em = factory.createEntityManager();
         List<DetalleBoleta> detalles;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Detalle_boleta c");
         detalles = q.getResultList();

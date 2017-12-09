@@ -35,13 +35,13 @@ public class FormaEnvioDAO {
         }
     }
 
-    public boolean Leer(int id) {
+    public FormaEnvio Leer(int id) {
         em = factory.createEntityManager();
         p = em.find(FormaEnvio.class, id);
         if (p.getIdEnvio()== null) {
-            return false;
+            return null;
         } else {
-            return true;
+            return p;
         }
     }
 

@@ -35,15 +35,15 @@ public class ComunaDAO {
         }
     }
 
-    public boolean Leer(int id) {
+    public Comuna Leer(int id) {
       
         em = factory.createEntityManager();
         p = em.find(Comuna.class, id);
 
         if (p.getIdComuna()== null) {
-            return false;
+            return null;
         } else {
-            return true;
+            return p;
         }
     }
 

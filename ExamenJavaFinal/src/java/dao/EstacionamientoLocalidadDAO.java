@@ -35,14 +35,14 @@ public class EstacionamientoLocalidadDAO {
         }
     }
     
-    public boolean Leer(String idEstacionamiento) {
+    public EstacionamientoLocalidad Leer(int idEstacionamiento) {
          em = factory.createEntityManager();
         p = em.find(EstacionamientoLocalidad.class, idEstacionamiento);
 
         if (p.getIdEstacionamiento() == null) {
-            return false;
+            return null;
         } else {
-            return true;
+            return p;
         }
     }
     

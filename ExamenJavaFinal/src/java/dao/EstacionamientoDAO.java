@@ -35,7 +35,7 @@ public class EstacionamientoDAO {
         }
     }
 
-    public boolean Leer(String idEstacionamiento) {
+    public boolean Leer(int idEstacionamiento) {
          em = factory.createEntityManager();
         p = em.find(Estacionamiento.class, idEstacionamiento);
 

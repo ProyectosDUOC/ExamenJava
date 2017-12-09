@@ -35,13 +35,13 @@ public class FormaPagoDAO {
         }
     }
 
-    public boolean Leer(int id) {
+    public FormaPago Leer(int id) {
         em = factory.createEntityManager();
         p = em.find(FormaPago.class, id);
         if (p.getIdPago() == null) {
-            return false;
+            return null;
         } else {
-            return true;
+            return p;
         }
     }
 

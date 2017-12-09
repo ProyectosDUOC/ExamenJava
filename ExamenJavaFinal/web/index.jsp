@@ -4,6 +4,8 @@
     Author     : benja
 --%>
 
+<%@page import="dao.EstacionamientoLocalidadDAO"%>
+<%@page import="modelo.EstacionamientoLocalidad"%>
 <%@page import="dao.EstacionamientoTicketDAO"%>
 <%@page import="modelo.EstacionamientoTicket"%>
 <%@page import="dao.EstacionamientoDAO"%>
@@ -21,49 +23,141 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <% List<Estacionamiento> listaEsta = (new EstacionamientoDAO()) .Listar(); %>
+        <% List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
+           EstacionamientoLocalidad locacion = new EstacionamientoLocalidad();
+           Comuna comuna = new Comuna();
+        %>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="index.jsp" class="brand-logo yellow-text"><i class="large material-icons left">directions_car</i>Auto Park</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="index.jsp">Inicio</a></li>
-                    <li><a href="buscarPedidos.jsp">Ver Pagos/Compras</a></li>
-                    <li><a href="#">Ayuda</a></li>
+                    <li><a href="buscarPedidos.jsp">Ver Pagos/Compras</a></li>                   
                     <li><a href="verEstacionamientos.jsp">Ver Estacionamientos</a></li>
+                    <li><a href="#">Ayuda</a></li>
                 </ul>
             </div>
         </nav>    
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                     <div class="input-field col s6 ">
-                    Rut:<input id="Text1" type="text" /> 
-                </div>
-                <div class="input-field col s6 ">
-                    Nombre:<input id="Text2" type="text" />
-                </div>
-                <div class="input-field col s6 ">
-                    Telefono:<input id="Text3" type="text" />
-                </div>
-                <div class="input-field col s6 ">
-                    e-mail:<input id="Text4" type="text" />
-                </div>
-                </div>                
+
+        <div class="section" id="acceso">
+            <div class="row">
+                <div class="col s4 offset-s6">
+                    <div class="card  cyan darken-2">
+                        <div class="card-content white-text">
+                            <span class="card-title">Datos Personales</span>
+                            <div class="input-field">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="rut" type="text" maxlength="9" name="rut" required="requered" /> 
+                                <label for="rut" class="white-text" >Rut  ejemplo 190000008</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">people</i>
+                                <input id="nombre" type="text" name="Nombre" required="requered"/>
+                                <label for="nombre" class="white-text">Nombre Completo</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">local_phone</i>
+                                <input id="tel" type="text" maxlength="12" required="requered" />
+                                <label for="tel" class="white-text">Telefono +569XXXXXXXX</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input id="correo" type="email" name="correo" required="requered" />
+                                <label for="correo" class="white-text">Correo Electronico @...</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="Estacionamientos">
             <div class="container">
-                <form action="#" method="POST">    
+                <div class="col s6 ">
+                    <div class="card orange darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title center-align">Estacionamientos</span>
+                            <div class="input-field">
+                                <select name="etacionamientos">
+
+                                    <option value="" disabled selected>Estacionamientos</option>
+                                    <%for (Estacionamiento esta : listaEsta) {
+                                        locacion = (new EstacionamientoLocalidadDAO()).Leer(esta.getIdEstacionamiento());
+                                        comuna = (new ComunaDAO()).Leer(locacion.getIdComuna());
+                                    %>
+                                    <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEstacionamiento()%> - <%=comuna.getNombreComuna() %></option>
+                                    <%
+                                        }
+                                    %>
+                                    <option value="Calera de Tango">Calera de Tango</option>
+                                </select>
+                                <label class="black-text">Selecciones un Estacionamiento</label>
+                                <button class="btn waves-effect waves-light center-align" type="submit" name="action">Agregar
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">people</i>
+                                <input id="nombre" type="text" name="Nombre" required="requered"/>
+                                <label for="nombre" class="white-text">Nombre Completo</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">local_phone</i>
+                                <input id="tel" type="text" maxlength="12" required="requered" />
+                                <label for="tel" class="white-text">Telefono +569XXXXXXXX</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input id="correo" type="email" name="correo" required="requered" />
+                                <label for="correo" class="white-text">Correo Electronico @...</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
+            </div>
+        </div>
+        <div class="section">
+
+            <div class="container">
+                <div class="row">
+                    <div class="card blue-grey darken-1">
+
+                        <div class="col s12 m8 l9">                  
+                            <p>
+                                <input name="group1" type="radio" id="test1" />
+                                <label for="test1">Red</label>
+                            </p>
+                            <p>
+                                <input name="group1" type="radio" id="test2" />
+                                <label for="test2">Yellow</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="group1" type="radio" id="test3" />
+                                <label for="test3">Green</label>
+                            </p>
+                            <p>
+                                <input name="group1" type="radio" id="test4" disabled="disabled" />
+                                <label for="test4">Brown</label>
+                            </p>                  
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <form action="#" method="POST">    
                 <div class="input-field col s2 ">
                     <div class="input-field col s12">
                         <select name="etacionamientos">
-                           
+
                             <option value="" disabled selected>Estacionamientos</option>
-                            <%for (Estacionamiento esta : listaEsta) { %>
-                             <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEstacionamiento()%></option>
-                            <%   
+                            <%for (Estacionamiento esta : listaEsta) {%>
+                            <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEstacionamiento()%></option>
+                            <%
                                 }
                             %>
                             <option value="Calera de Tango">Calera de Tango</option>
@@ -83,59 +177,6 @@
                         <input name="grupoPago" id="Radio2" type="radio" value="PL"/>
                         <label for="Radio2">Pago en Linea</label>
                     </p>
-                    
-                    
-                    <div class="col s12 m12 l6">
-                <div class="card-panel">
-                  <h4 class="header2">Form with validation</h4>
-                  <div class="row">
-                    <form class="col s12">
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <i class="large material-icons left">account-circle</i>
-                          
-                          <input id="name4" type="text" class="validate">
-                          <label for="first_name">Name</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <i class="mdi-communication-email prefix"></i>
-                          <input id="email4" type="email" class="validate">
-                          <label for="email">Email</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <i class="mdi-action-lock-outline prefix"></i>
-                          <input id="password5" type="password" class="validate">
-                          <label for="password">Password</label>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-field col s12">
-                          <i class="mdi-action-question-answer prefix"></i>
-                          <textarea id="message4" class="materialize-textarea validate" length="120"></textarea>
-                          <label for="message">Message</label>
-                        </div>
-                        <div class="row">
-                          <div class="input-field col s12">
-                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                              <i class="mdi-content-send right"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-                    
-                    
-                    
-                    <input id="Radio2" type="radio" />Pago en Linea
-                    <br/><br/>
-                    <input id="Radio3" type="radio" />Orden de Compra
                 </div>
                 <div class="input-field col s2 ">
                     Opciones de Envio de Boleta
@@ -150,19 +191,15 @@
                     <input id="btnPagar" type="button" value="Pagar" />
                 </div>
             </form>
-            
-            </div>
         </div>
-
-
-
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="js/materialize.js"></script>
-        <script src="js/init.js"></script>    
-        <script>
-            $(document).ready(function () {
-                $('select').material_select();
-            });
-        </script>
-    </body>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>    
+    <script>
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+    </script>
+</body>
 </html>
