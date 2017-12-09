@@ -35,7 +35,7 @@
                 var marker = new google.maps.Marker({
                     position: casaBenja,
                     map: map,
-                    label: 'Basural xD'
+                    label: 'Mansion'
                 });
             }
         </script>

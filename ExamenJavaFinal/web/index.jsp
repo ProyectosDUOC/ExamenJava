@@ -34,7 +34,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="index.jsp">Inicio</a></li>
                     <li><a href="buscarPedidos.jsp">Ver Pagos/Compras</a></li>                   
-                    <li><a href="verEstacionamientos.jsp">Ver Estacionamientos</a></li>
+                    <li><a href="mapa.jsp">Ver Estacionamientos</a></li>
                     <li><a href="#">Ayuda</a></li>
                 </ul>
             </div>
