@@ -64,7 +64,6 @@ public class ClienteDAO {
         List<Cliente> clientes;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Cliente c");
         clientes = q.getResultList();
-        int num_clientes = clientes.size();
         
         return clientes;
     }
