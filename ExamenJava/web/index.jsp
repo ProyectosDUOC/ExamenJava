@@ -69,24 +69,63 @@
                     Opciones de Pago:
                     <br/><br/>
                     <p>
-                        <input name="grupPago" id="Radio1" type="radio" />
+                        <input name="grupPago" id="Radio1" type="radio" value="T" checked/>
                         <label for="Radio1">Transferencia</label>
                     </p>
-                    <br/><br/>
                     <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" checked />
-                        <label for="test5">Red</label>
+                        <input name="grupoPago" id="Radio2" type="radio" value="PL"/>
+                        <label for="Radio2">Pago en Linea</label>
                     </p>
-
-
-
-
-                    <p>
-                        <input name="group1" type="radio" id="test1" />
-                        <label for="test1">Red</label>
-                    </p>
-
-
+                    
+                    
+                    <div class="col s12 m12 l6">
+                <div class="card-panel">
+                  <h4 class="header2">Form with validation</h4>
+                  <div class="row">
+                    <form class="col s12">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="large material-icons left">account-circle</i>
+                          
+                          <input id="name4" type="text" class="validate">
+                          <label for="first_name">Name</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-communication-email prefix"></i>
+                          <input id="email4" type="email" class="validate">
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-lock-outline prefix"></i>
+                          <input id="password5" type="password" class="validate">
+                          <label for="password">Password</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-question-answer prefix"></i>
+                          <textarea id="message4" class="materialize-textarea validate" length="120"></textarea>
+                          <label for="message">Message</label>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                              <i class="mdi-content-send right"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+                    
+                    
+                    
                     <input id="Radio2" type="radio" />Pago en Linea
                     <br/><br/>
                     <input id="Radio3" type="radio" />Orden de Compra
