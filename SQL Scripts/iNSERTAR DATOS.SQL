@@ -113,7 +113,7 @@ INSERT INTO cliente VALUES ('189761104','Carlos','+56998299855', 'car.orrella@gm
 INSERT INTO cliente VALUES ('111111111','Christian','+56998299855', 'car.orrella@gmail.com', 'san martin 185',53);
 INSERT INTO cliente VALUES ('222222222','Benjamin','+56998299855', 'b.morat@gmail.com', 'san martin 185',2);
 INSERT INTO cliente VALUES ('333333333','Sebastian','+56998299855', 'seba.orrego@gmail.com', 'san martin 185',9);
-                  id_ticket,n_ticket,EST,HRS,  rut          ,fecha     ,pate     ,total,PAGO, 
+--                id_ticket,n_ticket,EST,HRS,  rut          ,fecha     ,pate     ,total,PAGO, 
 INSERT INTO ticket VALUES(1, 2000   , 2, 4  , '189761104', '2017-12-12', 'AAAAAA', 1000, 0);
 INSERT INTO ticket VALUES(2, 2      , 1, 6  , '189761104', '2017-12-10', 'AAAAAA', 3000, 0);
 INSERT INTO ticket VALUES(3, 99     , 5, 1  , '189761104', '2017-12-12', 'AAAAAA', 520, 0);
@@ -125,5 +125,27 @@ INSERT INTO ticket VALUES(7, 99 , 5, 1 , '189761104', '2017-12-12', 'AAAAAA', 52
 INSERT INTO ticket VALUES(8, 2000 , 4, 3 , '189761104', '2017-12-12', 'AAAAAA', 400, 0);
 
 
+--rut 22(10) y 33(10)
+--                        id_ticket, n_ticket,EST,HRS,  rut        ,fecha        ,patente  ,total, PAGO,
+INSERT INTO ticket VALUES(20,         1998    ,2  ,4  , '222222222' , '2017-12-12', 'AAAAAA', 1000, 0);
+INSERT INTO ticket VALUES(21,         318     ,6  ,4  , '222222222' , '2017-12-11', 'AAAAAA', 2400, 0);
+INSERT INTO ticket VALUES(22,         1996    ,2  ,4  , '222222222' , '2017-12-10', 'AAAAAA', 1000, 0);
+INSERT INTO ticket VALUES(23,         316     ,6  ,4  , '222222222' , '2017-12-09', 'AAAAAA', 2400, 0);
+INSERT INTO ticket VALUES(24,         1994    ,2  ,4  , '222222222' , '2017-12-08', 'AAAAAA', 1000, 0);
+INSERT INTO ticket VALUES(25,         314     ,6  ,4  , '222222222' , '2017-12-07', 'AAAAAA', 2400, 0);
+INSERT INTO ticket VALUES(26,         1992    ,2  ,4  , '222222222' , '2017-12-06', 'AAAAAA', 1000, 0);
+INSERT INTO ticket VALUES(27,         312     ,6  ,4  , '222222222' , '2017-12-04', 'AAAAAA', 2400, 0);
+INSERT INTO ticket VALUES(28,         1990    ,2  ,4  , '222222222' , '2017-12-02', 'AAAAAA', 1000, 0);
+INSERT INTO ticket VALUES(29,         310     ,6  ,4  , '222222222' , '2017-12-01', 'AAAAAA', 2400, 0);
+INSERT INTO ticket VALUES(30,         1988    ,2  ,4  , '222222222' , '2017-11-30', 'AAAAAA', 1000, 0);
 
-
+INSERT INTO ticket VALUES(31,         10000   ,5  ,4  , '333333333' , '2017-12-12', 'AAAAAA', 2080, 0);
+INSERT INTO ticket VALUES(32,         200     ,3  ,4  , '333333333' , '2017-12-11', 'AAAAAA', 1200, 0);
+INSERT INTO ticket VALUES(33,         9998    ,5  ,4  , '333333333' , '2017-12-10', 'AAAAAA', 2080, 0);
+INSERT INTO ticket VALUES(34,         198     ,3  ,4  , '333333333' , '2017-12-09', 'AAAAAA', 1200, 0);
+INSERT INTO ticket VALUES(35,         9996    ,5  ,4  , '333333333' , '2017-12-08', 'AAAAAA', 2080, 0);
+INSERT INTO ticket VALUES(36,         196     ,3  ,4  , '333333333' , '2017-12-07', 'AAAAAA', 1200, 0);
+INSERT INTO ticket VALUES(37,         9994    ,5  ,4  , '333333333' , '2017-12-06', 'AAAAAA', 2080, 0);
+INSERT INTO ticket VALUES(38,         194     ,3  ,4  , '333333333' , '2017-12-05', 'AAAAAA', 1200, 0);
+INSERT INTO ticket VALUES(39,         9992    ,5  ,4  , '333333333' , '2017-12-04', 'AAAAAA', 2080, 0);
+INSERT INTO ticket VALUES(40,         192     ,3  ,4  , '333333333' , '2017-11*-30', 'AAAAAA', 1200, 0);
