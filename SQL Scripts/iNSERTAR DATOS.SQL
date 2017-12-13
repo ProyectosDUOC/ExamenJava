@@ -113,12 +113,12 @@ INSERT INTO cliente VALUES ('189761104','Carlos','+56998299855', 'car.orrella@gm
 INSERT INTO cliente VALUES ('111111111','Christian','+56998299855', 'car.orrella@gmail.com', 'san martin 185',53);
 INSERT INTO cliente VALUES ('222222222','Benjamin','+56998299855', 'b.morat@gmail.com', 'san martin 185',2);
 INSERT INTO cliente VALUES ('333333333','Sebastian','+56998299855', 'seba.orrego@gmail.com', 'san martin 185',9);
-                  id_ticket,n_ticket, id_esta,cant_horas,rut,fecha,pate,total,id_PAGO, 
-INSERT INTO ticket VALUES(1, 2000 , 2, 4  , '189761104', '2017-12-12', 'AAAAAA', 1000, 0);
-INSERT INTO ticket VALUES(2, 2    , 1, 6  , '189761104', '2017-12-10', 'AAAAAA', 3000, 0);
-INSERT INTO ticket VALUES(3, 99   , 5, 1  , '189761104', '2017-12-12', 'AAAAAA', 520, 0);
-INSERT INTO ticket VALUES(4, 2000 , 4, 3  , '189761104', '2017-12-12', 'AAAAAA', 400, 0);
-INSERT INTO ticket VALUES(5, 100  , 6, 10 , '189761104', '2017-12-12', 'AAAAAA', 6000, 0);
+                  id_ticket,n_ticket,EST,HRS,  rut          ,fecha     ,pate     ,total,PAGO, 
+INSERT INTO ticket VALUES(1, 2000   , 2, 4  , '189761104', '2017-12-12', 'AAAAAA', 1000, 0);
+INSERT INTO ticket VALUES(2, 2      , 1, 6  , '189761104', '2017-12-10', 'AAAAAA', 3000, 0);
+INSERT INTO ticket VALUES(3, 99     , 5, 1  , '189761104', '2017-12-12', 'AAAAAA', 520, 0);
+INSERT INTO ticket VALUES(4, 2000   , 4, 3  , '189761104', '2017-12-12', 'AAAAAA', 400, 0);
+INSERT INTO ticket VALUES(5, 100    , 6, 10 , '189761104', '2017-12-12', 'AAAAAA', 6000, 0);
 
 INSERT INTO ticket VALUES(6, 2 , 1, 6 , '189761104', '2017-12-10', 'AAAAAA', 3000, 0);
 INSERT INTO ticket VALUES(7, 99 , 5, 1 , '189761104', '2017-12-12', 'AAAAAA', 520, 0);
