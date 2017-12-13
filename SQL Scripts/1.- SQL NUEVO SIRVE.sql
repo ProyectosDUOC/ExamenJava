@@ -69,7 +69,7 @@ CREATE TABLE ticket(
     numero_ticket       INT, 
     id_estacionamiento  INT, 
     cant_horas          INT,
-    rut_cliente         INT,
+    rut_cliente         VARCHAR(9),
     fecha_ticket        DATE,
     patente_auto        VARCHAR(6), 
     total_pago          INT,    
