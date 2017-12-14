@@ -4,6 +4,9 @@
     Author     : benja
 --%>
 
+<%@page import="dao.TicketDAO"%>
+<%@page import="modelo.Ticket"%>
+<%@page import="java.util.List"%>
 <%@page import="modelo.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,28 +41,29 @@
                         <table class="striped responsive-table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Item Name</th>
-                                    <th>Item Price</th>
+                                    <th>N° Ticket</th>
+                                    <th>Fecha</th>
+                                    <th>Nombre Estacionamiento</th>
+                                    <th>Precio X horas</th>
+                                    <th>Cant horas</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
-
                             <tbody>
-                                <tr>
-                                    <td>Alvin</td>
-                                    <td>Eclair</td>
-                                    <td>$0.87</td>
-                                </tr>
-                                <tr>
-                                    <td>Alan</td>
-                                    <td>Jellybean</td>
-                                    <td>$3.76</td>
-                                </tr>
-                                <tr>
-                                    <td>Jonathan</td>
-                                    <td>Lollipop</td>
-                                    <td>$7.00</td>
-                                </tr>
+                                <% List<Ticket> listaTickets = (new TicketDAO()).Listar();
+                                   for (Ticket tt : listaTickets) {
+                                        if (tt.getRutCliente().equals(clie.getRutCliente())) {%>
+                                        <td><%=tt.getNumeroTicket()%></td>
+                                        <td><%=tt.getFechaTicket()%></td>
+                                        <td><%=tt.getIdEstacionamiento()%></td>
+                                        <td><%=tt.getIdEstacionamiento()%></td>
+                                        <td><%=tt.getCantHoras()%> hrs</td>
+                                        <td>$<%=tt.getTotalPago()%>.-</td>
+                                </tr>      
+                                   <%    }
+                                    }
+                                %>
+                              
                             </tbody>
                         </table>
 
