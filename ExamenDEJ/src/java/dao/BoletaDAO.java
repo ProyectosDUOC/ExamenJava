@@ -9,22 +9,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Estacionamiento;
+import modelo.Boleta;
+
 /**
  *
- * @author Seba
+ * @author benja
  */
-public class EstacionamientoDAO {
-    private Estacionamiento p;
+public class BoletaDAO {
+    private Boleta p;
     private EntityManager em;
-    
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
-    
-    public boolean Crear(Estacionamiento estacionamiento) {
+
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+
+    public boolean Crear(Boleta boleta) {
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(estacionamiento);
+            em.persist(boleta);
             em.flush();
             em.getTransaction().commit();
             return true;
@@ -33,22 +34,21 @@ public class EstacionamientoDAO {
             return false;
         }
     }
-
-    public boolean Leer(int idEstacionamiento) {
-         em = factory.createEntityManager();
-        p = em.find(Estacionamiento.class, idEstacionamiento);
-
-        if (p.getIdEstacionamiento() == null) {
+    
+    public boolean Leer(int id) {
+        em = factory.createEntityManager();
+        p = em.find(Boleta.class, id);
+        if (p.getIdBoleta() == null) {
             return false;
         } else {
             return true;
         }
     }
-    
-    public boolean Eliminar(int idEstacionamiento) {
+
+    public boolean Eliminar(int id) {
         try{
-             em = factory.createEntityManager();
-            p = em.find(Estacionamiento.class, idEstacionamiento);
+            em = factory.createEntityManager();
+            p = em.find(Boleta.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
@@ -59,11 +59,11 @@ public class EstacionamientoDAO {
         }        
     }
     
-    public List<Estacionamiento> Listar(){
+    public List<Boleta> Listar(){
         em = factory.createEntityManager();
-        List<Estacionamiento> estacionamientos;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento c");
-        estacionamientos = q.getResultList();        
-        return estacionamientos;
+        List<Boleta> boletas;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Boleta c");
+        boletas = q.getResultList();        
+        return boletas;
     }
 }
