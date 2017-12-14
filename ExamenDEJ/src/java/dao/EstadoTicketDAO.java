@@ -19,7 +19,7 @@ public class EstadoTicketDAO {
     private EstadoTicket p;
     private EntityManager em;
     
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
     
     public boolean Crear(EstadoTicketDAO esta) {
         em = factory.createEntityManager();

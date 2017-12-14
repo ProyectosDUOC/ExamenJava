@@ -9,23 +9,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Cliente;
+import modelo.FormaEnvio;
 
 /**
  *
- * @author Seba
+ * @author benja
  */
-public class ClienteDAO {
-    private Cliente p;
+public class FormaEnvioDAO {
+    private FormaEnvio p;
     private EntityManager em;
-
+    
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-
-    public boolean Crear(Cliente cliente) {
+    
+    public boolean Crear(FormaEnvio forma) {
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(cliente);
+            em.persist(forma);
             em.flush();
             em.getTransaction().commit();
             return true;
@@ -35,20 +35,21 @@ public class ClienteDAO {
         }
     }
 
-    public Cliente Leer(String rut) {
-        em = factory.createEntityManager();
-        p = em.find(Cliente.class, rut);
-        if (p.getRutCliente().isEmpty()) {
-            return p;
+    public boolean Leer(int id) {
+         em = factory.createEntityManager();
+        p = em.find(FormaEnvio.class, id);
+
+        if (p.getIdEnvio()== null) {
+            return false;
         } else {
-            return p;
+            return true;
         }
     }
-
-    public boolean Eliminar(String rut) {
+    
+    public boolean Eliminar(int id) {
         try{
-            em = factory.createEntityManager();
-            p = em.find(Cliente.class, rut);
+             em = factory.createEntityManager();
+            p = em.find(FormaEnvio.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
@@ -59,11 +60,11 @@ public class ClienteDAO {
         }        
     }
     
-    public List<Cliente> Listar(){
+    public List<FormaEnvio> Listar(){
         em = factory.createEntityManager();
-        List<Cliente> clientes;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Cliente c");
-        clientes = q.getResultList();        
-        return clientes;
+        List<FormaEnvio> estados;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_envio c");
+        estados = q.getResultList();        
+        return estados;
     }
 }

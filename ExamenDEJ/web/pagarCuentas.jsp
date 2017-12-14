@@ -4,6 +4,9 @@
     Author     : benja
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="dao.EstacionamientoDAO"%>
+<%@page import="modelo.Estacionamiento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -15,7 +18,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+        <% List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();  %>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
@@ -73,14 +76,11 @@
 
                                     <option value="" disabled selected>Estacionamientos</option>
                                     <%for (Estacionamiento esta : listaEsta) {
-                                            locacion = (new EstacionamientoLocalidadDAO()).Leer(esta.getIdEstacionamiento());
-                                            comuna = (new ComunaDAO()).Leer(locacion.getIdComuna());
                                     %>
-                                    <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEstacionamiento()%> - <%=comuna.getNombreComuna()%></option>
+                                    <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEsta()%> - <%=esta.getGlosa()%></option>
                                     <%
                                         }
                                     %>
-                                    <option value="Calera de Tango">Calera de Tango</option>
                                 </select>
                                 <label class="black-text">Selecciones un Estacionamiento</label>
                                 <button class="btn waves-effect waves-light center-align" type="submit" name="action">Agregar
@@ -146,7 +146,7 @@
 
                             <option value="" disabled selected>Estacionamientos</option>
                             <%for (Estacionamiento esta : listaEsta) {%>
-                            <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEstacionamiento()%></option>
+                            <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEsta()%></option>
                             <%
                                 }
                             %>

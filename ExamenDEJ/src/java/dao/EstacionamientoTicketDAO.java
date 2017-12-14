@@ -19,7 +19,7 @@ public class EstacionamientoTicketDAO {
     private EstacionamientoTicket p;
     private EntityManager em;
     
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenJavaFinalPU", System.getProperties());
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
     
     public boolean Crear(EstacionamientoTicket esta) {
         em = factory.createEntityManager();

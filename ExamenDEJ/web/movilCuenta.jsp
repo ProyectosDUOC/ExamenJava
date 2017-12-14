@@ -1,12 +1,12 @@
 <%-- 
-    Document   : mobileAppWeb
-    Created on : 14-dic-2017, 2:53:35
+    Document   : movilCuenta
+    Created on : 14-dic-2017, 17:08:10
     Author     : benja
 --%>
 
+<%@page import="modelo.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,20 +27,47 @@
                             <!-- <img src="images/login-logo.png" alt="" class="circle responsive-img valign profile-image-login"> -->
                             <h1 class="black-text">Auto Park app</h1> 
                             <p class="center">Para la comodida de nuestro clientes, siempre y cuando lo necesite</p>
-                            <span id="mensaje" class="red-text"> ${param.mensaje}</span>
+                            <% Cliente clie = (Cliente) session.getAttribute("cliente"); %>
+                            <p><%=clie.getNombreCliente() %></p>
+                            <p><%=clie.getRutCliente() %></p>
+                            <p><%=clie.getCorreoCliente() %></p>
+                            <p><%=clie.getTelefonoCliente() %></p>
                         </div>
                     </div>
-                    <div class="row margin">
-                        <div class="input-field col s12">                                
-                            <i class="material-icons">person_outline</i>
-                            <input id="rut" type="text" required="" name="rut" maxlength="9"> 
-                            <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
-                        </div>
+                    <div class="row margin col s12">
+                        <table class="striped responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Item Name</th>
+                                    <th>Item Price</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Alvin</td>
+                                    <td>Eclair</td>
+                                    <td>$0.87</td>
+                                </tr>
+                                <tr>
+                                    <td>Alan</td>
+                                    <td>Jellybean</td>
+                                    <td>$3.76</td>
+                                </tr>
+                                <tr>
+                                    <td>Jonathan</td>
+                                    <td>Lollipop</td>
+                                    <td>$7.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
 
                     <div class="row">                      
-                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="acceder">
-                            Acceder
+                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="salir">
+                            Salir
                         </button>
                     </div>
                     <div class="row">

@@ -9,23 +9,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.Cliente;
+import modelo.Ticket;
 
 /**
  *
- * @author Seba
+ * @author benja
  */
-public class ClienteDAO {
-    private Cliente p;
+public class TicketDAO {
+    private Ticket p;
     private EntityManager em;
-
+    
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-
-    public boolean Crear(Cliente cliente) {
+    
+    public boolean Crear(Ticket t) {
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(cliente);
+            em.persist(t);
             em.flush();
             em.getTransaction().commit();
             return true;
@@ -35,20 +35,21 @@ public class ClienteDAO {
         }
     }
 
-    public Cliente Leer(String rut) {
-        em = factory.createEntityManager();
-        p = em.find(Cliente.class, rut);
-        if (p.getRutCliente().isEmpty()) {
-            return p;
+    public boolean Leer(int id) {
+         em = factory.createEntityManager();
+        p = em.find(Ticket.class, id);
+
+        if (p.getIdTicket()== null) {
+            return false;
         } else {
-            return p;
+            return true;
         }
     }
-
-    public boolean Eliminar(String rut) {
+    
+    public boolean Eliminar(int id) {
         try{
-            em = factory.createEntityManager();
-            p = em.find(Cliente.class, rut);
+             em = factory.createEntityManager();
+            p = em.find(Ticket.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
@@ -59,11 +60,11 @@ public class ClienteDAO {
         }        
     }
     
-    public List<Cliente> Listar(){
+    public List<Ticket> Listar(){
         em = factory.createEntityManager();
-        List<Cliente> clientes;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Cliente c");
-        clientes = q.getResultList();        
-        return clientes;
-    }
+        List<Ticket> tickets;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Ticket c");
+        tickets = q.getResultList();        
+        return tickets;
+    } 
 }

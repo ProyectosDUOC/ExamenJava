@@ -4,6 +4,10 @@
     Author     : Seba
 --%>
 
+<%@page import="dao.ClienteDAO"%>
+<%@page import="modelo.Cliente"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,8 +32,21 @@
                 </ul>
             </div>
         </nav>   
-        <h1>Inicio</h1>
-
+        <div class="container">
+            <div class="row center-align">
+                <h1>Auto Park</h1>    
+                <a  class="white-text btn-large  waves-effect waves-light  red" href="movilApp.jsp"><i class="material-icons">touch_app</i>App movil</a>       
+            </div>
+        </div>
+        
+        <%  List<Cliente> listaCliente = (new ClienteDAO()).Listar(); %>
+        
+        <% for (Cliente cli : listaCliente) {
+                %>
+                <p><%=cli.getRutCliente()%> - <%=cli.getNombreCliente()%></p>
+        <%
+            }
+        %>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script> 

@@ -21,26 +21,27 @@
     <body>     
         <div id="login-page" class="row">
             <div class="col s12 z-depth-4 card-panel">
-                <form class="login-form">
+                <form class="login-form" method="POST" action="ControladorMovil">
                     <div class="row">
                         <div class="input-field col s12 center">
-                           <!-- <img src="images/login-logo.png" alt="" class="circle responsive-img valign profile-image-login"> -->
-                           <h1 class="black-text">Auto Park Online</h1> 
-                           <p class="center">Para la comodida de nuestro clientes, siempre y cuando lo necesite</p>
+                            <!-- <img src="images/login-logo.png" alt="" class="circle responsive-img valign profile-image-login"> -->
+                            <h1 class="black-text">Auto Park app</h1> 
+                            <p class="center">Para la comodida de nuestro clientes, siempre y cuando lo necesite</p>
+                            <span id="mensaje" class="red-text"> ${param.mensaje}</span>
                         </div>
                     </div>
                     <div class="row margin">
                         <div class="input-field col s12">                                
                             <i class="material-icons">person_outline</i>
-                            <input id="rut" type="text" required="">
-                            <label for="rut" class="center-align">Rut Cliente</label>
+                            <input id="rut" type="text" required="" name="rut" maxlength="9"> 
+                            <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
                         </div>
                     </div>
-                 
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <a href="index.html" class="btn waves-effect waves-light deep-orange accent-2 col s12">Acceder</a>
-                        </div>
+
+                    <div class="row">                      
+                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="acceder">
+                            Acceder
+                        </button>
                     </div>
                     <div class="row">
                         <div class="input-field col s6 m6 l6">
