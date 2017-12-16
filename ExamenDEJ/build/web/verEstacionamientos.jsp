@@ -19,7 +19,7 @@
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/mapmarker.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-                <style>
+        <style>
             #map {
                 height: 400px;
                 width: 50%;
@@ -53,26 +53,26 @@
                     zoom: 6,
                     center: {lat: -34.6, lng: -71.5}
                 });
-                var tempMarker;
-                var markers=[];
+                
                 <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>   
                         
                 <% for (Estacionamiento park : parks) { %>
-                tempMarker = new google.maps.Marker
+                var marker<%=park.getIdEstacionamiento()%> = new google.maps.Marker
                             ({ 
                                 position: { lng: <%=park.getMapaLatitud()%>, lat: <%=park.getMapaLongitud()%>},
                                 map: map,
-                                label: '<%=park.getIdEstacionamiento()%>',
-                                title: '<%=park.getNombreEsta()%>'
+                                label: '<%=park.getIdEstacionamiento()%>'                      
                             });
-                tempMarker.addListener('click', function() {
+                    
+                var infowindow<%=park.getIdEstacionamiento()%> = new google.maps.InfoWindow({content: '<%=park.getNombreEsta()%>' });
+
+                marker<%=park.getIdEstacionamiento()%>.addListener('click', function() {
                     map.setZoom(14);
-                    map.setCenter(tempMarker.getPosition());
+                    map.setCenter(marker<%=park.getIdEstacionamiento()%>.getPosition());
+                    infowindow<%=park.getIdEstacionamiento()%>.open(map, marker<%=park.getIdEstacionamiento()%>);
+                    window.setTimeout( function(){ infowindow<%=park.getIdEstacionamiento()%>.close();},3000);
                 });
-                markers.push(tempMarker);
                 <% } %>
-                
-                var markerCluster = new google.maps.MarkerClusterer(map, markers);
             }
         </script>
         
