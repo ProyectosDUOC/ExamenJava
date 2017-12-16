@@ -67,7 +67,7 @@ public class FormaEnvioDAO {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<FormaEnvio> estados;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_envio c");
+        javax.persistence.Query q = em.createQuery("SELECT c FROM FormaEnvio c");
         estados = q.getResultList();        
         return estados;
     }

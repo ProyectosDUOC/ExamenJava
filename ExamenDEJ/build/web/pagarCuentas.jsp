@@ -53,7 +53,7 @@
         </nav>   
         <br>
         <br>
-
+        <form action="ControladorPagarC" method="POST">
         <div class="container" id="acceso">
             <div class="row">
                 <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
@@ -118,19 +118,36 @@
                             </button>                      
                          
                                 
-                                        
-                        <div class="col s6">                  
+                        <%
+                           List<FormaPago> listaP = (new FormaPagoDAO()).Listar();
+                           List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar();                                
+                        %>              
+                        <div class="col s6">  
+                            <% for (FormaPago fp : listaP) { %>
                             <p>
-                                <input name="group1" type="radio" id="test1" />
-                                <label for="test1">Red</label>
-                            </p>                                           
+                                <input name="group1" type="radio" id="<%=fp.getNombrePago()%>" name="<%=fp.getIdPago()%>" />
+                                <label for="<%=fp.getNombrePago()%>"><%=fp.getNombrePago()%></label>
+                           <p>                            
+                            <%        
+                                }
+                            %>                                          
+                        </div>
+                        <div class="col s6">  
+                            <% for (FormaEnvio fe : listaE) { %>
+                            <p>
+                                <input name="group1" type="radio" id="<%=fe.getNombreEnvio()%>" name="<%=fe.getIdEnvio()%>" />
+                                <label for="<%=fe.getIdEnvio()%>"><%=fe.getNombreEnvio()%></label>
+                           <p>                            
+                            <%        
+                                }
+                            %>                                          
                         </div>
                         </div>
                     </div>
                 </div>                          
             </div>
         </div>  
-       
+        </form>
   
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>

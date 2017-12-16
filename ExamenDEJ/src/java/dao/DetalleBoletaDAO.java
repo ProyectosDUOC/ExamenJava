@@ -65,7 +65,7 @@ public class DetalleBoletaDAO {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
          em = factory.createEntityManager();
         List<DetalleBoleta> detalles;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Detalle_boleta c");
+        javax.persistence.Query q = em.createQuery("SELECT c FROM DetalleBoleta c");
         detalles = q.getResultList();
         
         return detalles;
