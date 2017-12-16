@@ -4,10 +4,11 @@
     Author     : carlos
 --%>
 
+<%@page import="dao.BoletaDAO"%>
+<%@page import="modelo.Boleta"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.EstacionamientoDAO"%>
 <%@page import="modelo.Estacionamiento"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,15 +31,16 @@
                     <li><a href="verEstacionamientos.jsp">Ver Estacionamientos</a></li>               
                 </ul>
             </div>
-        </nav>   
-
+        </nav>
         <div>
-            <div class="container">
+            <form method="POST" action="ControladorPedido">
+                <div class="container">
                 <div class="row margin">
                     <div class="input-field col s12">                                
                         <i class="material-icons">person_outline</i>
                         <input id="rut" type="text" required="" name="rut" maxlength="9"> 
                         <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
+                        <span id="mensaje" class="red-text"> ${param.mensaje}</span>
                     </div>
                 </div>
                 <div class="row">                      
@@ -57,6 +59,7 @@
                         </thead>
                         <tbody>
                             <%
+                                List<Boleta> listaBoleta = (new BoletaDAO()).Listar();
 
                             %>
 
@@ -66,7 +69,14 @@
                     </table>
                 </div>
             </div>
+            </form> 
         </div>
+
+
+        
+
+
+
 
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
