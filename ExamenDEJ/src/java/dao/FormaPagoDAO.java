@@ -19,9 +19,10 @@ public class FormaPagoDAO {
     private FormaPago p;
     private EntityManager em;
     
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+    EntityManagerFactory factory;
     
     public boolean Crear(FormaPago forma) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -36,6 +37,7 @@ public class FormaPagoDAO {
     }
 
     public boolean Leer(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
          em = factory.createEntityManager();
         p = em.find(FormaPago.class, id);
 
@@ -47,6 +49,7 @@ public class FormaPagoDAO {
     }
     
     public boolean Eliminar(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         try{
              em = factory.createEntityManager();
             p = em.find(FormaPago.class, id);
@@ -61,6 +64,7 @@ public class FormaPagoDAO {
     }
     
     public List<FormaPago> Listar(){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<FormaPago> estados;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_pago c");
