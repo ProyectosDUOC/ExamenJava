@@ -19,9 +19,10 @@ public class FormaEnvioDAO {
     private FormaEnvio p;
     private EntityManager em;
     
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+    EntityManagerFactory factory;
     
     public boolean Crear(FormaEnvio forma) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -36,6 +37,7 @@ public class FormaEnvioDAO {
     }
 
     public boolean Leer(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
          em = factory.createEntityManager();
         p = em.find(FormaEnvio.class, id);
 
@@ -47,6 +49,7 @@ public class FormaEnvioDAO {
     }
     
     public boolean Eliminar(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         try{
              em = factory.createEntityManager();
             p = em.find(FormaEnvio.class, id);
@@ -61,6 +64,7 @@ public class FormaEnvioDAO {
     }
     
     public List<FormaEnvio> Listar(){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<FormaEnvio> estados;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_envio c");

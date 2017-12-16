@@ -18,9 +18,10 @@ public class EstacionamientoDAO {
     private Estacionamiento p;
     private EntityManager em;
     
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+    EntityManagerFactory factory;
     
     public boolean Crear(Estacionamiento estacionamiento) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -35,6 +36,7 @@ public class EstacionamientoDAO {
     }
 
     public boolean Leer(int idEstacionamiento) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
          em = factory.createEntityManager();
         p = em.find(Estacionamiento.class, idEstacionamiento);
 
@@ -46,6 +48,7 @@ public class EstacionamientoDAO {
     }
     
     public boolean Eliminar(int idEstacionamiento) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         try{
              em = factory.createEntityManager();
             p = em.find(Estacionamiento.class, idEstacionamiento);
@@ -60,6 +63,7 @@ public class EstacionamientoDAO {
     }
     
     public List<Estacionamiento> Listar(){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<Estacionamiento> estacionamientos;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento c");
