@@ -14,3 +14,6 @@ thumbs.db
 *.jar
 *.war
 *.ear
+
+# se agrego automaticamente
+/ExamenDEJ/nbproject/private/
