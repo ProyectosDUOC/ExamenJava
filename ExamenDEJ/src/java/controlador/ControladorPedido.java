@@ -60,7 +60,7 @@ public class ControladorPedido extends HttpServlet {
                 
                 if(cli != null)
                 {
-                    
+                    response.sendRedirect("buscarPedido.jsp?rut="+ cli.getRutCliente() );
                 }
                 else
                 {

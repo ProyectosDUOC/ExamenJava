@@ -67,7 +67,7 @@ public class EstadoTicketDAO {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<EstadoTicket> estados;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Estado_ticket c");
+        javax.persistence.Query q = em.createQuery("SELECT c FROM EstadoTicket c");
         estados = q.getResultList();        
         return estados;
     }

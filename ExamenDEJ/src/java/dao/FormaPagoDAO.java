@@ -67,7 +67,7 @@ public class FormaPagoDAO {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<FormaPago> estados;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Forma_pago c");
+        javax.persistence.Query q = em.createQuery("SELECT c FROM FormaPago c");
         estados = q.getResultList();        
         return estados;
     }

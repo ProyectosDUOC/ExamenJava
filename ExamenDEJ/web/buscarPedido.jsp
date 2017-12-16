@@ -35,45 +35,59 @@
         <div>
             <form method="POST" action="ControladorPedido">
                 <div class="container">
-                <div class="row margin">
-                    <div class="input-field col s12">                                
-                        <i class="material-icons">person_outline</i>
-                        <input id="rut" type="text" required="" name="rut" maxlength="9"> 
-                        <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
-                        <span id="mensaje" class="red-text"> ${param.mensaje}</span>
+                    <div class="row margin">
+                        <div class="input-field col s12">                                
+                            <i class="material-icons">person_outline</i>
+                            <input id="rut" type="text" required name="rut" maxlength="9"> 
+                            <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
+                            <span id="mensaje" class="red-text"> ${param.mensaje}</span>
+                        </div>
+                    </div>
+                    <div class="row">                      
+                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="buscar">
+                            Buscar
+                        </button>
+                    </div>
+                    <div class="row margin col s12">
+                        <table class="striped responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Estacionamiento</th>
+                                    <th>Total</th>
+                                    <th>Pedir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    String rutC = request.getParameter("rut");
+                                    List<Boleta> listaBoleta = (new BoletaDAO()).ListarPorRut(rutC);
+
+                                    for (Boleta bol : listaBoleta) {
+                                %>
+                                <tr>
+                                    <td>
+                                        <%= bol.getNombreBoleta()%> 
+                                    </td> 
+                                    <td>
+                                        <%= bol.getTotalBoleta() %>
+                                    </td> 
+                                    <td>
+                                        <input type="submit" name="Pedir" value="+" >
+                                    </td> 
+                                </tr>
+
+                                <%
+                                    }
+                                %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row">                      
-                    <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="acceder">
-                        Buscar
-                    </button>
-                </div>
-                <div class="row margin col s12">
-                    <table class="striped responsive-table">
-                        <thead>
-                            <tr>
-                                <th>Estacionamiento</th>
-                                <th>Total</th>
-                                <th>Pedir</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                List<Boleta> listaBoleta = (new BoletaDAO()).Listar();
-
-                            %>
-
-                            <%
-                            %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             </form> 
         </div>
 
 
-        
+
 
 
 
