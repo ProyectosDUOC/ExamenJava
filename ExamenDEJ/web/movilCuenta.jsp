@@ -4,6 +4,8 @@
     Author     : benja
 --%>
 
+<%@page import="dao.EstacionamientoDAO"%>
+<%@page import="modelo.Estacionamiento"%>
 <%@page import="dao.TicketDAO"%>
 <%@page import="modelo.Ticket"%>
 <%@page import="java.util.List"%>
@@ -49,14 +51,25 @@
                                     <th>Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>                              
                                 <% List<Ticket> listaTickets = (new TicketDAO()).Listar();
+                                //Arreglas despues
+                                List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
+                                Estacionamiento estacionamiento = new Estacionamiento();
                                    for (Ticket tt : listaTickets) {
-                                        if (tt.getRutCliente().equals(clie.getRutCliente())) {%>
+                                        if (tt.getRutCliente().equals(clie.getRutCliente()) && tt.getIdEstadoT()==0) {
+                                            for (Estacionamiento est : listaEsta) {
+                                                if (est.getIdEstacionamiento() == tt.getIdEstacionamiento()) {
+                                                    estacionamiento = est;
+                                                    break;
+                                                }
+                                            }
+                                               
+                                %>                                        
                                         <td><%=tt.getNumeroTicket()%></td>
-                                        <td><%=tt.getFechaTicket()%></td>
-                                        <td><%=tt.getIdEstacionamiento()%></td>
-                                        <td><%=tt.getIdEstacionamiento()%></td>
+                                        <td><%=tt.getFechaTicket().getDate()%>/<%=tt.getFechaTicket().getMonth()+1%>/<%=tt.getFechaTicket().getYear()+1900%></td>
+                                        <td><%=estacionamiento.getNombreEsta()%></td>
+                                        <td>$<%=estacionamiento.getPrecioEsta()%>.-</td>
                                         <td><%=tt.getCantHoras()%> hrs</td>
                                         <td>$<%=tt.getTotalPago()%>.-</td>
                                 </tr>      
