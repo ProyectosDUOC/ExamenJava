@@ -70,4 +70,14 @@ public class BoletaDAO {
         boletas = q.getResultList();        
         return boletas;
     }
+    // =P Carlos y Seba
+    public List<Boleta> ListarPorRut(String rutC){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+        em = factory.createEntityManager();
+        List<Boleta> boletas;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Boleta c WHERE c.rutCliente = '" + rutC + "'");
+        //SELECT b FROM Boleta b WHERE b.rutCliente = :rutCliente
+        boletas = q.getResultList();        
+        return boletas;
+    }
 }
