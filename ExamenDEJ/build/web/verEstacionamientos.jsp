@@ -18,7 +18,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-                <style>
+        <link href="css/mapmarker.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <style>
             #map {
                 height: 400px;
                 width: 50%;
@@ -47,33 +48,34 @@
         </div>
         <script>
             function initMap() {
-                
-                var casaBenja = {lat: -33.6311, lng: -70.7654};                
+                              
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 16,
-                    center: casaBenja
+                    zoom: 6,
+                    center: {lat: -34.6, lng: -71.5}
                 });
                 
-                <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>
-                
-                var markers = [];
-                var tempMarker;
-                
+                <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>   
+                        
                 <% for (Estacionamiento park : parks) { %>
-                    tempMarker = new google.maps.Marker
-                                ({ 
-                                    position:
-                                    {
-                                        lat: <%=park.getMapaLatitud()%>,
-                                        lng: <%=park.getMapaLongitud()%>
-                                    },
-                                    map: map,
-                                    label: '<%=park.getNombreEsta()%>'
-                                });
-                    markers.push(tempMarker);
+                var marker<%=park.getIdEstacionamiento()%> = new google.maps.Marker
+                            ({ 
+                                position: { lng: <%=park.getMapaLatitud()%>, lat: <%=park.getMapaLongitud()%>},
+                                map: map,
+                                label: '<%=park.getIdEstacionamiento()%>'                      
+                            });
+                    
+                var infowindow<%=park.getIdEstacionamiento()%> = new google.maps.InfoWindow({content: '<%=park.getNombreEsta()%>' });
+
+                marker<%=park.getIdEstacionamiento()%>.addListener('click', function() {
+                    map.setZoom(14);
+                    map.setCenter(marker<%=park.getIdEstacionamiento()%>.getPosition());
+                    infowindow<%=park.getIdEstacionamiento()%>.open(map, marker<%=park.getIdEstacionamiento()%>);
+                    window.setTimeout( function(){ infowindow<%=park.getIdEstacionamiento()%>.close();},3000);
+                });
                 <% } %>
             }
         </script>
+        
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv1J4q_RwQyBqrQjGNB-4KDc4914pQ78I&callback=initMap">
         </script>

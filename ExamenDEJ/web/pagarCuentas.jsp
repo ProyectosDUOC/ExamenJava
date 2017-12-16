@@ -4,6 +4,11 @@
     Author     : benja
 --%>
 
+<%@page import="dao.FormaPagoDAO"%>
+<%@page import="modelo.FormaPago"%>
+<%@page import="dao.FormaEnvioDAO"%>
+<%@page import="modelo.FormaEnvio"%>
+<%@page import="modelo.FormaEnvio"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.EstacionamientoDAO"%>
 <%@page import="modelo.Estacionamiento"%>
@@ -18,6 +23,20 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/pagarCuentas.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <script>
+            function habilitar(value)
+            {
+                if (value.length() > 0)
+                {
+                    // habilitamos
+                    document.getElementById("tel").disabled = false;
+                } else if (value.length() === 0) {
+                    document.getElementById("tel").disabled = true;
+                }
+            }
+        </script> 
+
         <% List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();  %>
     </head>
     <body>
@@ -32,48 +51,53 @@
                 </ul>
             </div>
         </nav>   
+        <br>
+        <br>
 
-        <div class="section" id="acceso">
+        <div class="container" id="acceso">
             <div class="row">
-                <div class="col s4 offset-s6">
-                    <div class="card  cyan darken-2">
-                        <div class="card-content white-text">
+                <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
+                <div class="col s12 m4">
+                    <div class="card orange lighten-5">
+                        <div class="card-content blue-text">
                             <span class="card-title">Datos Personales</span>
                             <div class="input-field">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input id="rut" type="text" maxlength="9" name="rut" required="requered" /> 
-                                <label for="rut" class="white-text" >Rut  ejemplo 190000008</label>
+                                <label for="rut" class="blue-text" >Rut  ejemplo 190000008</label>
                             </div>
                             <div class="input-field">
                                 <i class="material-icons prefix">people</i>
-                                <input id="nombre" type="text" name="Nombre" required="requered"/>
-                                <label for="nombre" class="white-text">Nombre Completo</label>
+                                <input id="nombre" type="text" name="Nombre" required="requered" onchange="habilitar(this.value);" />
+                                <label for="nombre" class="blue-text">Nombre Completo</label>
                             </div>
                             <div class="input-field">
                                 <i class="material-icons prefix">local_phone</i>
                                 <input id="tel" type="text" maxlength="12" required="requered" />
-                                <label for="tel" class="white-text">Telefono +569XXXXXXXX</label>
+                                <label for="tel" class="blue-text">Telefono +569XXXXXXXX</label>
                             </div>
                             <div class="input-field">
                                 <i class="material-icons prefix">email</i>
                                 <input id="correo" type="email" name="correo" required="requered" />
-                                <label for="correo" class="white-text">Correo Electronico @...</label>
+                                <label for="correo" class="blue-text">Correo Electronico @...</label>
                             </div>
                         </div>
                     </div>
-                </div>                   
-            </div>
-        </div>
-
-        <div class="section" id="Estacionamientos">
-            <div class="container">
-                <div class="col s6 ">
-                    <div class="card orange darken-1">
-                        <div class="card-content white-text">
+                </div>
+                <div class="col s6 slider">
+                    <div class="carousel carousel-slider">
+                        <a class="carousel-item" href="#one!"><img  width="600" height="400" src="images/auto1.jpg"></a>
+                        <a class="carousel-item" href="#two!"><img width="600" height="400"  src="images/auto2.jpg"></a>
+                        <a class="carousel-item" href="#three!"><img width="600" height=400  src="images/auto3.jpg"></a>
+                        <a class="carousel-item" href="#four!"><img width="600" height="400"  src="images/auto1.jpg"></a>
+                    </div>
+                </div>
+                <div class="col s12">                    
+                    <div class="card orange lighten-5">
+                        <div class="card-content orange lighten-5">
                             <span class="card-title center-align">Estacionamientos</span>
-                            <div class="input-field">
-                                <select name="etacionamientos">
-
+                            <div class="input-field">                                
+                                <select name="etacionamientos" >
                                     <option value="" disabled selected>Estacionamientos</option>
                                     <%for (Estacionamiento esta : listaEsta) {
                                     %>
@@ -81,116 +105,52 @@
                                     <%
                                         }
                                     %>
-                                </select>
+                                </select>                                
                                 <label class="black-text">Selecciones un Estacionamiento</label>
-                                <button class="btn waves-effect waves-light center-align" type="submit" name="action">Agregar
-                                    <i class="material-icons right">send</i>
-                                </button>
                             </div>
-                            <div class="input-field">
+                             <div class="input-field">
                                 <i class="material-icons prefix">people</i>
-                                <input id="nombre" type="text" name="Nombre" required="requered"/>
-                                <label for="nombre" class="white-text">Nombre Completo</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">local_phone</i>
-                                <input id="tel" type="text" maxlength="12" required="requered" />
-                                <label for="tel" class="white-text">Telefono +569XXXXXXXX</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input id="correo" type="email" name="correo" required="requered" />
-                                <label for="correo" class="white-text">Correo Electronico @...</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>                   
-            </div>
-        </div>
-        <div class="section">
-
-            <div class="container">
-                <div class="row">
-                    <div class="card blue-grey darken-1">
-
-                        <div class="col s12 m8 l9">                  
+                                <input id="idTi" type="text" name="ticket" required="requered"/>
+                                <label for="idTi" class="white-text">N°Ticket</label>
+                            </div>    
+                            <button class="btn waves-effect waves-light red white-text col s6" type="submit" name="action">Agregar
+                                <i class="material-icons right">send</i>
+                            </button>                         
+                         
+                                
+                                
+                                    <%
+                                        List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar(); 
+                                        List<FormaPago> listaP = (new FormaPagoDAO()).Listar(); 
+                                    %>        
+                        <div class="col s6">                  
                             <p>
                                 <input name="group1" type="radio" id="test1" />
                                 <label for="test1">Red</label>
-                            </p>
-                            <p>
-                                <input name="group1" type="radio" id="test2" />
-                                <label for="test2">Yellow</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="group1" type="radio" id="test3" />
-                                <label for="test3">Green</label>
-                            </p>
-                            <p>
-                                <input name="group1" type="radio" id="test4" disabled="disabled" />
-                                <label for="test4">Brown</label>
-                            </p>                  
+                            </p>                                           
                         </div>
-                    </div> 
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="section">
-        <div class="container">
-            <form action="#" method="POST">    
-                <div class="input-field col s2 ">
-                    <div class="input-field col s12">
-                        <select name="etacionamientos">
-
-                            <option value="" disabled selected>Estacionamientos</option>
-                            <%for (Estacionamiento esta : listaEsta) {%>
-                            <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEsta()%></option>
-                            <%
-                                }
-                            %>
-                            <option value="Calera de Tango">Calera de Tango</option>
-                        </select>
-                        <label>Comuna</label>
+                        </div>
                     </div>
-                    <input id="btnAgregar" type="button" value="Agrebar" />
-                </div>
-                <div class="input-field col s2 ">
-                    Opciones de Pago:
-                    <br/><br/>
-                    <p>
-                        <input name="grupPago" id="Radio1" type="radio" value="T" checked/>
-                        <label for="Radio1">Transferencia</label>
-                    </p>
-                    <p>
-                        <input name="grupoPago" id="Radio2" type="radio" value="PL"/>
-                        <label for="Radio2">Pago en Linea</label>
-                    </p>
-                </div>
-                <div class="input-field col s2 ">
-                    Opciones de Envio de Boleta
-                    <br/><br/>
-                    <input id="Radio4" type="radio" />Correo Eléctronico
-                    <br/><br/>
-                    <input id="Radio5" type="radio" />Direccion Particular
-                </div>
-                <div class="input-field col s2 ">
-                    lblPago
-                    <br/><br/>
-                    <input id="btnPagar" type="button" value="Pagar" />
-                </div>
-            </form>
-        </div>
-    </div>
-
+                </div>                          
+            </div>
+        </div>  
+       
+  
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script> 
     <script>
+                                    $(document).ready(function () {
+                                        $('select').material_select();
+                                    });
+    </script>
+    <script>
+        $('.carousel.carousel-slider').carousel({fullWidth: true});
+        //      
         $(document).ready(function () {
-            $('select').material_select();
+            $('.slider').slider();
         });
     </script>
+
 </body>
 </html>
