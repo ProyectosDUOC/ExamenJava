@@ -19,9 +19,10 @@ public class ClienteDAO {
     private Cliente p;
     private EntityManager em;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+    EntityManagerFactory factory;
 
     public boolean Crear(Cliente cliente) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -36,6 +37,7 @@ public class ClienteDAO {
     }
 
     public Cliente Leer(String rut) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         p = em.find(Cliente.class, rut);
         if (p.getRutCliente().isEmpty()) {
@@ -46,6 +48,7 @@ public class ClienteDAO {
     }
 
     public boolean Eliminar(String rut) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         try{
             em = factory.createEntityManager();
             p = em.find(Cliente.class, rut);
@@ -60,6 +63,7 @@ public class ClienteDAO {
     }
     
     public List<Cliente> Listar(){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<Cliente> clientes;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Cliente c");

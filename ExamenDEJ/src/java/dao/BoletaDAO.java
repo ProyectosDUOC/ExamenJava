@@ -19,9 +19,10 @@ public class BoletaDAO {
     private Boleta p;
     private EntityManager em;
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+    EntityManagerFactory factory;
 
     public boolean Crear(Boleta boleta) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -36,6 +37,7 @@ public class BoletaDAO {
     }
     
     public boolean Leer(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         p = em.find(Boleta.class, id);
         if (p.getIdBoleta() == null) {
@@ -46,6 +48,7 @@ public class BoletaDAO {
     }
 
     public boolean Eliminar(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         try{
             em = factory.createEntityManager();
             p = em.find(Boleta.class, id);
@@ -60,6 +63,7 @@ public class BoletaDAO {
     }
     
     public List<Boleta> Listar(){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<Boleta> boletas;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Boleta c");

@@ -19,9 +19,10 @@ public class TicketDAO {
     private Ticket p;
     private EntityManager em;
     
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+    EntityManagerFactory factory;
     
     public boolean Crear(Ticket t) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -36,6 +37,7 @@ public class TicketDAO {
     }
 
     public boolean Leer(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
          em = factory.createEntityManager();
         p = em.find(Ticket.class, id);
 
@@ -47,6 +49,7 @@ public class TicketDAO {
     }
     
     public boolean Eliminar(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         try{
              em = factory.createEntityManager();
             p = em.find(Ticket.class, id);
@@ -61,6 +64,7 @@ public class TicketDAO {
     }
     
     public List<Ticket> Listar(){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<Ticket> tickets;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Ticket c");
