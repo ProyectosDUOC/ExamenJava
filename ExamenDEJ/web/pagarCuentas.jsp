@@ -115,14 +115,10 @@
                             </div>    
                             <button class="btn waves-effect waves-light red white-text col s6" type="submit" name="action">Agregar
                                 <i class="material-icons right">send</i>
-                            </button>                         
+                            </button>                      
                          
                                 
-                                
-                                    <%
-                                        List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar(); 
-                                        List<FormaPago> listaP = (new FormaPagoDAO()).Listar(); 
-                                    %>        
+                                        
                         <div class="col s6">                  
                             <p>
                                 <input name="group1" type="radio" id="test1" />
