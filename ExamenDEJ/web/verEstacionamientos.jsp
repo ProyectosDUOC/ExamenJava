@@ -55,7 +55,8 @@
                 });
                 var tempMarker;
                 var markers=[];
-                <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>                                
+                <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>   
+                        
                 <% for (Estacionamiento park : parks) { %>
                 tempMarker = new google.maps.Marker
                             ({ 
@@ -68,9 +69,9 @@
                     map.setZoom(14);
                     map.setCenter(tempMarker.getPosition());
                 });
-
                 markers.push(tempMarker);
                 <% } %>
+                
                 var markerCluster = new google.maps.MarkerClusterer(map, markers);
             }
         </script>
