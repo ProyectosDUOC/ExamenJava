@@ -4,6 +4,11 @@
     Author     : benja
 --%>
 
+<%@page import="dao.FormaPagoDAO"%>
+<%@page import="modelo.FormaPago"%>
+<%@page import="dao.FormaEnvioDAO"%>
+<%@page import="modelo.FormaEnvio"%>
+<%@page import="modelo.FormaEnvio"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.EstacionamientoDAO"%>
 <%@page import="modelo.Estacionamiento"%>
@@ -91,8 +96,8 @@
                     <div class="card orange lighten-5">
                         <div class="card-content orange lighten-5">
                             <span class="card-title center-align">Estacionamientos</span>
-                            <div class="input-field col s12">                                
-                                <select name="etacionamientos" id="comboBox">
+                            <div class="input-field">                                
+                                <select name="etacionamientos" >
                                     <option value="" disabled selected>Estacionamientos</option>
                                     <%for (Estacionamiento esta : listaEsta) {
                                     %>
@@ -103,64 +108,34 @@
                                 </select>                                
                                 <label class="black-text">Selecciones un Estacionamiento</label>
                             </div>
-
-                            <div class="input-field col s6">
-                                <i class="material-icons prefix">email</i>
-                                <input id="correo" type="email" name="correo" required="requered" />
-                                <label for="correo" class="blue-text">Correo Electronico @...</label>
-                            </div>
+                             <div class="input-field">
+                                <i class="material-icons prefix">people</i>
+                                <input id="idTi" type="text" name="ticket" required="requered"/>
+                                <label for="idTi" class="white-text">N°Ticket</label>
+                            </div>    
                             <button class="btn waves-effect waves-light red white-text col s6" type="submit" name="action">Agregar
                                 <i class="material-icons right">send</i>
-                            </button>
-                            <div class="input-field">
-                                <i class="material-icons prefix">people</i>
-                                <input id="nombre" type="text" name="Nombre" required="requered"/>
-                                <label for="nombre" class="white-text">Nombre Completo</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">local_phone</i>
-                                <input id="tel" type="text" maxlength="12" required="requered" />
-                                <label for="tel" class="white-text">Telefono +569XXXXXXXX</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input id="correo" type="email" name="correo" required="requered" />
-                                <label for="correo" class="white-text">Correo Electronico @...</label>
-                            </div>
+                            </button>                         
+                         
+                                
+                                
+                                    <%
+                                        List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar(); 
+                                        List<FormaPago> listaP = (new FormaPagoDAO()).Listar(); 
+                                    %>        
+                        <div class="col s6">                  
+                            <p>
+                                <input name="group1" type="radio" id="test1" />
+                                <label for="test1">Red</label>
+                            </p>                                           
+                        </div>
                         </div>
                     </div>
                 </div>                          
             </div>
-        </div>   
-        <div class="section">
-
-            <div class="container">
-                <div class="row">
-                    <div class="card blue-grey darken-1">
-
-                        <div class="col s12 m8 l9">                  
-                            <p>
-                                <input name="group1" type="radio" id="test1" />
-                                <label for="test1">Red</label>
-                            </p>
-                            <p>
-                                <input name="group1" type="radio" id="test2" />
-                                <label for="test2">Yellow</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="group1" type="radio" id="test3" />
-                                <label for="test3">Green</label>
-                            </p>
-                            <p>
-                                <input name="group1" type="radio" id="test4" disabled="disabled" />
-                                <label for="test4">Brown</label>
-                            </p>                  
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>  
+       
+  
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script> 
