@@ -122,7 +122,7 @@
                                         <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
                                     <div class="input-field">
-                                        <button class="btn waves-effect waves-light red white-text" type="opcion" name="agregar">Agregar
+                                        <button class="btn waves-effect waves-light red white-text" type="submit" name="opcion" value="agregar">Agregar
                                             <i class="material-icons right">send</i>
                                         </button>
                                     </div>
