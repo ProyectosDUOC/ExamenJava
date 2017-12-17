@@ -68,20 +68,21 @@
         <br>
         <br>
         <%
-            HttpSession  sesion = request.getSession(true);
+            HttpSession sesion = request.getSession(true);
             Boleta boleta = sesion.getAttribute("boleta") == null ? null : (Boleta) sesion.getAttribute("boleta");
-            ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() :(ArrayList) sesion.getAttribute("carrito");
-            
+            ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
+
             String rut = "";
             String nombre = "";
             String telefono = "";
             String correo = "";
-            
+            String total = "0";
             if (boleta != null) {
                 rut = boleta.getRutCliente();
                 nombre = boleta.getNombreBoleta();
                 telefono = boleta.getTelefonoBoleta();
                 correo = boleta.getCorreoBoleta();
+                total = boleta.getTotalBoleta().toString();
             }
         %>
         <h1><%=listaDetalle.size()%></h1>
@@ -140,7 +141,7 @@
                                     </div>
                                     <div class="input-field">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="id" type="text" maxlength="9" name="idTicket" required /> 
+                                        <input id="id" type="text" maxlength="9" name="idTicket" value="0" /> 
                                         <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
                                     <div class="input-field">
@@ -151,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <!--Carga carrito -->
                         <div class="col s12">
                             <div class="card">
@@ -165,28 +166,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% 
-                                            Ticket tic ;
+                                        <%
+                                            Ticket tic;
                                             Estacionamiento esta;
-                                            for (DetalleBoleta detalle: listaDetalle) {    
-                                            tic = (new TicketDAO()).BuscarId(detalle.getIdTicket());
-                                            esta = (new EstacionamientoDAO()).BuscarId(tic.getIdEstacionamiento());
+                                            for (DetalleBoleta detalle : listaDetalle) {
+                                                tic = (new TicketDAO()).BuscarId(detalle.getIdTicket());
+                                                esta = (new EstacionamientoDAO()).BuscarId(tic.getIdEstacionamiento());
                                         %>
-                                            <tr>
-                                                <td><%=esta.getNombreEsta()%></td>
-                                                <td>$<%=tic.getTotalPago()%>.-</td>
-                                                <td><%=tic.getIdTicket()%></td>
-                                                <td>
-                                                    <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=detalle.getIdBoleta()%>">Eliminar
-                                                        <i class="material-icons right">delete_forever</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        <%} %>                                      
+                                        <tr>
+                                            <td><%=esta.getNombreEsta()%></td>
+                                            <td>$<%=tic.getTotalPago()%>.-</td>
+                                            <td><%=tic.getNumeroTicket()%></td>
+                                            <td>
+                                                <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=detalle.getIdBoleta()%>">Eliminar
+                                                    <i class="material-icons right">delete_forever</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <%}%>                                      
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        <!--Total-->
+                        <div class="col s12">
+                            <div class="card">
+                                <h3 class="red-text">Total : $<%=total%>.-</h3>
+                            </div>
+                        </div>  
                         <div class="col s6">
                             <div class="card">
                                 <div class="card-content">
@@ -213,6 +220,15 @@
                                     </p>
                                     <% }%>                                          
                                 </div>
+                            </div>
+                        </div>  
+                        <!--btnPagar-->
+                        <!--Carga carrito -->
+                        <div class="col s12 m4 center-align">
+                            <div class="card">
+                                <button class="btn-large waves-effect waves-light red black-text" type="submit" name="opcion" value="pagar">Pagar
+                                    <i class="material-icons right">delete_forever</i>
+                                </button>
                             </div>
                         </div>
                     </div>

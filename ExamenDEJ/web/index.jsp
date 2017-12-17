@@ -4,6 +4,9 @@
     Author     : Seba
 --%>
 
+<%@page import="dao.TicketDAO"%>
+<%@page import="modelo.Ticket"%>
+<%@page import="modelo.Ticket"%>
 <%@page import="dao.ClienteDAO"%>
 <%@page import="modelo.Cliente"%>
 <%@page import="java.util.List"%>
@@ -58,6 +61,15 @@
         <% for (Cliente cli : listaCliente) {
         %>
         <p><%=cli.getRutCliente()%> - <%=cli.getNombreCliente()%></p>
+        <%
+            }
+        %>
+        
+          <%  List<Ticket> listaT = (new TicketDAO()).Listar(); %>
+
+        <% for (Ticket t : listaT) {
+        %>
+        <p><%=t.getRutCliente()%></p>
         <%
             }
         %>

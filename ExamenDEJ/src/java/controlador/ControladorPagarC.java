@@ -23,6 +23,8 @@ import dao.TicketDAO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Estacionamiento;
 import modelo.Ticket;
 
@@ -59,9 +61,15 @@ public class ControladorPagarC extends HttpServlet {
         for (int i = 0; i < miseleccion.length; i++) {
             idEstacion = miseleccion[i];
         }
+
+        Logger.getLogger(getClass().getName()).log(Level.INFO, "Estacionamiento id=" + idEstacion);
+
         //id ticke a agregar al carrito
         String ticket = request.getParameter("idTicket");
-
+        //Crea boleta en el caso si existe las llama        
+        Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
+        ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
+               
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -72,9 +80,6 @@ public class ControladorPagarC extends HttpServlet {
             out.println("<body>");
             if (opcion.equals("agregar")) {
 
-                //Crea boleta en el caso si existe las llama        
-                Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
-                ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
                 //*******************ANEXO BOLETA**********************************  
                 // En el cao que la boleta esta null creara una nueva con los campos de la ventana
                 if (boleta.getNombreBoleta() == null) {
@@ -106,7 +111,7 @@ public class ControladorPagarC extends HttpServlet {
                 List<Ticket> listaT = (new TicketDAO()).Listar();
                 Ticket ticketBuscado = null;
                 for (Ticket ti : listaT) {
-                    if (ti.getIdTicket().toString().equals(ticket) && ti.getIdEstacionamiento().toString().equals(idEstacion) && ti.getRutCliente().equals(rut)) {
+                    if (ti.getNumeroTicket().toString().equals(ticket) && ti.getIdEstacionamiento().toString().equals(idEstacion) && ti.getRutCliente().equals(rut)) {
                         ticketBuscado = ti;
                         break;
                     }
@@ -120,6 +125,7 @@ public class ControladorPagarC extends HttpServlet {
                         boolean estado = false;
                         //ahora veremos que si el carrito esta vacio y si existe el articulo que vamos a agregar
                         if (listaDetalle.size() > 0) {
+
                             for (DetalleBoleta detalle : listaDetalle) {
                                 //Vamos a confirma si etamos en el detalle de boleta correcto
                                 if (boleta.getIdBoleta() == detalle.getIdBoleta()) {
@@ -130,28 +136,40 @@ public class ControladorPagarC extends HttpServlet {
                                     }
                                 }
                             }
-                        }
 
-                        //En el caso que no encuentre el carrito
-                        if (!estado) {
-                            int contadorId = 0;
-                            if (listaDetalle.isEmpty()) {
-                                contadorId = (new DetalleBoletaDAO()).ultimoId() + 1;
-                            } else {
+                            //En el caso que no encuentre el carrito
+                            if (!estado) {
+                                int contadorId = 0;
                                 for (DetalleBoleta cc : listaDetalle) {
-                                    contadorId = cc.getIdBoleta();
+                                    contadorId = cc.getIdDetalleBoleta();
                                 }
                                 contadorId = contadorId + 1;
+                                listaDetalle.add(new DetalleBoleta(contadorId, boleta.getIdBoleta(), ticketBuscado.getIdTicket()));
+
+                                //A boleta se Actualiza el moento
+                                int total = boleta.getTotalBoleta();
+                                total = total + ticketBuscado.getTotalPago();
+                                boleta.setTotalBoleta(total);
+
+                                sesion.setAttribute("carrito", listaDetalle);
                             }
-                            listaDetalle.add(new DetalleBoleta(contadorId, boleta.getIdBoleta(), ticketBuscado.getIdTicket()));
 
-                            //A boleta se Actualiza el moento
-                            int total = boleta.getTotalBoleta();
-                            total = total + ticketBuscado.getTotalPago();
-                            boleta.setTotalBoleta(total);
+                        } else {
+                            if (listaDetalle.isEmpty()) {
+                                int contadorId = 0;
+                                contadorId = (new DetalleBoletaDAO()).ultimoId() + 1;
+                                listaDetalle.add(new DetalleBoleta(contadorId, boleta.getIdBoleta(), ticketBuscado.getIdTicket()));
+                                Logger.getLogger(getClass().getName()).log(Level.INFO, "contador id=" + contadorId);
+                                //A boleta se Actualiza el moento
+                                int total = boleta.getTotalBoleta();
+                                total = total + ticketBuscado.getTotalPago();
+                                boleta.setTotalBoleta(total);
 
-                            sesion.setAttribute("carrito", listaDetalle);
+                                sesion.setAttribute("carrito", listaDetalle);
+                            }
                         }
+
+                        Logger.getLogger(getClass().getName()).log(Level.INFO, "Estado =" + estado);
 
                         //Ahora vamos a guardarlo sin importar que no exista debe ingresar                
                     } else {
@@ -170,56 +188,58 @@ public class ControladorPagarC extends HttpServlet {
                 sesion.setAttribute("boleta", boleta);
                 response.sendRedirect("pagarCuentas.jsp");
             }
+            if (opcion.startsWith("x")) {
+                
+                sesion.setAttribute("carrito", listaDetalle);
+                sesion.setAttribute("boleta", boleta);
+                response.sendRedirect("pagarCuentas.jsp");
+            }
 
             out.println("<h1>Servlet ControladorPagarC at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally{
-                out.close();
-            }
+        } finally {
+            out.close();
         }
-
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

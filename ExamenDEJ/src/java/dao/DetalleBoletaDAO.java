@@ -74,7 +74,7 @@ public class DetalleBoletaDAO {
      public int ultimoId(){
         int ultimo=0;
          for (DetalleBoleta de : Listar()) {
-             ultimo = de.getIdBoleta();
+             ultimo = de.getIdDetalleBoleta();
          }
         return ultimo;
     }

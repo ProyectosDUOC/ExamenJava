@@ -71,7 +71,7 @@ public class EstacionamientoDAO {
         return estacionamientos;
     }
     
-      public Estacionamiento BuscarId(int id){
+    public Estacionamiento BuscarId(int id){
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         Estacionamiento esta;
