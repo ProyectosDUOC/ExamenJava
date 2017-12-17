@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.Boleta;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -79,5 +80,14 @@ public class BoletaDAO {
         //SELECT b FROM Boleta b WHERE b.rutCliente = :rutCliente
         boletas = q.getResultList();        
         return boletas;
+    }
+    
+    
+    public int contador(){
+        int total = 0;
+        for (Boleta cc : Listar()) {
+            total++;
+        }
+        return total;
     }
 }

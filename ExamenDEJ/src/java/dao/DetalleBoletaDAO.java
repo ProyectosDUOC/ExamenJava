@@ -70,4 +70,13 @@ public class DetalleBoletaDAO {
         
         return detalles;
     }
+    
+    
+    public int contador(){
+        int total = 0;
+        for (DetalleBoleta cc : Listar()) {
+            total++;
+        }
+        return total;
+    }
 }
