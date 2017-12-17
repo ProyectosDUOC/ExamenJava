@@ -263,7 +263,7 @@ public class ControladorPagarC extends HttpServlet {
                             }                            
                             String rutCliente=boleta.getRutCliente();
                             String idBoleta=boleta.getIdBoleta().toString();
-                            response.sendRedirect("entregaBoucher.jsp?idBoleta="+idBoleta+"&rut="+rutCliente);
+                            response.sendRedirect("entregaBoucher.jsp?idBoleta="+idBoleta+"&rut="+rutCliente+"&total="+total);
                         }else{
                             Logger.getLogger(getClass().getName()).log(Level.INFO, "Boleta no se creo");
                         }

@@ -4,6 +4,17 @@
     Author     : benja
 --%>
 
+<%@page import="dao.BoletaDAO"%>
+<%@page import="modelo.Boleta"%>
+<%@page import="dao.DetalleBoletaDAO"%>
+<%@page import="dao.EstacionamientoDAO"%>
+<%@page import="dao.EstacionamientoDAO"%>
+<%@page import="modelo.Estacionamiento"%>
+<%@page import="modelo.Estacionamiento"%>
+<%@page import="dao.TicketDAO"%>
+<%@page import="dao.TicketDAO"%>
+<%@page import="modelo.Ticket"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +25,20 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
+        <%
+            String total = "0";
+            String rut = "0";
+            if (request.getParameter("rut") != null) {
+                rut = request.getParameter("rut");
+            }
+            String idBoleta = "No existe";
+            if (request.getParameter("idBoleta") != null) {
+                idBoleta = request.getParameter("idBoleta");
+            }
+             if (request.getParameter("total") != null) {
+                total = request.getParameter("total");
+            }
+        %>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
@@ -30,35 +54,66 @@
         </nav>   
         <div class="section">
             <div class="container">
+                <h1>Entrega de Pago Estacionamientos</h1>
                 <div class="col s12">                    
                     <div class="card">
                         <div class="card-content orange lighten-5">
-                            <span class="card-title center-align">Entrega de Pago Estacionamiento</span>
-                            <div class="input-field ">                                
-                                <select name="estacionamientos" >
-                                    <option value="" disabled selected>Estacionamientos</option>
+                            <span class="card-title center-align">Numero de Boleta : <%=idBoleta%></span>
+                            <table class="striped responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>N° Ticket</th>
+                                        <th>Fecha</th>
+                                        <th>Nombre Estacionamiento</th>
+                                        <th>Precio X horas</th>
+                                        <th>Cant horas</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>       
+                                    <% Boleta boleta = (new BoletaDAO()).BuscarId(Integer.parseInt(idBoleta));
+                                       List<DetalleBoleta> listaDetalle = (new DetalleBoletaDAO()).buscarId()
                                     
-                                </select>                                
-                                <label class="black-text">Selecciones un Estacionamiento</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix"></i>
-                                <input id="id" type="text" maxlength="9" name="idTicket"/> 
-                                <label for="id" class="blue-text" >Id Ticket</label>
-                            </div>
-                            <div class="input-field">
-                                <button class="btn waves-effect waves-light red white-text" type="submit" name="opcion" value="agregar">Agregar
-                                    <i class="material-icons right">add_circle_outline</i>
-                                </button>
-                                
-                            </div>
+                                    
+                                    %>
+                                    
+                                    <% List<Ticket> listaTickets = (new TicketDAO()).Listar();
+                                        //Arreglas despues
+                                        List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
+                                        List<DetalleBoleta> detalleBoleta = 
+                                        Estacionamiento estacionamiento = new Estacionamiento();
+                                        for (Ticket tt : listaTickets) {
+                                            if (tt.getRutCliente().equals(rut) && tt.getIdEstadoT() == 1) {
+                                                for (Estacionamiento est : listaEsta) {
+                                                    if (est.getIdEstacionamiento() == tt.getIdEstacionamiento()) {
+                                                        estacionamiento = est;
+                                                        break;
+                                                    }
+                                                }
+
+                                    %>                                        
+                                <td><%=tt.getNumeroTicket()%></td>
+                                <td><%=tt.getFechaTicket().getDate()%>/<%=tt.getFechaTicket().getMonth() + 1%>/<%=tt.getFechaTicket().getYear() + 1900%></td>
+                                <td><%=estacionamiento.getNombreEsta()%></td>
+                                <td>$<%=estacionamiento.getPrecioEsta()%>.-</td>
+                                <td><%=tt.getCantHoras()%> hrs</td>
+                                <td>$<%=tt.getTotalPago()%>.-</td>
+                                </tr>      
+                                <%    }
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                            <div class="col s12">
+                                <div class="card">
+                                    <h3 class="red-text">Total a Pagar : $<%=total%>.-</h3>
+                                </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
             </div>        
         </div>
-
-
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script> 

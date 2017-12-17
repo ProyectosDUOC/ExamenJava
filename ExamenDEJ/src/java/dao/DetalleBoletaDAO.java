@@ -10,11 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.DetalleBoleta;
+
 /**
  *
  * @author Seba
  */
 public class DetalleBoletaDAO {
+
     private DetalleBoleta p;
     private EntityManager em;
 
@@ -39,7 +41,7 @@ public class DetalleBoletaDAO {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         p = em.find(DetalleBoleta.class, id);
 
-        if (p.getIdBoleta()== null) {
+        if (p.getIdBoleta() == null) {
             return null;
         } else {
             return p;
@@ -48,53 +50,52 @@ public class DetalleBoletaDAO {
 
     public boolean Eliminar(int id) {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-        try{
-             em = factory.createEntityManager();
+        try {
+            em = factory.createEntityManager();
             p = em.find(DetalleBoleta.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
             return true;
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             return false;
-        }        
+        }
     }
-    
-    public List<DetalleBoleta> Listar(){
+
+    public List<DetalleBoleta> Listar() {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-         em = factory.createEntityManager();
+        em = factory.createEntityManager();
         List<DetalleBoleta> detalles;
         javax.persistence.Query q = em.createQuery("SELECT c FROM DetalleBoleta c");
         detalles = q.getResultList();
-        
+
         return detalles;
     }
-    
-     public int ultimoId(){
-        int ultimo=0;
-         for (DetalleBoleta de : Listar()) {
-             ultimo = de.getIdDetalleBoleta();
-         }
+
+    public int ultimoId() {
+        int ultimo = 0;
+        for (DetalleBoleta de : Listar()) {
+            ultimo = de.getIdDetalleBoleta();
+        }
         return ultimo;
     }
-    
-    public int contador(){
+
+    public int contador() {
         int total = 0;
         for (DetalleBoleta cc : Listar()) {
             total++;
         }
         return total;
     }
-    
-      public DetalleBoleta buscarId(int id){
+
+    public DetalleBoleta buscarId(int id) {
         DetalleBoleta detalle = null;
-          for (DetalleBoleta de : Listar()) {
-              if (de.getIdDetalleBoleta() == id) {
-                  detalle = de;
-                  break;
-              }
-          }
+        for (DetalleBoleta de : Listar()) {
+            if (de.getIdDetalleBoleta() == id) {
+                detalle = de;
+                break;
+            }
+        }
         return detalle;
     }
 }

@@ -79,9 +79,7 @@
                               
                             </tbody>
                         </table>
-
                     </div>
-
                     <div class="row">                      
                         <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="salir">
                             Salir

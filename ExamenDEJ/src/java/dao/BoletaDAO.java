@@ -82,7 +82,16 @@ public class BoletaDAO {
         return boletas;
     }
     
-    
+    public Boleta BuscarId(int id) {
+        Boleta bol = null;
+        for (Boleta b : Listar()) {
+            if (b.getIdBoleta() == id) {
+                bol = b;
+                break;
+            }
+        }
+        return bol;                
+    }
     public int contador(){
         int total = 0;
         for (Boleta cc : Listar()) {
