@@ -135,7 +135,7 @@
                         <div class="col s6">  
                             <% for (FormaEnvio fe : listaE) { %>
                             <p>
-                                <input name="group1" type="radio" id="<%=fe.getNombreEnvio()%>" name="<%=fe.getIdEnvio()%>" />
+                                <input name="group2" type="radio" id="<%=fe.getNombreEnvio()%>" name="<%=fe.getIdEnvio()%>" />
                                 <label for="<%=fe.getIdEnvio()%>"><%=fe.getNombreEnvio()%></label>
                            <p>                            
                             <%        
