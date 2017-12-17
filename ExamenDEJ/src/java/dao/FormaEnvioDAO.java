@@ -71,4 +71,16 @@ public class FormaEnvioDAO {
         estados = q.getResultList();        
         return estados;
     }
+    
+       
+    public FormaEnvio BuscarId(int id){        
+        FormaEnvio forma = null;
+        for (FormaEnvio f : Listar()) {
+            if (f.getIdEnvio() == id) {
+                forma = f;
+                break;
+            }
+        }       
+        return forma;
+    }
 }

@@ -80,4 +80,14 @@ public class EstacionamientoDAO {
         esta = (Estacionamiento)q.getSingleResult();        
         return esta;
     }
+    public Estacionamiento BuscarIdEstacionamiento(int id){
+       Estacionamiento esta = null;
+        for (Estacionamiento es : Listar()) {
+            if (es.getIdEstacionamiento() == id) {
+                esta = es;
+                break;
+            }
+        }
+       return esta;
+    }
 }

@@ -88,6 +88,7 @@ public class DetalleBoletaDAO {
         return total;
     }
 
+    
     public DetalleBoleta buscarId(int id) {
         DetalleBoleta detalle = null;
         for (DetalleBoleta de : Listar()) {
@@ -97,5 +98,15 @@ public class DetalleBoletaDAO {
             }
         }
         return detalle;
+    }
+    
+    public List<DetalleBoleta> listadoBoletas(int idBoleta){
+        List<DetalleBoleta> listado = null;
+        for (DetalleBoleta detalleBoleta : Listar()) {
+            if (detalleBoleta.getIdBoleta()== idBoleta) {
+                listado.add(detalleBoleta);
+            }
+        }        
+        return listado;
     }
 }

@@ -5,22 +5,18 @@
  */
 package controlador;
 
-import dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import modelo.Cliente;
 
 /**
  *
  * @author benja
  */
-public class ControladorMovil extends HttpServlet {
+public class ControladorBoucher extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,40 +30,18 @@ public class ControladorMovil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession sesion = request.getSession(true);
-
-        String opcion = request.getParameter("opcion");
-        String rut = request.getParameter("rut");
-        
-        try {
-            if (opcion.equals("acceder")) {
-                List<Cliente> listaCliente = (new ClienteDAO()).Listar();
-                Cliente cli = null;
-                for (Cliente c : listaCliente) {
-                    if (c.getRutCliente().equals(rut)) {
-                        cli = c;
-                        break;
-                    }
-                }
-                
-                if (cli != null) {
-                    sesion.setAttribute("cliente", cli);
-                    response.sendRedirect("movilCuenta.jsp");
-                } else 
-                {    
-                    response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe");
-                }
-            }
-            if (opcion.equals("salir")) {
-                sesion.invalidate();
-                response.sendRedirect("movilCuenta.jsp");
-            }
-        } catch (Exception e) {
-          //  response.sendRedirect("movilApp.jsp?mensaje="+e.toString());
-           response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe exception" + e.toString());
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ControladorBoucher</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ControladorBoucher at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
