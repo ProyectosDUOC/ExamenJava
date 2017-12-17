@@ -52,10 +52,10 @@ public class ControladorPagarC extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String tel = request.getParameter("tel");
         String correo = request.getParameter("correo");
-        String idEstacion = "";
+        String idEstacion = "0";
 
         if (opcion.equals("agregar")) {
-            String[] miseleccion = request.getParameterValues("etacionamientos");
+            String[] miseleccion = request.getParameterValues("estacionamientos");
             //Encuentra la id del combo box de estacionamiento
             for (int i = 0; i < miseleccion.length; i++) {
                 idEstacion = miseleccion[i];
@@ -80,7 +80,7 @@ public class ControladorPagarC extends HttpServlet {
             List<Ticket> listaT = (new TicketDAO()).Listar();
             Ticket ticketBuscado = null;
             for (Ticket ti : listaT) {
-                if (ti.getIdTicket().toString().equals(ticket) && ti.getIdEstacionamiento().toString().equals(idEstacion)) {
+                if (ti.getIdTicket().toString().equals(ticket) && ti.getIdEstacionamiento().toString().equals(idEstacion) && ti.getRutCliente().equals(rut)) {
                     ticketBuscado = ti;
                     break;
                 }

@@ -108,7 +108,7 @@
                                 <div class="card-content orange lighten-5">
                                     <span class="card-title center-align">Estacionamientos</span>
                                     <div class="input-field ">                                
-                                        <select name="etacionamientos" >
+                                        <select name="estacionamientos" >
                                             <option value="" disabled selected>Estacionamientos</option>
                                             <%for (Estacionamiento esta : listaEsta) {%>
                                             <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEsta()%> - <%=esta.getGlosa()%></option>
@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="input-field">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="id" type="text" maxlength="9" name="idTiket" required /> 
+                                        <input id="id" type="text" maxlength="9" name="idTicket" required /> 
                                         <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
                                     <div class="input-field">

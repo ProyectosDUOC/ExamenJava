@@ -70,4 +70,14 @@ public class EstacionamientoDAO {
         estacionamientos = q.getResultList();        
         return estacionamientos;
     }
+    
+      public Estacionamiento BuscarId(int id){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+        em = factory.createEntityManager();
+        Estacionamiento esta;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Estacionamiento c WHERE c.idEstacionamiento = " + id);
+       // javax.persistence.Query q = em.createNamedQuery("Estacionamiento.findByIdEstacionamiento", Estacionamiento.class);
+        esta = (Estacionamiento)q.getSingleResult();        
+        return esta;
+    }
 }
