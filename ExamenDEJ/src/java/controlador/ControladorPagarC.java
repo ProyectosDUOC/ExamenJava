@@ -57,6 +57,7 @@ public class ControladorPagarC extends HttpServlet {
         String idEstacion = "0";
         String ticket = "0";
         String mensaje = "";
+        String resultado = "";
         if (request.getParameterValues("estacionamientos") != null && request.getParameterValues("idTicket")!=null) {
             String[] miseleccion = request.getParameterValues("estacionamientos");
             //Encuentra la id del combo box de estacionamiento
@@ -67,6 +68,21 @@ public class ControladorPagarC extends HttpServlet {
             ticket = request.getParameter("idTicket");
             Logger.getLogger(getClass().getName()).log(Level.INFO, "Estacionamiento id=" + idEstacion);
         }
+        String formaPago ="";
+        String formaEnvio ="";
+        if (request.getParameter("gpago")!=null) {
+           formaPago = request.getParameter("gpago");
+              Logger.getLogger(getClass().getName()).log(Level.INFO, "Forma Pago " + formaPago);
+        }else{
+             resultado = "Ingrese una forma de pago";
+        }
+        if (request.getParameter("genvio")!=null) {
+           formaEnvio = request.getParameter("genvio");
+           Logger.getLogger(getClass().getName()).log(Level.INFO, "Forma Envio  " + formaEnvio);
+        }else{
+            resultado = resultado + " Ingrese una forma de envio";
+        }
+        
         
         //Crea boleta en el caso si existe las llama        
         Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
@@ -204,12 +220,68 @@ public class ControladorPagarC extends HttpServlet {
                         break;
                     }
                     cont++;
-                }
-                
-                               
+                }                               
                 sesion.setAttribute("carrito", listaDetalle);
                 sesion.setAttribute("boleta", boleta);
                 response.sendRedirect("pagarCuentas.jsp");
+            }
+            if (opcion.equals("pagar")) {
+                if (!listaDetalle.isEmpty()) {
+                    if (!formaEnvio.isEmpty() && !formaPago.isEmpty()) {
+                        
+                        //Calcular el total
+                        int total = 0;
+                        for (DetalleBoleta d : listaDetalle) {
+                            total = total + (new TicketDAO()).totalId(d.getIdTicket());
+                        }
+                        Logger.getLogger(getClass().getName()).log(Level.INFO, "Compra =" + boleta.getIdBoleta());
+                        Logger.getLogger(getClass().getName()).log(Level.INFO, "Total =" + total);
+                        
+                        
+                        
+                        boleta.setIdEnvio(Integer.parseInt(formaEnvio));
+                        boleta.setIdEstadoT(1);
+                        boleta.setIdEnvio(Integer.parseInt(formaEnvio));
+                        boleta.setTotalBoleta(total);
+                        //Crea boleta
+                        if ((new BoletaDAO()).Crear(boleta)) {
+                            Logger.getLogger(getClass().getName()).log(Level.INFO, "Estado se creo");
+                            //crea los detalle boletas
+                            List<Ticket> listaTicket = (new TicketDAO()).Listar();
+                            
+                            for (DetalleBoleta dB : listaDetalle) {
+                                if ((new DetalleBoletaDAO()).Crear(dB)) {
+                                    Logger.getLogger(getClass().getName()).log(Level.INFO, "Boleta se ha agregado a la base de dato"); 
+                                    
+                                    //Se cambia la bae de datos de Ticket
+                                    (new TicketDAO()).UpdatePay(dB.getIdTicket());
+                                                                 
+                                }
+                                else{
+                                     Logger.getLogger(getClass().getName()).log(Level.INFO, "No se ha agregado Boleta "+dB.getIdBoleta());
+                                }
+                            }                            
+                            String rutCliente=boleta.getRutCliente();
+                            String idBoleta=boleta.getIdBoleta().toString();
+                            response.sendRedirect("entregaBoucher.jsp?idBoleta="+idBoleta+"&rut="+rutCliente);
+                        }else{
+                            Logger.getLogger(getClass().getName()).log(Level.INFO, "Boleta no se creo");
+                        }
+                        
+                    }
+                    else{                       
+                        sesion.setAttribute("carrito", listaDetalle);
+                        sesion.setAttribute("boleta", boleta);
+                        response.sendRedirect("pagarCuentas.jsp?resultado="+resultado);
+                    }                    
+                }
+                else{
+                   resultado = "No existen elementos en la lista"; 
+                   sesion.setAttribute("carrito", listaDetalle);
+                   sesion.setAttribute("boleta", boleta);
+                   response.sendRedirect("pagarCuentas.jsp?resultado="+resultado);
+                }
+                
             }
 
             out.println("<h1>Servlet ControladorPagarC at " + request.getContextPath() + "</h1>");

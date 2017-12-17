@@ -28,12 +28,32 @@
                 </ul>
             </div>
         </nav>   
-
-
         <div class="section">
             <div class="container">
-                <div class="input-field col s2 ">
-                    Numero Pedido: 
+                <div class="col s12">                    
+                    <div class="card">
+                        <div class="card-content orange lighten-5">
+                            <span class="card-title center-align">Entrega de Pago Estacionamiento</span>
+                            <div class="input-field ">                                
+                                <select name="estacionamientos" >
+                                    <option value="" disabled selected>Estacionamientos</option>
+                                    
+                                </select>                                
+                                <label class="black-text">Selecciones un Estacionamiento</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix"></i>
+                                <input id="id" type="text" maxlength="9" name="idTicket"/> 
+                                <label for="id" class="blue-text" >Id Ticket</label>
+                            </div>
+                            <div class="input-field">
+                                <button class="btn waves-effect waves-light red white-text" type="submit" name="opcion" value="agregar">Agregar
+                                    <i class="material-icons right">add_circle_outline</i>
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>        
         </div>

@@ -210,7 +210,7 @@
                                     <div>  
                                         <% for (FormaPago fp : listaP) {%>
                                         <p>
-                                            <input type="radio" id="<%=fp.getNombrePago()%>" name="gpago" />
+                                            <input type="radio" id="<%=fp.getNombrePago()%>" name="gpago" value="<%=fp.getIdPago()%>"/>
                                             <label for="<%=fp.getNombrePago()%>"> <%=fp.getNombrePago()%> </label>
                                         </p>
                                         <% } %>                                          
@@ -224,10 +224,11 @@
                                     <span class="card-title center-align">Forma de Envio</span>
                                     <% for (FormaEnvio fe : listaE) {%>
                                     <p>
-                                        <input type="radio" id="<%=fe.getNombreEnvio()%>" name="genvio" />
+                                        <input type="radio" id="<%=fe.getNombreEnvio()%>" name="genvio" value="<%=fe.getIdEnvio()%>" />
                                         <label for="<%=fe.getNombreEnvio()%>"><%=fe.getNombreEnvio()%></label>
                                     </p>
-                                    <% }%>                                          
+                                    <% }%>      
+                                    <span id="mensaje" class="red-text"> ${param.resultado}</span>                                    
                                 </div>
                             </div>
                         </div>  
@@ -237,7 +238,7 @@
                             <div class="card">
                                 <button class="btn-large waves-effect waves-light red black-text" type="submit" name="opcion" value="pagar">Pagar
                                     <i class="material-icons right">payment</i>
-                                </button>
+                                </button>                                  
                             </div>
                         </div>
                     </div>

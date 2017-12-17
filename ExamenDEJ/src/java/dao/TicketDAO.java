@@ -81,8 +81,46 @@ public class TicketDAO {
         t = (Ticket)q.getSingleResult();        
         return t;
     }
+    
+    public void Update(Ticket ticket){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+        em = factory.createEntityManager();
+        Ticket t = ticket;
+        em.merge(t);
+        em.getTransaction().commit();       
+    } 
+    
+    
+     public void UpdatePay(int id){        
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+        em = factory.createEntityManager();
+        Ticket t = em.find(Ticket.class, id);       
+        em.getTransaction().begin();
+         t.setIdEstadoT(1);
+        em.getTransaction().commit();
+        em.close();
+    } 
+    
+    public boolean Pagado(int idticket){
+        Ticket buscandoTicket = null;
+        for (Ticket xx: Listar()) {
+            if (xx.getIdTicket()==idticket) {
+                buscandoTicket = xx;
+                break;
+            }
+        }
+        
+        if (buscandoTicket != null) {
+            buscandoTicket.setIdEstadoT(1);
+            Update(buscandoTicket);
+            return true;
+        }
+        else{
+            return false;
+        }
+    } 
      
-     public int totalId(int id){
+    public int totalId(int id){
         int total = 0;
          for (Ticket ti : Listar()) {
              if (id == ti.getIdTicket()) {
