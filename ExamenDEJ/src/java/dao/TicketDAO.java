@@ -82,5 +82,14 @@ public class TicketDAO {
         return t;
     }
      
-    
+     public int totalId(int id){
+        int total = 0;
+         for (Ticket ti : Listar()) {
+             if (id == ti.getIdTicket()) {
+                total = ti.getTotalPago();
+                break;
+             }
+         }
+        return total;
+    }
 }

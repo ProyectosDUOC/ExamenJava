@@ -82,7 +82,15 @@
                 nombre = boleta.getNombreBoleta();
                 telefono = boleta.getTelefonoBoleta();
                 correo = boleta.getCorreoBoleta();
-                total = boleta.getTotalBoleta().toString();
+                
+                if (listaDetalle.size()>0) {
+                    int tot = 0;
+                    for (DetalleBoleta lis : listaDetalle) {
+                        tot = tot + (new TicketDAO()).totalId(lis.getIdTicket());
+                    }
+                    total = tot + "";
+                }
+               
             }
         %>
         <h1><%=listaDetalle.size()%></h1>
@@ -178,7 +186,7 @@
                                             <td>$<%=tic.getTotalPago()%>.-</td>
                                             <td><%=tic.getNumeroTicket()%></td>
                                             <td>
-                                                <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=detalle.getIdBoleta()%>">Eliminar
+                                                <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=detalle.getIdDetalleBoleta()%>">Eliminar
                                                     <i class="material-icons right">delete_forever</i>
                                                 </button>
                                             </td>

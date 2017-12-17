@@ -55,12 +55,16 @@ public class ControladorPagarC extends HttpServlet {
         String tel = request.getParameter("tel");
         String correo = request.getParameter("correo");
         String idEstacion = "0";
-
-        String[] miseleccion = request.getParameterValues("estacionamientos");
-        //Encuentra la id del combo box de estacionamiento
-        for (int i = 0; i < miseleccion.length; i++) {
-            idEstacion = miseleccion[i];
+        
+        if (request.getParameterValues("estacionamientos") != null) {
+              String[] miseleccion = request.getParameterValues("estacionamientos");
+            //Encuentra la id del combo box de estacionamiento
+            for (int i = 0; i < miseleccion.length; i++) {
+                idEstacion = miseleccion[i];
+            }
         }
+        
+      
 
         Logger.getLogger(getClass().getName()).log(Level.INFO, "Estacionamiento id=" + idEstacion);
 
@@ -161,9 +165,10 @@ public class ControladorPagarC extends HttpServlet {
                                 listaDetalle.add(new DetalleBoleta(contadorId, boleta.getIdBoleta(), ticketBuscado.getIdTicket()));
                                 Logger.getLogger(getClass().getName()).log(Level.INFO, "contador id=" + contadorId);
                                 //A boleta se Actualiza el moento
-                                int total = boleta.getTotalBoleta();
-                                total = total + ticketBuscado.getTotalPago();
-                                boleta.setTotalBoleta(total);
+                              
+                                //int total = boleta.getTotalBoleta();
+                                //total = total + ticketBuscado.getTotalPago();
+                                //boleta.setTotalBoleta(total);
 
                                 sesion.setAttribute("carrito", listaDetalle);
                             }
@@ -190,6 +195,18 @@ public class ControladorPagarC extends HttpServlet {
             }
             if (opcion.startsWith("x")) {
                 
+                String idDetalleBoleta = opcion.substring(1);
+                int cont = 0;
+                for (DetalleBoleta db: listaDetalle) {
+                    
+                    if (db.getIdDetalleBoleta().toString().equals(idDetalleBoleta)) {                        
+                        listaDetalle.remove(cont);
+                        break;
+                    }
+                    cont++;
+                }
+                
+                               
                 sesion.setAttribute("carrito", listaDetalle);
                 sesion.setAttribute("boleta", boleta);
                 response.sendRedirect("pagarCuentas.jsp");
