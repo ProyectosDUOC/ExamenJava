@@ -149,13 +149,14 @@
                                     </div>
                                     <div class="input-field">
                                         <i class="material-icons prefix"></i>
-                                        <input id="id" type="text" maxlength="9" name="idTicformat_list_numberedket" /> 
+                                        <input id="id" type="text" maxlength="9" name="idTicket"/> 
                                         <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
                                     <div class="input-field">
                                         <button class="btn waves-effect waves-light red white-text" type="submit" name="opcion" value="agregar">Agregar
                                             <i class="material-icons right">add_circle_outline</i>
                                         </button>
+                                        <span id="mensaje" class="red-text"> ${param.mensaje}</span>
                                     </div>
                                 </div>
                             </div>

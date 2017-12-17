@@ -56,8 +56,9 @@ public class ControladorPagarC extends HttpServlet {
         String correo = request.getParameter("correo");
         String idEstacion = "0";
         String ticket = "0";
-        if (request.getParameterValues("estacionamientos") != null) {
-              String[] miseleccion = request.getParameterValues("estacionamientos");
+        String mensaje = "";
+        if (request.getParameterValues("estacionamientos") != null && request.getParameterValues("idTicket")!=null) {
+            String[] miseleccion = request.getParameterValues("estacionamientos");
             //Encuentra la id del combo box de estacionamiento
             for (int i = 0; i < miseleccion.length; i++) {
                 idEstacion = miseleccion[i];
@@ -153,6 +154,8 @@ public class ControladorPagarC extends HttpServlet {
                                 boleta.setTotalBoleta(total);
 
                                 sesion.setAttribute("carrito", listaDetalle);
+                            }else{
+                                mensaje = "Este ticket ya fue utilizado";
                             }
 
                         } else {
@@ -177,18 +180,18 @@ public class ControladorPagarC extends HttpServlet {
                     } else {
                         //Error:
                         //El ticket ya lo ocuparon
-
+                        mensaje = "Ticket ya fue pagado";
                         //Ahora vamos a guardarlo sin importar que no exista debe ingresar
                     }
 
                 } else {
                     //Error : 
                     //El ticket NO EXISTE
-
+                    mensaje = "Ticket no se encuentra";
                     //Ahora vamos a guardarlo sin importar que no exista debe ingresar
                 }
                 sesion.setAttribute("boleta", boleta);
-                response.sendRedirect("pagarCuentas.jsp");
+                response.sendRedirect("pagarCuentas.jsp?mensaje="+mensaje);
             }
             if (opcion.startsWith("x")) {
                 

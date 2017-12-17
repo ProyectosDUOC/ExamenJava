@@ -60,17 +60,17 @@ public class ControladorPedido extends HttpServlet {
                 
                 if(cli != null)
                 {
-                    response.sendRedirect("buscarPedido.jsp?rut="+ cli.getRutCliente() );
+                    response.sendRedirect("buscarPagos.jsp?rut="+ cli.getRutCliente() );
                 }
                 else
                 {
-                    response.sendRedirect("buscarPedido.jsp?mensaje=El Cliente no Existe");
+                    response.sendRedirect("buscarPagos.jsp?mensaje=El Cliente no Existe");
                 }
                 
             }
         }catch(Exception e)
         {
-            response.sendRedirect("buscarPedido.jsp?mensaje=El Cliente no Existe" + e.toString());
+            response.sendRedirect("buscarPagos.jsp?mensaje=El Cliente no Existe" + e.toString());
         }
     }
 
