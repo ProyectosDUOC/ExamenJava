@@ -4,6 +4,11 @@
     Author     : benja
 --%>
 
+<%@page import="dao.TicketDAO"%>
+<%@page import="modelo.Ticket"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.DetalleBoleta"%>
+<%@page import="modelo.Boleta"%>
 <%@page import="dao.FormaPagoDAO"%>
 <%@page import="modelo.FormaPago"%>
 <%@page import="dao.FormaEnvioDAO"%>
@@ -14,7 +19,6 @@
 <%@page import="modelo.Estacionamiento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -63,6 +67,24 @@
         </nav>   
         <br>
         <br>
+        <%
+            HttpSession  sesion = request.getSession(true);
+            Boleta boleta = sesion.getAttribute("boleta") == null ? null : (Boleta) sesion.getAttribute("boleta");
+            ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() :(ArrayList) sesion.getAttribute("carrito");
+            
+            String rut = "";
+            String nombre = "";
+            String telefono = "";
+            String correo = "";
+            
+            if (boleta != null) {
+                rut = boleta.getRutCliente();
+                nombre = boleta.getNombreBoleta();
+                telefono = boleta.getTelefonoBoleta();
+                correo = boleta.getCorreoBoleta();
+            }
+        %>
+        <h1><%=listaDetalle.size()%></h1>
         <form action="ControladorPagarC" method="POST">
             <div class="container">
                 <div class="row">
@@ -73,22 +95,22 @@
                                 <span class="card-title">Datos Personales</span>
                                 <div class="input-field">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="rut" type="text" maxlength="9" name="rut" required oninput="habilitar()" /> 
+                                    <input id="rut" type="text" maxlength="9" name="rut" value="<%=rut%>" required oninput="habilitar()" /> 
                                     <label for="rut" class="blue-text" >Rut  ejemplo 190000008</label>
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">people</i>
-                                    <input id="nombre" type="text" name="nombre" required oninput="habilitar()" />
+                                    <input id="nombre" type="text" name="nombre" value="<%=nombre%>" required oninput="habilitar()" />
                                     <label for="nombre" class="blue-text">Nombre Completo</label>
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">local_phone</i>
-                                    <input id="tel" type="text" maxlength="12" nam="tel" required oninput="habilitar()" />
+                                    <input id="tel" type="text" maxlength="12" name="tel" value="<%=telefono%>" required oninput="habilitar()" />
                                     <label for="tel" class="blue-text">Telefono +569XXXXXXXX</label>
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="correo" type="email" name="correo" required oninput="habilitar()" />
+                                    <input id="correo" type="email" name="correo" value="<%=correo%>" required oninput="habilitar()" />
                                     <label for="correo" class="blue-text">Correo Electronico @...</label>
                                 </div>
                             </div>
@@ -123,7 +145,7 @@
                                     </div>
                                     <div class="input-field">
                                         <button class="btn waves-effect waves-light red white-text" type="submit" name="opcion" value="agregar">Agregar
-                                            <i class="material-icons right">send</i>
+                                            <i class="material-icons right">add_circle_outline</i>
                                         </button>
                                     </div>
                                 </div>
@@ -142,6 +164,26 @@
                                             <th>Eliminar</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <% 
+                                            Ticket tic ;
+                                            Estacionamiento esta;
+                                            for (DetalleBoleta detalle: listaDetalle) {    
+                                            tic = (new TicketDAO()).BuscarId(detalle.getIdTicket());
+                                            esta = (new EstacionamientoDAO()).BuscarId(tic.getIdEstacionamiento());
+                                        %>
+                                            <tr>
+                                                <td><%=esta.getNombreEsta()%></td>
+                                                <td>$<%=tic.getTotalPago()%>.-</td>
+                                                <td><%=tic.getIdTicket()%></td>
+                                                <td>
+                                                    <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=detalle.getIdBoleta()%>">Eliminar
+                                                        <i class="material-icons right">delete_forever</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <%} %>                                      
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

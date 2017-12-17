@@ -71,4 +71,14 @@ public class TicketDAO {
         tickets = q.getResultList();        
         return tickets;
     } 
+    
+     public Ticket BuscarId(int id){
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+        em = factory.createEntityManager();
+        Ticket t;
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Ticket c WHERE c.idTicket ="+ id);
+       // javax.persistence.Query q = em.createNamedQuery("Estacionamiento.findByIdEstacionamiento", Estacionamiento.class);
+        t = (Ticket)q.getSingleResult();        
+        return t;
+    }
 }

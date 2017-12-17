@@ -71,6 +71,13 @@ public class DetalleBoletaDAO {
         return detalles;
     }
     
+     public int ultimoId(){
+        int ultimo=0;
+         for (DetalleBoleta de : Listar()) {
+             ultimo = de.getIdBoleta();
+         }
+        return ultimo;
+    }
     
     public int contador(){
         int total = 0;
