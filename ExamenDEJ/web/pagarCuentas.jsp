@@ -148,8 +148,8 @@
                                         <label class="black-text">Selecciones un Estacionamiento</label>
                                     </div>
                                     <div class="input-field">
-                                        <i class="material-icons prefix">account_circle</i>
-                                        <input id="id" type="text" maxlength="9" name="idTicket" value="0" /> 
+                                        <i class="material-icons prefix"></i>
+                                        <input id="id" type="text" maxlength="9" name="idTicformat_list_numberedket" /> 
                                         <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
                                     <div class="input-field">
@@ -235,7 +235,7 @@
                         <div class="col s12 m4 center-align">
                             <div class="card">
                                 <button class="btn-large waves-effect waves-light red black-text" type="submit" name="opcion" value="pagar">Pagar
-                                    <i class="material-icons right">delete_forever</i>
+                                    <i class="material-icons right">payment</i>
                                 </button>
                             </div>
                         </div>

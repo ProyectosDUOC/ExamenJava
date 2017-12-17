@@ -55,21 +55,18 @@ public class ControladorPagarC extends HttpServlet {
         String tel = request.getParameter("tel");
         String correo = request.getParameter("correo");
         String idEstacion = "0";
-        
+        String ticket = "0";
         if (request.getParameterValues("estacionamientos") != null) {
               String[] miseleccion = request.getParameterValues("estacionamientos");
             //Encuentra la id del combo box de estacionamiento
             for (int i = 0; i < miseleccion.length; i++) {
                 idEstacion = miseleccion[i];
             }
+            //id ticke a agregar al carrito
+            ticket = request.getParameter("idTicket");
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "Estacionamiento id=" + idEstacion);
         }
         
-      
-
-        Logger.getLogger(getClass().getName()).log(Level.INFO, "Estacionamiento id=" + idEstacion);
-
-        //id ticke a agregar al carrito
-        String ticket = request.getParameter("idTicket");
         //Crea boleta en el caso si existe las llama        
         Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
         ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
