@@ -37,44 +37,44 @@
                 <h1>Auto Park</h1>    
                 <a  class="white-text btn-large  waves-effect waves-light  red" href="movilApp.jsp"><i class="material-icons">touch_app</i>App movil</a>       
             </div>
-               <div class="slider">
-                    <ul class="slides">
-                        <li>
-                            <img src="images/auto1.jpg"> <!-- random image -->                                                  
-                           
-                        </li>
-                        <li>
-                            <img src="images/auto2.jpg"> <!-- random image -->                           
-                        </li>
-                        <li>
-                            <img src="images/auto3.jpg"> <!-- random image -->                            
-                        </li>                 
-                    </ul>
-                </div>
+            <div class="slider">
+                <ul class="slides">
+                    <li>
+                        <img src="images/auto1.jpg"> <!-- random image -->                                                  
+
+                    </li>
+                    <li>
+                        <img src="images/auto2.jpg"> <!-- random image -->                           
+                    </li>
+                    <li>
+                        <img src="images/auto3.jpg"> <!-- random image -->                            
+                    </li>                 
+                </ul>
+            </div>
         </div>
-        
+
         <%  List<Cliente> listaCliente = (new ClienteDAO()).Listar(); %>
-        
+
         <% for (Cliente cli : listaCliente) {
-                %>
-                <p><%=cli.getRutCliente()%> - <%=cli.getNombreCliente()%></p>
+        %>
+        <p><%=cli.getRutCliente()%> - <%=cli.getNombreCliente()%></p>
         <%
             }
         %>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
         <script src="js/init.js"></script> 
-            <script>
-                                    $(document).ready(function () {
-                                        $('select').material_select();
-                                    });
-    </script>
-    <script>
-        $('.carousel.carousel-slider').carousel({fullWidth: true});
-        //      
-        $(document).ready(function () {
-            $('.slider').slider();
-        });
-    </script>
+        <script>
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+        </script>
+        <script>
+            $('.carousel.carousel-slider').carousel({fullWidth: true});
+            //      
+            $(document).ready(function () {
+                $('.slider').slider();
+            });
+        </script>
     </body>
 </html>

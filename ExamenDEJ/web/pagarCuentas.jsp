@@ -26,27 +26,25 @@
         <link href="css/pagarCuentas.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script>
-        function habilitar()
-        {
-            console.log("x");
-            var rutOk = document.getElementById("rut").value.length >= 7;
-            var telOk = document.getElementById("tel").value.length > 0;
-            var nameOk = document.getElementById("nombre").value.length > 0;
-            var mailOk = document.getElementById("correo").value.length > 0;
+            function habilitar()
+            {
+                console.log("x");
+                var rutOk = document.getElementById("rut").value.length >= 7;
+                var telOk = document.getElementById("tel").value.length > 0;
+                var nameOk = document.getElementById("nombre").value.length > 0;
+                var mailOk = document.getElementById("correo").value.length > 0;
 
-            var panel = document.getElementById("oculto");
+                var panel = document.getElementById("oculto");
 
-            if (rutOk && telOk && nameOk && mailOk) {
-                console.log("ok");
-                panel.style.display = 'inline';
+                if (rutOk && telOk && nameOk && mailOk) {
+                    console.log("ok");
+                    panel.style.display = 'inline';
+                } else {
+                    panel.style.display = 'none';
+                }
             }
-            else {
-                panel.style.display = 'none';
-            }
-        };
+            ;
         </script>
-
-
         <%  List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
             List<FormaPago> listaP = (new FormaPagoDAO()).Listar();
             List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar();%>
@@ -65,12 +63,10 @@
         </nav>   
         <br>
         <br>
-        <form action="ControladorPagarC" method="POST">
-            <div class="container" id="acceso">
+        <form action="ControladorPedido" method="POST">
+            <div class="container">
                 <div class="row">
-
                     <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
-
                     <div class="col s12 m4">
                         <div class="card orange lighten-5">
                             <div class="card-content blue-text">
@@ -82,12 +78,12 @@
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">people</i>
-                                    <input id="nombre" type="text" name="Nombre" required oninput="habilitar()" />
+                                    <input id="nombre" type="text" name="nombre" required oninput="habilitar()" />
                                     <label for="nombre" class="blue-text">Nombre Completo</label>
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">local_phone</i>
-                                    <input id="tel" type="text" maxlength="12" required oninput="habilitar()" />
+                                    <input id="tel" type="text" maxlength="12" nam="tel" required oninput="habilitar()" />
                                     <label for="tel" class="blue-text">Telefono +569XXXXXXXX</label>
                                 </div>
                                 <div class="input-field">
@@ -98,7 +94,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col s8 slider">
                         <div class="carousel carousel-slider">
                             <a class="carousel-item" href="#one!"><img  width="600" height="400" src="images/auto1.jpg"></a>
@@ -107,7 +102,6 @@
                             <a class="carousel-item" href="#four!"><img width="600" height="400"  src="images/auto1.jpg"></a>
                         </div>
                     </div>
-
                     <div id="oculto">
                         <div class="col s12">                    
                             <div class="card">
@@ -123,19 +117,17 @@
                                         <label class="black-text">Selecciones un Estacionamiento</label>
                                     </div>
                                     <div class="input-field">
-                                        <i class="material-icons prefix">people</i>
-                                        <input id="idTi" type="text" name="ticket" required="requered"/>
+                                        <input id="idTi" type="text" name="ticket" required/>
                                         <label for="idTi" class="white-text">N°Ticket</label>
                                     </div>
                                     <div class="input-field">
-                                        <button class="btn waves-effect waves-light red white-text" type="submit" name="action">Agregar
+                                        <button class="btn waves-effect waves-light red white-text" type="opcion" name="Agregar">Agregar
                                             <i class="material-icons right">send</i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col s12">
                             <div class="card">
                                 <table>
@@ -150,10 +142,10 @@
                                 </table>
                             </div>
                         </div>
-
                         <div class="col s6">
                             <div class="card">
                                 <div class="card-content">
+                                    <span class="card-title center-align">Forma de Pago</span>
                                     <div>  
                                         <% for (FormaPago fp : listaP) {%>
                                         <p>
@@ -165,10 +157,10 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col s6">
                             <div class="card">
-                                <div class="card-content"> 
+                                <div class="card-content">                                     
+                                    <span class="card-title center-align">Forma de Envio</span>
                                     <% for (FormaEnvio fe : listaE) {%>
                                     <p>
                                         <input type="radio" id="<%=fe.getNombreEnvio()%>" name="genvio" />
@@ -180,27 +172,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>        
+        </form>
+        <script src="js/materialize.js"></script>
+        <script src="js/init.js"></script> 
+        <script>
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+        </script>
+        <script>
+            $('.carousel.carousel-slider').carousel({fullWidth: true});
+            //      
+            $(document).ready(function () {
+                $('.slider').slider();
+            });
+        </script>
 
-        </div>
-    </div>  
-</form>
-
-
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script> 
-<script>
-    $(document).ready(function () {
-        $('select').material_select();
-    });
-</script>
-<script>
-    $('.carousel.carousel-slider').carousel({fullWidth: true});
-    //      
-    $(document).ready(function () {
-        $('.slider').slider();
-    });
-</script>
-
-</body>
+    </body>
 </html>

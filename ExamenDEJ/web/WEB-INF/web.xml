@@ -12,10 +12,6 @@
         <servlet-name>ControladorPagarC</servlet-name>
         <servlet-class>controlador.ControladorPagarC</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ControladorAddEsta</servlet-name>
-        <servlet-class>controlador.ControladorAddEsta</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorMovil</servlet-name>
         <url-pattern>/ControladorMovil</url-pattern>
@@ -27,10 +23,6 @@
     <servlet-mapping>
         <servlet-name>ControladorPagarC</servlet-name>
         <url-pattern>/ControladorPagarC</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControladorAddEsta</servlet-name>
-        <url-pattern>/agregarEstacionamientos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
