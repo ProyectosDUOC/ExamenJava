@@ -37,7 +37,9 @@
             }
         </script> 
 
-        <% List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();  %>
+        <%  List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
+            List<FormaPago> listaP = (new FormaPagoDAO()).Listar();
+            List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar();%>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
@@ -54,116 +56,147 @@
         <br>
         <br>
         <form action="ControladorPagarC" method="POST">
-        <div class="container" id="acceso">
-            <div class="row">
-                <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
-                <div class="col s12 m4">
-                    <div class="card orange lighten-5">
-                        <div class="card-content blue-text">
-                            <span class="card-title">Datos Personales</span>
-                            <div class="input-field">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="rut" type="text" maxlength="9" name="rut" required="requered" /> 
-                                <label for="rut" class="blue-text" >Rut  ejemplo 190000008</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">people</i>
-                                <input id="nombre" type="text" name="Nombre" required="requered" onchange="habilitar(this.value);" />
-                                <label for="nombre" class="blue-text">Nombre Completo</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">local_phone</i>
-                                <input id="tel" type="text" maxlength="12" required="requered" />
-                                <label for="tel" class="blue-text">Telefono +569XXXXXXXX</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input id="correo" type="email" name="correo" required="requered" />
-                                <label for="correo" class="blue-text">Correo Electronico @...</label>
+            <div class="container" id="acceso">
+                <div class="row">
+                    <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
+                    <div class="col s12 m4">
+                        <div class="card orange lighten-5">
+                            <div class="card-content blue-text">
+                                <span class="card-title">Datos Personales</span>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="rut" type="text" maxlength="9" name="rut" required="requered" /> 
+                                    <label for="rut" class="blue-text" >Rut  ejemplo 190000008</label>
+                                </div>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">people</i>
+                                    <input id="nombre" type="text" name="Nombre" required="requered" onchange="habilitar(this.value);" />
+                                    <label for="nombre" class="blue-text">Nombre Completo</label>
+                                </div>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">local_phone</i>
+                                    <input id="tel" type="text" maxlength="12" required="requered" />
+                                    <label for="tel" class="blue-text">Telefono +569XXXXXXXX</label>
+                                </div>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="correo" type="email" name="correo" required="requered" />
+                                    <label for="correo" class="blue-text">Correo Electronico @...</label>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col s8 slider">
+                        <div class="carousel carousel-slider">
+                            <a class="carousel-item" href="#one!"><img  width="600" height="400" src="images/auto1.jpg"></a>
+                            <a class="carousel-item" href="#two!"><img width="600" height="400"  src="images/auto2.jpg"></a>
+                            <a class="carousel-item" href="#three!"><img width="600" height=400  src="images/auto3.jpg"></a>
+                            <a class="carousel-item" href="#four!"><img width="600" height="400"  src="images/auto1.jpg"></a>
+                        </div>
+                    </div>
+
+                    <div class="col s12">                    
+                        <div class="card">
+                            <div class="card-content orange lighten-5">
+                                <span class="card-title center-align">Estacionamientos</span>
+                                <div class="input-field ">                                
+                                    <select name="etacionamientos" >
+                                        <option value="" disabled selected>Estacionamientos</option>
+                                        <%for (Estacionamiento esta : listaEsta) {%>
+                                        <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEsta()%> - <%=esta.getGlosa()%></option>
+                                        <% } %>
+                                    </select>                                
+                                    <label class="black-text">Selecciones un Estacionamiento</label>
+                                </div>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">people</i>
+                                    <input id="idTi" type="text" name="ticket" required="requered"/>
+                                    <label for="idTi" class="white-text">N°Ticket</label>
+                                </div>
+                                <div class="input-field">
+                                    <button class="btn waves-effect waves-light red white-text" type="submit" name="action">Agregar
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12">
+                        <div class="card">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre estacionamiento</th>
+                                        <th>Monto</th>
+                                        <th>N° Ticket</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col s6">
+                        <div class="card">
+                            <div class="card-content">
+                                <div>  
+                                    <% for (FormaPago fp : listaP) {%>
+                                    <p>
+                                        <input type="radio" id="<%=fp.getNombrePago()%>" name="gpago" />
+                                        <label for="<%=fp.getNombrePago()%>"> <%=fp.getNombrePago()%> </label>
+                                    </p>
+                                    <% } %>                                          
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s6">
+                        <div class="card">
+                            <div class="card-content"> 
+                                <% for (FormaEnvio fe : listaE) {%>
+                                <p>
+                                    <input type="radio" id="<%=fe.getNombreEnvio()%>" name="genvio" />
+                                    <label for="<%=fe.getNombreEnvio()%>"><%=fe.getNombreEnvio()%></label>
+                                </p>
+                                <% } %>                                          
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12">
+                        <div class="card">
+                            <!-- pagar -->
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col s6 slider">
-                    <div class="carousel carousel-slider">
-                        <a class="carousel-item" href="#one!"><img  width="600" height="400" src="images/auto1.jpg"></a>
-                        <a class="carousel-item" href="#two!"><img width="600" height="400"  src="images/auto2.jpg"></a>
-                        <a class="carousel-item" href="#three!"><img width="600" height=400  src="images/auto3.jpg"></a>
-                        <a class="carousel-item" href="#four!"><img width="600" height="400"  src="images/auto1.jpg"></a>
-                    </div>
-                </div>
-                <div class="col s12">                    
-                    <div class="card orange lighten-5">
-                        <div class="card-content orange lighten-5">
-                            <span class="card-title center-align">Estacionamientos</span>
-                            <div class="input-field">                                
-                                <select name="etacionamientos" >
-                                    <option value="" disabled selected>Estacionamientos</option>
-                                    <%for (Estacionamiento esta : listaEsta) {
-                                    %>
-                                    <option value="<%=esta.getIdEstacionamiento()%>"><%=esta.getNombreEsta()%> - <%=esta.getGlosa()%></option>
-                                    <%
-                                        }
-                                    %>
-                                </select>                                
-                                <label class="black-text">Selecciones un Estacionamiento</label>
-                            </div>
-                             <div class="input-field">
-                                <i class="material-icons prefix">people</i>
-                                <input id="idTi" type="text" name="ticket" required="requered"/>
-                                <label for="idTi" class="white-text">N°Ticket</label>
-                            </div>    
-                            <button class="btn waves-effect waves-light red white-text col s6" type="submit" name="action">Agregar
-                                <i class="material-icons right">send</i>
-                            </button>                      
-                         
-                                
-                        <%
-                           List<FormaPago> listaP = (new FormaPagoDAO()).Listar();
-                           List<FormaEnvio> listaE = (new FormaEnvioDAO()).Listar();                                
-                        %>              
-                        <div class="col s6">  
-                            <% for (FormaPago fp : listaP) { %>
-                            <p>
-                                <input name="group1" type="radio" id="<%=fp.getNombrePago()%>" name="<%=fp.getIdPago()%>" />
-                                <label for="<%=fp.getNombrePago()%>"><%=fp.getNombrePago()%></label>
-                           <p>                            
-                            <%        
-                                }
-                            %>                                          
-                        </div>
-                        <div class="col s6">  
-                            <% for (FormaEnvio fe : listaE) { %>
-                            <p>
-                                <input name="group1" type="radio" id="<%=fe.getNombreEnvio()%>" name="<%=fe.getIdEnvio()%>" />
-                                <label for="<%=fe.getIdEnvio()%>"><%=fe.getNombreEnvio()%></label>
-                           <p>                            
-                            <%        
-                                }
-                            %>                                          
-                        </div>
-                        </div>
-                    </div>
-                </div>                          
             </div>
-        </div>  
-        </form>
-  
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script> 
-    <script>
-                                    $(document).ready(function () {
-                                        $('select').material_select();
-                                    });
-    </script>
-    <script>
-        $('.carousel.carousel-slider').carousel({fullWidth: true});
-        //      
-        $(document).ready(function () {
-            $('.slider').slider();
-        });
-    </script>
+
+        </div>
+    </div>  
+</form>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script> 
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
+<script>
+    $('.carousel.carousel-slider').carousel({fullWidth: true});
+    //      
+    $(document).ready(function () {
+        $('.slider').slider();
+    });
+</script>
 
 </body>
 </html>
