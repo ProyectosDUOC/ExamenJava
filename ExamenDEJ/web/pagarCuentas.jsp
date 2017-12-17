@@ -183,7 +183,8 @@
             $(document).ready(function () {
                 $('select').material_select();
             });
-        </script>
+            habilitar();
+        </script>        
         <script>
             $('.carousel.carousel-slider').carousel({fullWidth: true});
             //      
