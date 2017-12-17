@@ -44,6 +44,12 @@ public class DetalleBoleta implements Serializable {
     public DetalleBoleta() {
     }
 
+    public DetalleBoleta(Integer idDetalleBoleta, Integer idBoleta, Integer idTicket) {
+        this.idDetalleBoleta = idDetalleBoleta;
+        this.idBoleta = idBoleta;
+        this.idTicket = idTicket;
+    }
+
     public DetalleBoleta(Integer idDetalleBoleta) {
         this.idDetalleBoleta = idDetalleBoleta;
     }

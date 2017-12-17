@@ -63,7 +63,7 @@
         </nav>   
         <br>
         <br>
-        <form action="ControladorPedido" method="POST">
+        <form action="ControladorPagarC" method="POST">
             <div class="container">
                 <div class="row">
                     <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
@@ -117,17 +117,20 @@
                                         <label class="black-text">Selecciones un Estacionamiento</label>
                                     </div>
                                     <div class="input-field">
-                                        <input id="idTi" type="text" name="ticket" required/>
-                                        <label for="idTi" class="white-text">N°Ticket</label>
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input id="id" type="text" maxlength="9" name="idTiket" required /> 
+                                        <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
                                     <div class="input-field">
-                                        <button class="btn waves-effect waves-light red white-text" type="opcion" name="Agregar">Agregar
+                                        <button class="btn waves-effect waves-light red white-text" type="opcion" name="agregar">Agregar
                                             <i class="material-icons right">send</i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                       
+                        <!--Carga carrito -->
                         <div class="col s12">
                             <div class="card">
                                 <table>

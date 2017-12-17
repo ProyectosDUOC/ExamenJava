@@ -7,11 +7,24 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Boleta;
+import modelo.DetalleBoleta;
+import dao.BoletaDAO;
+import dao.DetalleBoletaDAO;
+import dao.EstacionamientoDAO;
+import dao.TicketDAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import modelo.Estacionamiento;
+import modelo.Ticket;
 
 /**
  *
@@ -31,17 +44,131 @@ public class ControladorPagarC extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession sesion = request.getSession(true);
+
+        String opcion = request.getParameter("opcion");
+        String rut = request.getParameter("rut");
+        String nombre = request.getParameter("nombre");
+        String tel = request.getParameter("tel");
+        String correo = request.getParameter("correo");
+        String idEstacion = "";
+
+        if (opcion.equals("agregar")) {
+            String[] miseleccion = request.getParameterValues("etacionamientos");
+            //Encuentra la id del combo box de estacionamiento
+            for (int i = 0; i < miseleccion.length; i++) {
+                idEstacion = miseleccion[i];
+            }
+            //id ticke a agregar al carrito
+            String ticket = request.getParameter("idTicket");
+
+            //Crea boleta en el caso si existe las llama        
+            Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
+            ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<>() : (ArrayList) sesion.getAttribute("carrito");
+
+            //Busco el estacionamiento
+            List<Estacionamiento> listaE = (new EstacionamientoDAO()).Listar();
+            Estacionamiento estacionamiento;
+            for (Estacionamiento es : listaE) {
+                if (es.getIdEstacionamiento().toString().equals(idEstacion)) {
+                    estacionamiento = es;
+                    break;
+                }
+            }
+            //Busca el ticket
+            List<Ticket> listaT = (new TicketDAO()).Listar();
+            Ticket ticketBuscado = null;
+            for (Ticket ti : listaT) {
+                if (ti.getIdTicket().toString().equals(ticket) && ti.getIdEstacionamiento().toString().equals(idEstacion)) {
+                    ticketBuscado = ti;
+                    break;
+                }
+            }
+
+            if (ticketBuscado != null) {
+                //El tiket SI Existe
+                if (ticketBuscado.getIdEstadoT() == 0) {
+                    //El ticket no ha sido pagado
+
+                    //*******************ANEXO BOLETA**********************************  
+                    // En el cao que la boleta esta null creara una nueva con los campos de la ventana
+                    if (boleta == null) {
+                        int id = (new BoletaDAO()).contador() + 1;
+                        Date fecha = new Date();
+                        boleta = new Boleta(id, rut, nombre, tel, correo, fecha, 0, 0, 0, 0);
+                        /*        id_boleta      INT NOT NULL,
+                        rut_cliente    VARCHAR(9),
+                        nombre_boleta      VARCHAR(200),
+                        telefono_boleta    VARCHAR(12),
+                        correo_boleta      VARCHAR(100),
+                        fecha_boleta   DATE,
+                        total_boleta   INT,
+                        id_envio       INT,
+                        id_pago        INT, 
+                        id_estado_t    INT 0 no pagado, 1 pagado */
+                    }//else {en el caso contrario ya esta registrada la boleta}
+                    
+                    
+                    
+                    boolean estado = false;
+                    //ahora veremos que si el carrito esta vacio y si existe el articulo que vamos a agregar
+                    if (listaDetalle.size()>0) {
+                        for (DetalleBoleta detalle : listaDetalle) {
+                            //Vamos a confirma si etamos en el detalle de boleta correcto
+                            if (boleta.getIdBoleta() == detalle.getIdBoleta()) {
+                                if (detalle.getIdTicket() == ticketBuscado.getIdTicket()) {                                                                     
+                                    //No se puede Agregar
+                                    estado = true;//Si existe ete elemento en la lista de detalle   
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    //En el caso que no encuentre el carrito
+                    if (!estado) {
+                        int contadorDe = (new  DetalleBoletaDAO()).contador()+1;
+                        listaDetalle.add(new DetalleBoleta(contadorDe, boleta.getIdBoleta(), ticketBuscado.getIdTicket()));
                         
-        
-        
+                        //A boleta se Actualiza el moento
+                        int total = boleta.getTotalBoleta();
+                        total = total + ticketBuscado.getTotalPago();
+                        boleta.setTotalBoleta(total);
+                        
+                    }
+                    
+                    //Ahora vamos a guardarlo sin importar que no exista debe ingresar
+                    sesion.setAttribute("carrito", listaDetalle);
+                    sesion.setAttribute("boleta", boleta);
+
+                } else {
+                    //Error:
+                    //El ticket ya lo ocuparon
+                    
+                    
+                     //Ahora vamos a guardarlo sin importar que no exista debe ingresar
+                    sesion.setAttribute("carrito", listaDetalle);
+                    sesion.setAttribute("boleta", boleta);
+                }
+
+            } else {
+                //Error : 
+                //El ticket NO EXISTE
+                
+                //Ahora vamos a guardarlo sin importar que no exista debe ingresar
+                sesion.setAttribute("carrito", listaDetalle);
+                sesion.setAttribute("boleta", boleta);
+            }
+            response.sendRedirect("pagarCuentas.jsp");
+        }
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorPagarC</title>");            
+            out.println("<title>Servlet ControladorPagarC</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControladorPagarC at " + request.getContextPath() + "</h1>");

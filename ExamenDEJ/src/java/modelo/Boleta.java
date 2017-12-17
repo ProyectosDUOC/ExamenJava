@@ -78,6 +78,19 @@ public class Boleta implements Serializable {
         this.idBoleta = idBoleta;
     }
 
+    public Boleta(Integer idBoleta, String rutCliente, String nombreBoleta, String telefonoBoleta, String correoBoleta, Date fechaBoleta, Integer totalBoleta, Integer idEnvio, Integer idPago, Integer idEstadoT) {
+        this.idBoleta = idBoleta;
+        this.rutCliente = rutCliente;
+        this.nombreBoleta = nombreBoleta;
+        this.telefonoBoleta = telefonoBoleta;
+        this.correoBoleta = correoBoleta;
+        this.fechaBoleta = fechaBoleta;
+        this.totalBoleta = totalBoleta;
+        this.idEnvio = idEnvio;
+        this.idPago = idPago;
+        this.idEstadoT = idEstadoT;
+    }
+
     public Integer getIdBoleta() {
         return idBoleta;
     }
