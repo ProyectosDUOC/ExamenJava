@@ -28,16 +28,20 @@
                 </ul>
             </div>
         </nav>   
+        
+        <div class="container">
         <h1>Preguntas Frecuentes</h1>
 
         <ul class="collapsible" data-collapsible="accordion">
             <li>
-                <div class="collapsible-header"><i class="material-icons">filter_drama</i>¿Que es AutoPark?</div>
-                <div class="collapsible-body"><span>Es un sistema Online en el cual puedes pagar las boletas de los 
-                    estacionamientos en los que has estado, a lo largo de todo Chile.</span></div>
+                <div class="collapsible-header"><i class="material-icons">directions_car</i>¿Que es AutoPark?</div>
+                <div class="collapsible-body"><span>
+                                                        Es un sistema Online en el cual puedes pagar las boletas de los 
+                                                        estacionamientos en los que has estado, a lo largo de todo Chile.
+                                                    </span></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">place</i>¿Como puedo ver mis boletas pendientes?</div>
+                <div class="collapsible-header"><i class="material-icons">format_list_numbered</i>¿Como puedo ver mis boletas pendientes?</div>
                 <div class="collapsible-body"><span>1.- Al ingresar a la pagina principal de AutoPark, aparecera un boton de color
                                                         rojo que dira "APP Movil"y le damos click. 
                                                         <br/><br/> 
@@ -51,7 +55,7 @@
                                                     </span></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>¿Como puedo pagar mis cuentas de estacionamiento?</div>
+                <div class="collapsible-header"><i class="material-icons">local_atm</i>¿Como puedo pagar mis cuentas de estacionamiento?</div>
                 <div class="collapsible-body"><span>1.- En la parte superior de la pantalla, en una barra de color azul, apareceran una
                                                         serie de opcciones una de esas opciones es "Pagar".
                                                         <br/><br/> 
@@ -77,7 +81,7 @@
             </li>
             
             <li>
-                <div class="collapsible-header"><i class="material-icons">filter_drama</i>¿Como puedo hacerme cliente de AutoPark?</div>
+                <div class="collapsible-header"><i class="material-icons">face</i>¿Como puedo hacerme cliente de AutoPark?</div>
                 <div class="collapsible-body"><span>
                                             1.- Puedes hacerte cliente de AutoPark descargando la aplicacion de forma gratuita de Internet desde GooglePlay o desde
                                                 la AppStore.
@@ -90,7 +94,7 @@
                                               </span></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">place</i>¿Como puedo ver la ubicacion de los Estacionamientos de AutoPak en el mapa?</div>
+                <div class="collapsible-header"><i class="material-icons">place</i>¿Como puedo ver la ubicacion de los Estacionamientos de AutoPark en el mapa?</div>
                 <div class="collapsible-body"><span>
                                                 1.- En la parte superior de la pantalla se encuentra uan barra azul, buscamos 
                                                     la opcion que dice "Ver Estacionamientos" y le damos Click.
@@ -100,25 +104,9 @@
                                                     de ubicacion en el mapa.
                                                 </span></div>
             </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            
-            <li>
-                <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
         </ul>
 
+        </div>
 
 
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
