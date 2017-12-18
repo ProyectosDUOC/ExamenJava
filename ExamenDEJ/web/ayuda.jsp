@@ -76,7 +76,9 @@
                                                     6.- Mas abajo, nos apareceran las posibles formas de pago y las posibles formas de envio, debe escojer solo
                                                         una forma de pago y solo una forma de envio.
                                                         <br/><br/> 
-                                                    7.-     
+                                                    7.- Al darle Click al boton "Pagar" nos enviara la pagina de pago de estacionamientos, este nos mostrara en 
+                                                        pantalla todos los tickets de estacionamiento que deseamos pagar, con sus espectivos datos y de paso, 
+                                                        el total a pagar de la boleta, junto a su forma de pago. 
                                                     </span></div>
             </li>
             
