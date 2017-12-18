@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -79,13 +81,22 @@ public class ControladorPedido extends HttpServlet {
                 int cont = 0;
                 Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
                 ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
+                List<DetalleBoleta> listaPrincipal = (new DetalleBoletaDAO()).Listar();
                 
-                if (boleta == null) {
-                    boleta = (new BoletaDAO()).BuscarId(Integer.parseInt(idBoleta));
-                    listaDetalle = (new DetalleBoletaDAO()).listadoBoletasArray(boleta.getIdBoleta());
+                boleta = (new BoletaDAO()).BuscarId(Integer.parseInt(idBoleta));
+                Logger.getLogger(getClass().getName()).log(Level.INFO, "Boleta funciona " + boleta.getIdBoleta());
+                
+                if (boleta != null) {                  
+                    for (DetalleBoleta xx: listaPrincipal){
+                        if (xx.getIdBoleta() == boleta.getIdBoleta()) {
+                            listaDetalle.add(xx);
+                            Logger.getLogger(getClass().getName()).log(Level.INFO, "Funciono 2.0");
+                        }
+                    }
+                    
                     sesion.setAttribute("carrito", listaDetalle);
                     sesion.setAttribute("boleta", boleta);
-                    response.sendRedirect("entragaBoucher.jsp");
+                    response.sendRedirect("entregaBoucher.jsp");
                 }else{
                      response.sendRedirect("buscarPagos.jsp?mensaje=Error!");
                 }

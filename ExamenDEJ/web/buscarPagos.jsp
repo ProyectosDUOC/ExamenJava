@@ -37,7 +37,11 @@
             </div>
         </nav>
         <div>
-            <%String rutC = request.getParameter("rut"); %>
+            <%String rutC = "";
+            if (request.getParameter("rut") != null) {
+                rutC = request.getParameter("rut");
+            }
+            %>
             
             <form method="POST" action="ControladorPedido">
                 <div class="container">
@@ -92,7 +96,7 @@
                                     <td><%= nombre%></td> 
                                     <td>$<%= bol.getTotalBoleta()%>.-</td>     
                                     <td>
-                                        <button class="btn waves-effect waves-light red black-text" type="submit" name="opcion" value="x<%=bol.getIdBoleta()%>">Pedir
+                                        <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=bol.getIdBoleta()%>">Pedir
                                             <i class="material-icons right">zoom_in</i>
                                         </button>
                                     </td>                               

@@ -21,14 +21,11 @@
         <link href="css/mapmarker.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <style>
             #map {
-                height: 400px;
-                width: 50%;
-            }
-
-            #elmapa {
-                width: 10%;
+                height: 350px;
+                width: 100%;
             }
         </style>
+        <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
@@ -43,39 +40,64 @@
             </div>
         </nav>
         <div class="container">
-            <h2 class="center-align">Estacionamientos</h2>
-            <div id="map" class="center-block"></div>
+            <div class="row">
+                <h2 class="center-align">Estacionamientos</h2>
+                <div class="col s6">
+                    <div id="map"></div>
+                </div>
+
+                <ul class="collapsible col s6" data-collapsible="accordion">
+                    <% for (Estacionamiento park : parks) {%>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">directions_car</i><%=park.getNombreEsta()%></div>
+                        <div class="collapsible-body">Direccion: <span><%=park.getGlosa()%>. </span><a href="#" id="mostrar<%=park.getIdEstacionamiento()%>">[Mostrar]</a></div>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
         </div>
         <script>
+            var markers = [];
+            var infoWindows = [];
+            
             function initMap() {
-                              
+
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 6,
                     center: {lat: -34.6, lng: -71.5}
                 });
-                
-                <% List<Estacionamiento> parks = (new EstacionamientoDAO()).Listar(); %>   
-                        
-                <% for (Estacionamiento park : parks) { %>
-                var marker<%=park.getIdEstacionamiento()%> = new google.maps.Marker
-                            ({ 
-                                position: { lng: <%=park.getMapaLatitud()%>, lat: <%=park.getMapaLongitud()%>},
-                                map: map,
-                                label: '<%=park.getIdEstacionamiento()%>'                      
-                            });
-                    
-                var infowindow<%=park.getIdEstacionamiento()%> = new google.maps.InfoWindow({content: '<%=park.getNombreEsta()%>' });
 
-                marker<%=park.getIdEstacionamiento()%>.addListener('click', function() {
-                    map.setZoom(14);
+            <% for (Estacionamiento park : parks) {%>
+                var marker<%=park.getIdEstacionamiento()%> = new google.maps.Marker
+                        ({
+                            position: {lng: <%=park.getMapaLatitud()%>, lat: <%=park.getMapaLongitud()%>},
+                            map: map,
+                            label: '<%=park.getIdEstacionamiento()%>'
+                        });
+
+                var infowindow<%=park.getIdEstacionamiento()%> = new google.maps.InfoWindow({content: '<%=park.getNombreEsta()%>'});
+                
+                var mostrar = function() {
+                    map.setZoom(16);
                     map.setCenter(marker<%=park.getIdEstacionamiento()%>.getPosition());
                     infowindow<%=park.getIdEstacionamiento()%>.open(map, marker<%=park.getIdEstacionamiento()%>);
-                    window.setTimeout( function(){ infowindow<%=park.getIdEstacionamiento()%>.close();},3000);
-                });
-                <% } %>
+                    window.setTimeout(function () {
+                        infowindow<%=park.getIdEstacionamiento()%>.close();
+                    }, 3000);
+                };
+                
+                marker<%=park.getIdEstacionamiento()%>.addListener('click',mostrar);
+                
+                document.getElementById("mostrar<%=park.getIdEstacionamiento()%>").addEventListener('click',mostrar);
+                                
+                markers.push(marker<%=park.getIdEstacionamiento()%>);
+                infoWindows.push(infowindow<%=park.getIdEstacionamiento()%>);
+                
+            <%}%>                
             }
+            
         </script>
-        
+
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv1J4q_RwQyBqrQjGNB-4KDc4914pQ78I&callback=initMap">
         </script>
