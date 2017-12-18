@@ -93,13 +93,13 @@
                
             }
         %>
-        <h1><%=listaDetalle.size()%></h1>
         <form action="ControladorPagarC" method="POST">
             <div class="container">
                 <div class="row">
-                    <h4 class="white green-text">Auto Park: Servicio online a la comodidad del Usuario</h4>
-                    <div class="col s12 m4">
-                        <div class="card orange lighten-5">
+                    <h2 class="white-text center-align">Auto Park</h2>
+                    <h4 class="white-text center-align">De forma rápida y segura, en cualquier parte de Chile</h4>
+                    <div class="col s4">
+                        <div class="card">
                             <div class="card-content blue-text">
                                 <span class="card-title">Datos Personales</span>
                                 <div class="input-field">
@@ -136,7 +136,7 @@
                     <div id="oculto">
                         <div class="col s12">                    
                             <div class="card">
-                                <div class="card-content orange lighten-5">
+                                <div class="card-content">
                                     <span class="card-title center-align">Estacionamientos</span>
                                     <div class="input-field ">                                
                                         <select name="estacionamientos" >
@@ -148,7 +148,7 @@
                                         <label class="black-text">Selecciones un Estacionamiento</label>
                                     </div>
                                     <div class="input-field">
-                                        <i class="material-icons prefix"></i>
+                                        <i class="material-icons prefix">chrome_reader_mode</i>
                                         <input id="id" type="text" maxlength="9" name="idTicket"/> 
                                         <label for="id" class="blue-text" >Id Ticket</label>
                                     </div>
@@ -211,7 +211,7 @@
                                         <% for (FormaPago fp : listaP) {%>
                                         <p>
                                             <input type="radio" id="<%=fp.getNombrePago()%>" name="gpago" value="<%=fp.getIdPago()%>"/>
-                                            <label for="<%=fp.getNombrePago()%>"> <%=fp.getNombrePago()%> </label>
+                                            <label class="blue-text" for="<%=fp.getNombrePago()%>"> <%=fp.getNombrePago()%> </label>
                                         </p>
                                         <% } %>                                          
                                     </div>
@@ -225,7 +225,7 @@
                                     <% for (FormaEnvio fe : listaE) {%>
                                     <p>
                                         <input type="radio" id="<%=fe.getNombreEnvio()%>" name="genvio" value="<%=fe.getIdEnvio()%>" />
-                                        <label for="<%=fe.getNombreEnvio()%>"><%=fe.getNombreEnvio()%></label>
+                                        <label class="blue-text" for="<%=fe.getNombreEnvio()%>"><%=fe.getNombreEnvio()%></label>
                                     </p>
                                     <% }%>      
                                     <span id="mensaje" class="red-text"> ${param.resultado}</span>                                    
@@ -234,7 +234,7 @@
                         </div>  
                         <!--btnPagar-->
                         <!--Carga carrito -->
-                        <div class="col s12 m4 center-align">
+                        <div class="col s12 center-align">
                             <div class="card">
                                 <button class="btn-large waves-effect waves-light red black-text" type="submit" name="opcion" value="pagar">Pagar
                                     <i class="material-icons right">payment</i>

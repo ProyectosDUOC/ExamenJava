@@ -59,6 +59,10 @@ public class ControladorMovil extends HttpServlet {
                     response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe");
                 }
             }
+            if (opcion.equals("salir")) {
+                sesion.invalidate();
+                response.sendRedirect("movilCuenta.jsp");
+            }
         } catch (Exception e) {
           //  response.sendRedirect("movilApp.jsp?mensaje="+e.toString());
            response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe exception" + e.toString());

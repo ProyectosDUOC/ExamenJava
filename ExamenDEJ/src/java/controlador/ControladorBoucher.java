@@ -5,25 +5,22 @@
  */
 package controlador;
 
-import dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.http.HttpSession;
-import modelo.Cliente;
+import modelo.Boleta;
+import modelo.DetalleBoleta;
 
 /**
  *
- * @author carlos
+ * @author benja
  */
-@WebServlet(name = "ControladorPedido", urlPatterns = {"/ControladorPedido"})
-public class ControladorPedido extends HttpServlet {
+public class ControladorBoucher extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,44 +34,29 @@ public class ControladorPedido extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession sesion = request.getSession(true);
         
-
         String opcion = request.getParameter("opcion");
-        String rut = request.getParameter("rut");
-
-        try {
-            if (opcion.equals("buscar")) {
-                List<Cliente> listaCliente = (new ClienteDAO()).Listar();
-                
-                Cliente cli = null;
-                
-                for(Cliente c: listaCliente)
-                {
-                    if(c.getRutCliente().equals(rut))
-                    {
-                        cli = c;
-                        break;
-                    }
-                }
-                
-                if(cli != null)
-                {
-                    response.sendRedirect("buscarPagos.jsp?rut="+ cli.getRutCliente() );
-                }
-                else
-                {
-                    response.sendRedirect("buscarPagos.jsp?mensaje=El Cliente no Existe");
-                }
-                
-            }
-            if (opcion.equals("Pedido")) {
-                
-            }
-        }catch(Exception e)
-        {
-            response.sendRedirect("buscarPagos.jsp?mensaje=El Cliente no Existe" + e.toString());
+        HttpSession sesion = request.getSession(true);
+        if (opcion.equals("cerrar")) {
+            Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
+            ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
+           // boleta = null;
+           // listaDetalle = null;
+            sesion.invalidate();
+            response.sendRedirect("index.jsp");
+        }
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ControladorBoucher</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ControladorBoucher at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

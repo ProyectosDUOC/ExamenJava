@@ -16,11 +16,12 @@ import modelo.Ticket;
  * @author benja
  */
 public class TicketDAO {
+
     private Ticket p;
     private EntityManager em;
-    
+
     EntityManagerFactory factory;
-    
+
     public boolean Crear(Ticket t) {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
@@ -38,96 +39,79 @@ public class TicketDAO {
 
     public boolean Leer(int id) {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-         em = factory.createEntityManager();
+        em = factory.createEntityManager();
         p = em.find(Ticket.class, id);
 
-        if (p.getIdTicket()== null) {
+        if (p.getIdTicket() == null) {
             return false;
         } else {
             return true;
         }
     }
-    
+
     public boolean Eliminar(int id) {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-        try{
-             em = factory.createEntityManager();
+        try {
+            em = factory.createEntityManager();
             p = em.find(Ticket.class, id);
             em.remove(p);
             em.flush();
             em.getTransaction().commit();
             return true;
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             return false;
-        }        
+        }
     }
-    
-    public List<Ticket> Listar(){
+
+    public List<Ticket> Listar() {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         List<Ticket> tickets;
         javax.persistence.Query q = em.createQuery("SELECT c FROM Ticket c");
-        tickets = q.getResultList();        
+        tickets = q.getResultList();
         return tickets;
-    } 
-    
-     public Ticket BuscarId(int id){
+    }
+
+    public Ticket BuscarId(int id) {
         factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
         em = factory.createEntityManager();
         Ticket t;
-        javax.persistence.Query q = em.createQuery("SELECT c FROM Ticket c WHERE c.idTicket ="+ id);
-       // javax.persistence.Query q = em.createNamedQuery("Estacionamiento.findByIdEstacionamiento", Estacionamiento.class);
-        t = (Ticket)q.getSingleResult();        
+        javax.persistence.Query q = em.createQuery("SELECT c FROM Ticket c WHERE c.idTicket =" + id);
+        // javax.persistence.Query q = em.createNamedQuery("Estacionamiento.findByIdEstacionamiento", Estacionamiento.class);
+        t = (Ticket) q.getSingleResult();
         return t;
     }
-    
-    public void Update(Ticket ticket){
-        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-        em = factory.createEntityManager();
-        Ticket t = ticket;
-        em.merge(t);
-        em.getTransaction().commit();       
-    } 
-    
-    
-     public void UpdatePay(int id){        
-        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
-        em = factory.createEntityManager();
-        Ticket t = em.find(Ticket.class, id);       
-        em.getTransaction().begin();
-         t.setIdEstadoT(1);
-        em.getTransaction().commit();
-        em.close();
-    } 
-    
-    public boolean Pagado(int idticket){
-        Ticket buscandoTicket = null;
-        for (Ticket xx: Listar()) {
-            if (xx.getIdTicket()==idticket) {
-                buscandoTicket = xx;
+
+    public Ticket BuscarId2(int id) {
+        Ticket t = null;
+        for (Ticket xx : Listar()) {
+            if (xx.getIdTicket() == id) {
+                t = xx;
                 break;
             }
         }
-        
-        if (buscandoTicket != null) {
-            buscandoTicket.setIdEstadoT(1);
-            Update(buscandoTicket);
-            return true;
-        }
-        else{
-            return false;
-        }
-    } 
-     
-    public int totalId(int id){
+        return t;
+    }
+
+    public void UpdatePay(int id) {
+        factory = Persistence.createEntityManagerFactory("ExamenDEJPU", System.getProperties());
+        em = factory.createEntityManager();
+        Ticket t = em.find(Ticket.class, id);
+        em.getTransaction().begin();
+        t.setIdEstadoT(1);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+   
+    public int totalId(int id) {
         int total = 0;
-         for (Ticket ti : Listar()) {
-             if (id == ti.getIdTicket()) {
+        for (Ticket ti : Listar()) {
+            if (id == ti.getIdTicket()) {
                 total = ti.getTotalPago();
                 break;
-             }
-         }
+            }
+        }
         return total;
     }
 }

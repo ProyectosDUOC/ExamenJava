@@ -241,7 +241,7 @@ public class ControladorPagarC extends HttpServlet {
                         
                         boleta.setIdEnvio(Integer.parseInt(formaEnvio));
                         boleta.setIdEstadoT(1);
-                        boleta.setIdEnvio(Integer.parseInt(formaEnvio));
+                        boleta.setIdPago(Integer.parseInt(formaPago));
                         boleta.setTotalBoleta(total);
                         //Crea boleta
                         if ((new BoletaDAO()).Crear(boleta)) {
@@ -261,9 +261,10 @@ public class ControladorPagarC extends HttpServlet {
                                      Logger.getLogger(getClass().getName()).log(Level.INFO, "No se ha agregado Boleta "+dB.getIdBoleta());
                                 }
                             }                            
-                            String rutCliente=boleta.getRutCliente();
-                            String idBoleta=boleta.getIdBoleta().toString();
-                            response.sendRedirect("entregaBoucher.jsp?idBoleta="+idBoleta+"&rut="+rutCliente);
+                                                        
+                            sesion.setAttribute("carrito", listaDetalle);
+                            sesion.setAttribute("boleta", boleta);
+                            response.sendRedirect("entregaBoucher.jsp");
                         }else{
                             Logger.getLogger(getClass().getName()).log(Level.INFO, "Boleta no se creo");
                         }
