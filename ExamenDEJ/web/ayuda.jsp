@@ -104,6 +104,10 @@
                                                 2.- Al darle Click nos llevara a la Pagina que nos mostrara en el mapa, todos los 
                                                     estacionamientos que se ecneutran dentro del sistema de AutoPark, indicando sus puntos
                                                     de ubicacion en el mapa.
+                                                <br/><br/>
+                                                3.- Tambien saldran al lado derecho del mapa una lista de estacionamientos que posee AutoPark,
+                                                    el cual, al darle click nos saldra la opcion "mostrar", y nos mostrara directamente en el
+                                                    mapa donde se encuentra el estacionamiento seleccionado.
                                                 </span></div>
             </li>
         </ul>
