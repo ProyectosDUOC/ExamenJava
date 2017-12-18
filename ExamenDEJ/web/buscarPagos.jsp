@@ -18,11 +18,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Buscar Pago - Auto Park</title>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/pagarCuentas.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
         <nav class="blue darken-4" role="navigation">
@@ -38,76 +39,88 @@
         </nav>
         <div>
             <%String rutC = "";
-            if (request.getParameter("rut") != null) {
-                rutC = request.getParameter("rut");
-            }
+                if (request.getParameter("rut") != null) {
+                    rutC = request.getParameter("rut");
+                }
             %>
-            
+
             <form method="POST" action="ControladorPedido">
                 <div class="container">
-                    <div class="row margin">
-                        <div class="input-field col s4">                                
-                            <i class="material-icons">person_outline</i>
-                            <input id="rut" type="text" required name="rut" maxlength="9" value="<%=rutC%>"> 
-                            <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
-                            <span id="mensaje" class="red-text"> ${param.mensaje}</span>
-                        </div>
-                    </div>
-                    <div class="row">                      
-                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="buscar">
-                            Buscar
-                        </button>
-                    </div>
-                    <div class="row margin col s12">
-                        <table class="striped responsive-table">
-                            <thead>
-                                <tr>
-                                    <th>Estacionamiento</th>
-                                    <th>Total</th>
-                                    <th>Pedir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    
-                                    List<Boleta> listaBoleta = (new BoletaDAO()).ListarPorRut(rutC);
-                                    List<DetalleBoleta> listaDetalle = (new DetalleBoletaDAO()).Listar();
-                                    List<Ticket> listaTicket = (new TicketDAO()).Listar();
-                                    List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
+                    <h2 class="white-text center-align">Auto Park</h2>
+                    <h4 class="white-text center-align">Buscar Boucher Pagados</h4>
 
-                                    String nombre = "";
-                                    for (Boleta bol : listaBoleta) {
-                                        nombre = "";
-                                        for (DetalleBoleta de : listaDetalle) {
-                                            if (bol.getIdBoleta() == de.getIdBoleta()) {
-                                                for (Ticket tic : listaTicket) {
-                                                    if (de.getIdTicket() == tic.getIdTicket()) {
-                                                        for (Estacionamiento esta : listaEsta) {
-                                                            if (esta.getIdEstacionamiento() == tic.getIdEstacionamiento()) {
-                                                                nombre = nombre + "<br>"+ esta.getNombreEsta();
+                    <div class="col s4 m4 l8">
+                        <div class="card">
+                            <div class="card-content blue-text">
+                                <span class="card-title">Datos Personales</span>
+                                <i class="material-icons left">person_outline</i>
+                                <div class="input-field">                                    
+                                    <input id="rut" type="text" required name="rut" maxlength="9" value="<%=rutC%>"> 
+                                    <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
+                                    <span id="mensaje" class="red-text"> ${param.mensaje}</span>                                    
+                                </div>
+                                <div class="row">                      
+                                    <button class="btn-large waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="buscar">
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+
+                    <div class="row margin col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title center-align">Estacionamientos</span>
+                                <table class="striped responsive-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Estacionamiento</th>
+                                            <th>Total</th>
+                                            <th>Pedir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            List<Boleta> listaBoleta = (new BoletaDAO()).ListarPorRut(rutC);
+                                            List<DetalleBoleta> listaDetalle = (new DetalleBoletaDAO()).Listar();
+                                            List<Ticket> listaTicket = (new TicketDAO()).Listar();
+                                            List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
+
+                                            String nombre = "";
+                                            for (Boleta bol : listaBoleta) {
+                                                nombre = "";
+                                                for (DetalleBoleta de : listaDetalle) {
+                                                    if (bol.getIdBoleta() == de.getIdBoleta()) {
+                                                        for (Ticket tic : listaTicket) {
+                                                            if (de.getIdTicket() == tic.getIdTicket()) {
+                                                                for (Estacionamiento esta : listaEsta) {
+                                                                    if (esta.getIdEstacionamiento() == tic.getIdEstacionamiento()) {
+                                                                        nombre = nombre + "<br>" + esta.getNombreEsta();
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
+                                        %>
+                                        <tr>
+                                            <td><%= nombre%></td> 
+                                            <td>$<%= bol.getTotalBoleta()%>.-</td>     
+                                            <td>
+                                                <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=bol.getIdBoleta()%>">Pedir
+                                                    <i class="material-icons right">zoom_in</i>
+                                                </button>
+                                            </td>                               
+                                        </tr>
+                                        <%
                                             }
-                                        }
-                                %>
-                                <tr>
-                                    <td><%= nombre%></td> 
-                                    <td>$<%= bol.getTotalBoleta()%>.-</td>     
-                                    <td>
-                                        <button class="btn waves-effect waves-light yellow black-text" type="submit" name="opcion" value="x<%=bol.getIdBoleta()%>">Pedir
-                                            <i class="material-icons right">zoom_in</i>
-                                        </button>
-                                    </td>                               
-                                </tr>
-                                <%
-                                    }
-                                %>
-                            </tbody>
-                        </table>
+                                        %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </form> 
         </div>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

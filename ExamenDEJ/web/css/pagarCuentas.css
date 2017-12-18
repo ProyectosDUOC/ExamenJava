@@ -9,11 +9,12 @@ and open the template in the editor.
 */
 
 html, body {
-    height: 100%;
-    background: #0089ec;
+    height: 100%; 
+    background-color: #0288d1;
 }
 
 #oculto {
     display:none;
 }
+
 

@@ -22,7 +22,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <title>Pagar Cuenta - Auto Park</title>
         <!-- CSS  -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="col s8 slider">
                         <div class="carousel carousel-slider">
-                            <a class="carousel-item" href="#one!"><img  width="600" height="400" src="images/auto1.jpg"></a>
+                            <a class="carousel-item" href="#one!"><img  width="600" height="400" src="images/autoPark.jpg"></a>
                             <a class="carousel-item" href="#two!"><img width="600" height="400"  src="images/auto2.jpg"></a>
                             <a class="carousel-item" href="#three!"><img width="600" height=400  src="images/auto3.jpg"></a>
                             <a class="carousel-item" href="#four!"><img width="600" height="400"  src="images/auto1.jpg"></a>
