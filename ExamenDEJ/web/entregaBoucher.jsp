@@ -53,17 +53,17 @@
         <nav class="blue darken-4" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="index.jsp" class="brand-logo yellow-text"><i class="large material-icons left">directions_car</i>Auto Park</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="index.jsp">Inicio</a></li>                    
-                    <li><a href="pagarCuentas.jsp">Pagar</a></li>
-                    <li><a href="buscarPagos.jsp">Ver Pagos</a></li>
-                    <li><a href="ayuda.jsp">Ayuda</a></li>
-                    <li><a href="verEstacionamientos.jsp">Ver Estacionamientos</a></li>               
+                    <li><a href="#">Inicio</a></li>                    
+                    <li><a href="#">Pagar</a></li>
+                    <li><a href="#">Ver Pagos</a></li>
+                    <li><a href="#">Ayuda</a></li>
+                    <li><a href="#">Ver Estacionamientos</a></li>               
                 </ul>
             </div>
         </nav>   
         <div class="section">
             <div class="container">
-                <h1 class="center-align">Entrega de Pago Estacionamientos</h1>
+                <h1 class="red white-text center-align">Entrega de Pago Estacionamientos</h1>
                 <div class="col s12">
                     <div class="card">
                         <table>
@@ -97,17 +97,20 @@
                 <!--Total-->
                 <div class="col s12">
                     <div class="card">
-                        <h3 class="red-text">Total : $<%=total%>.-</h3>
+                        <h3 class="red-text center-align">Total : $<%=total%>.-</h3>
                     </div>
                 </div> 
                 <div class="col s12">
                     <div class="card">
-                        <h3 class="red-text">OPCIÓN DE ENVÍO : $<%=boleta.getIdEnvio()%>.-</h3>
+                        <% 
+                            FormaEnvio forma = (new FormaEnvioDAO()).BuscarId(boleta.getIdEnvio());
+                        %>
+                        <h5>OPCIÓN DE ENVÍO : <%=forma.getNombreEnvio()%></h5>
                     </div>
                 </div> 
                 <form action="ControladorBoucher" method="POST" >  
                     <div class="row">                      
-                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="cerrar">
+                        <button class="btn waves-effect waves-light red" type="submit" name="opcion" value="cerrar">
                             Salir
                         </button>
                     </div>    
