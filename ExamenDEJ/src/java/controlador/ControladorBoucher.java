@@ -7,10 +7,14 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Boleta;
+import modelo.DetalleBoleta;
 
 /**
  *
@@ -30,6 +34,18 @@ public class ControladorBoucher extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String opcion = request.getParameter("opcion");
+        HttpSession sesion = request.getSession(true);
+        if (opcion.equals("cerrar")) {
+            Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
+            ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
+           // boleta = null;
+           // listaDetalle = null;
+            sesion.invalidate();
+            response.sendRedirect("index.jsp");
+        }
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

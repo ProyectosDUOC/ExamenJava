@@ -39,6 +39,7 @@ public class ControladorPedido extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession sesion = request.getSession(true);
+        
 
         String opcion = request.getParameter("opcion");
         String rut = request.getParameter("rut");
@@ -66,6 +67,9 @@ public class ControladorPedido extends HttpServlet {
                 {
                     response.sendRedirect("buscarPagos.jsp?mensaje=El Cliente no Existe");
                 }
+                
+            }
+            if (opcion.equals("Pedido")) {
                 
             }
         }catch(Exception e)

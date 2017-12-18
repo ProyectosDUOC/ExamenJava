@@ -36,12 +36,12 @@
             ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
 
             String idBoleta = "";
-            String total = "0";            
+            String total = "0";
             String formaEnvio = "1";
             String idEnvio = "";
 
             if (boleta != null) {
-                total = boleta.getTotalBoleta().toString();                
+                total = boleta.getTotalBoleta().toString();
                 idEnvio = boleta.getIdEnvio().toString();
                 idBoleta = boleta.getIdBoleta().toString();
             }
@@ -63,7 +63,7 @@
         </nav>   
         <div class="section">
             <div class="container">
-                <h1>Entrega de Pago Estacionamientos</h1>
+                <h1 class="center-align">Entrega de Pago Estacionamientos</h1>
                 <div class="col s12">
                     <div class="card">
                         <table>
@@ -105,6 +105,13 @@
                         <h3 class="red-text">OPCIÓN DE ENVÍO : $<%=boleta.getIdEnvio()%>.-</h3>
                     </div>
                 </div> 
+                <form action="ControladorBoucher" method="POST" >  
+                    <div class="row">                      
+                        <button class="btn waves-effect waves-light deep-orange accent-2" type="submit" name="opcion" value="cerrar">
+                            Salir
+                        </button>
+                    </div>    
+                </form>
             </div>        
         </div>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

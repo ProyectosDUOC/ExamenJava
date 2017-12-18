@@ -36,7 +36,7 @@
             <form method="POST" action="ControladorPedido">
                 <div class="container">
                     <div class="row margin">
-                        <div class="input-field col s12">                                
+                        <div class="input-field col s4">                                
                             <i class="material-icons">person_outline</i>
                             <input id="rut" type="text" required name="rut" maxlength="9"> 
                             <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
