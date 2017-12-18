@@ -4,6 +4,10 @@
     Author     : benja
 --%>
 
+<%@page import="dao.TicketDAO"%>
+<%@page import="modelo.Ticket"%>
+<%@page import="dao.DetalleBoletaDAO"%>
+<%@page import="modelo.DetalleBoleta"%>
 <%@page import="dao.BoletaDAO"%>
 <%@page import="modelo.Boleta"%>
 <%@page import="java.util.List"%>
@@ -33,12 +37,14 @@
             </div>
         </nav>
         <div>
+            <%String rutC = request.getParameter("rut"); %>
+            
             <form method="POST" action="ControladorPedido">
                 <div class="container">
                     <div class="row margin">
                         <div class="input-field col s4">                                
                             <i class="material-icons">person_outline</i>
-                            <input id="rut" type="text" required name="rut" maxlength="9"> 
+                            <input id="rut" type="text" required name="rut" maxlength="9" value="<%=rutC%>"> 
                             <label for="rut" class="center-align">Rut Cliente (sin puntos ni guión)</label>
                             <span id="mensaje" class="red-text"> ${param.mensaje}</span>
                         </div>
@@ -59,23 +65,38 @@
                             </thead>
                             <tbody>
                                 <%
-                                    String rutC = request.getParameter("rut");
+                                    
                                     List<Boleta> listaBoleta = (new BoletaDAO()).ListarPorRut(rutC);
+                                    List<DetalleBoleta> listaDetalle = (new DetalleBoletaDAO()).Listar();
+                                    List<Ticket> listaTicket = (new TicketDAO()).Listar();
+                                    List<Estacionamiento> listaEsta = (new EstacionamientoDAO()).Listar();
 
+                                    String nombre = "";
                                     for (Boleta bol : listaBoleta) {
+                                        nombre = "";
+                                        for (DetalleBoleta de : listaDetalle) {
+                                            if (bol.getIdBoleta() == de.getIdBoleta()) {
+                                                for (Ticket tic : listaTicket) {
+                                                    if (de.getIdTicket() == tic.getIdTicket()) {
+                                                        for (Estacionamiento esta : listaEsta) {
+                                                            if (esta.getIdEstacionamiento() == tic.getIdEstacionamiento()) {
+                                                                nombre = nombre + "<br>"+ esta.getNombreEsta();
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                 %>
                                 <tr>
+                                    <td><%= nombre%></td> 
+                                    <td>$<%= bol.getTotalBoleta()%>.-</td>     
                                     <td>
-                                        <%= bol.getNombreBoleta()%> 
-                                    </td> 
-                                    <td>
-                                        <%= bol.getTotalBoleta() %>
-                                    </td> 
-                                    <td>
-                                        <input type="submit" name="Pedir" value="+" >
-                                    </td> 
+                                        <button class="btn waves-effect waves-light red black-text" type="submit" name="opcion" value="x<%=bol.getIdBoleta()%>">Pedir
+                                            <i class="material-icons right">zoom_in</i>
+                                        </button>
+                                    </td>                               
                                 </tr>
-
                                 <%
                                     }
                                 %>

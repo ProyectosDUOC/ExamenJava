@@ -5,9 +5,12 @@
  */
 package controlador;
 
+import dao.BoletaDAO;
 import dao.ClienteDAO;
+import dao.DetalleBoletaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
+import modelo.Boleta;
 import modelo.Cliente;
+import modelo.DetalleBoleta;
 
 /**
  *
@@ -69,7 +74,22 @@ public class ControladorPedido extends HttpServlet {
                 }
                 
             }
-            if (opcion.equals("Pedido")) {
+            if (opcion.startsWith("x")) {
+                String idBoleta = opcion.substring(1);
+                int cont = 0;
+                Boleta boleta = sesion.getAttribute("boleta") == null ? new Boleta() : (Boleta) sesion.getAttribute("boleta");
+                ArrayList<DetalleBoleta> listaDetalle = sesion.getAttribute("carrito") == null ? new ArrayList<DetalleBoleta>() : (ArrayList) sesion.getAttribute("carrito");
+                
+                if (boleta == null) {
+                    boleta = (new BoletaDAO()).BuscarId(Integer.parseInt(idBoleta));
+                    listaDetalle = (new DetalleBoletaDAO()).listadoBoletasArray(boleta.getIdBoleta());
+                    sesion.setAttribute("carrito", listaDetalle);
+                    sesion.setAttribute("boleta", boleta);
+                    response.sendRedirect("entragaBoucher.jsp");
+                }else{
+                     response.sendRedirect("buscarPagos.jsp?mensaje=Error!");
+                }
+                                                   
                 
             }
         }catch(Exception e)

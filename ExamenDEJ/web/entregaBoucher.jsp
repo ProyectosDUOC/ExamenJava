@@ -87,7 +87,6 @@
                                     <td>$<%=tic.getTotalPago()%>.-</td>
                                     <td><%=tic.getNumeroTicket()%></td>
                                     <td>
-
                                 </tr>
                                 <%}%>                                      
                             </tbody>

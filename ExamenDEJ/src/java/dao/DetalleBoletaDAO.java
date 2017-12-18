@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -102,6 +103,16 @@ public class DetalleBoletaDAO {
     
     public List<DetalleBoleta> listadoBoletas(int idBoleta){
         List<DetalleBoleta> listado = null;
+        for (DetalleBoleta detalleBoleta : Listar()) {
+            if (detalleBoleta.getIdBoleta()== idBoleta) {
+                listado.add(detalleBoleta);
+            }
+        }        
+        return listado;
+    }
+    
+      public ArrayList<DetalleBoleta> listadoBoletasArray(int idBoleta){
+        ArrayList<DetalleBoleta> listado = null;
         for (DetalleBoleta detalleBoleta : Listar()) {
             if (detalleBoleta.getIdBoleta()== idBoleta) {
                 listado.add(detalleBoleta);
