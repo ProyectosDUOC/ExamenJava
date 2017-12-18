@@ -104,6 +104,8 @@ public class ControladorPagarC extends HttpServlet {
                     int id = (new BoletaDAO()).contador() + 1;
                     Date fecha = new Date();
                     boleta = new Boleta(id, rut, nombre, tel, correo, fecha, 0, 0, 0, 0);
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, "Se crea la boleta con id "+id);
+                               
                     /*        id_boleta      INT NOT NULL,
                         rut_cliente    VARCHAR(9),
                         nombre_boleta      VARCHAR(200),
@@ -163,7 +165,8 @@ public class ControladorPagarC extends HttpServlet {
                                 }
                                 contadorId = contadorId + 1;
                                 listaDetalle.add(new DetalleBoleta(contadorId, boleta.getIdBoleta(), ticketBuscado.getIdTicket()));
-
+                                Logger.getLogger(getClass().getName()).log(Level.INFO, "Se crea carrito con nuevo elemento id " + contadorId);
+                               
                                 //A boleta se Actualiza el moento
                                 int total = boleta.getTotalBoleta();
                                 total = total + ticketBuscado.getTotalPago();
@@ -172,6 +175,8 @@ public class ControladorPagarC extends HttpServlet {
                                 sesion.setAttribute("carrito", listaDetalle);
                             }else{
                                 mensaje = "Este ticket ya fue utilizado";
+                                Logger.getLogger(getClass().getName()).log(Level.INFO, "Ticket ya fue utilizado");
+                               
                             }
 
                         } else {
@@ -197,6 +202,8 @@ public class ControladorPagarC extends HttpServlet {
                         //Error:
                         //El ticket ya lo ocuparon
                         mensaje = "Ticket ya fue pagado";
+                         Logger.getLogger(getClass().getName()).log(Level.INFO, "El ticke ya fue pagado ");
+                               
                         //Ahora vamos a guardarlo sin importar que no exista debe ingresar
                     }
 
@@ -204,6 +211,8 @@ public class ControladorPagarC extends HttpServlet {
                     //Error : 
                     //El ticket NO EXISTE
                     mensaje = "Ticket no se encuentra";
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, "El ticke no existe");
+                               
                     //Ahora vamos a guardarlo sin importar que no exista debe ingresar
                 }
                 sesion.setAttribute("boleta", boleta);
@@ -220,7 +229,8 @@ public class ControladorPagarC extends HttpServlet {
                         break;
                     }
                     cont++;
-                }                               
+                }                     
+                Logger.getLogger(getClass().getName()).log(Level.INFO, "Se ha eliminado del carrito correctamente");                               
                 sesion.setAttribute("carrito", listaDetalle);
                 sesion.setAttribute("boleta", boleta);
                 response.sendRedirect("pagarCuentas.jsp");

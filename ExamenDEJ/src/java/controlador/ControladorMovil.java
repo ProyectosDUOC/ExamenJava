@@ -9,6 +9,8 @@ import dao.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,14 +51,14 @@ public class ControladorMovil extends HttpServlet {
                         cli = c;
                         break;
                     }
-                }
-                
+                }                
                 if (cli != null) {
                     sesion.setAttribute("cliente", cli);
                     response.sendRedirect("movilCuenta.jsp");
                 } else 
-                {    
-                    response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe");
+                {   
+                    Logger.getLogger(getClass().getName()).log(Level.INFO, "El Cliente no Existe");                               
+                    response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe");                    
                 }
             }
             if (opcion.equals("salir")) {
@@ -65,6 +67,7 @@ public class ControladorMovil extends HttpServlet {
             }
         } catch (Exception e) {
           //  response.sendRedirect("movilApp.jsp?mensaje="+e.toString());
+           Logger.getLogger(getClass().getName()).log(Level.INFO, "Ha ocurrido una error con la conexion a la base de datos");                               
            response.sendRedirect("movilApp.jsp?mensaje=Cliente no existe exception" + e.toString());
         }
 
