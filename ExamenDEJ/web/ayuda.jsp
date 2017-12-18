@@ -30,8 +30,8 @@
 
         <div class="container">
             <h1 class="center-align">Preguntas Frecuentes</h1>
-             <div class="center-align">                
-                 <img src="images/Logo.png"   width="200" height="100" alt="Logo"/>
+            <div class="center-align">                
+                <img src="images/Logo.png"   width="200" height="100" alt="Logo"/>
             </div>    
             <div class="card">
                 <div class="card-content blue lighten-2">
@@ -101,9 +101,9 @@
                                     2.- la descarga y el servicio es Gratuita y se asocia al correo electronico registrado en el sistema de tienda de aplicaciones
                                     por lo cual los datos deben de ser reales y confirmarse.
                                     <br/><br/>
-                                    3.- no hay ningun costo de mantencion por tener la Apliacion.    
-
-                                </span></div>
+                                    3.- no hay ningun costo de mantencion por tener la Apliacion.
+                                </span>
+                            </div>
                         </li>
                         <li>
                             <div class="collapsible-header"><i class="material-icons">place</i>¿Como puedo ver la ubicacion de los Estacionamientos de AutoPark en el mapa?</div>
@@ -115,14 +115,17 @@
                                     2.- Al darle Click nos llevara a la Pagina que nos mostrara en el mapa, todos los 
                                     estacionamientos que se ecneutran dentro del sistema de AutoPark, indicando sus puntos
                                     de ubicacion en el mapa.
-                                </span></div>
+                                    3.- Tambien saldran al lado derecho del mapa una lista de estacionamientos que posee AutoPark,
+                                    el cual, al darle click nos saldra la opcion "mostrar", y nos mostrara directamente en el
+                                    mapa donde se encuentra el estacionamiento seleccionado.
+                                </span>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
-                   
         </div>
-       
+
 
 
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
